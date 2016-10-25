@@ -16,8 +16,10 @@ import {SearchComponent} from './comp/search/search.comp';
 import {HomeComponent} from './comp/home/home.comp';
 import { AlertModule , DropdownModule , AccordionModule  } from 'ng2-bootstrap/ng2-bootstrap';
 
+import {CoreModule} from '../core/core.module';
+
 @NgModule({
-    imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule],
+    imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule],
     declarations : [ AppComponent,HomeComponent ,ListComponent,DetailComponent,AddressbkComponent,SearchComponent],
     bootstrap : [ AppComponent ],
     providers: [ // expose our Services and Providers into Angular's dependency injection

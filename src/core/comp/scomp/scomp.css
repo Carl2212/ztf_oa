@@ -1,0 +1,48 @@
+.ldmore {
+  display: block;
+  margin: 5px auto;
+  width: 80%;
+  font-size: large;
+  font-weight: bold;
+}
+.ldmore:after {
+  content: "点击加载更多...";
+  display: inline-block;
+}
+.ldmore.active:before {
+  display: inline-block;
+  content: " ";
+  background: url("../../../resources/images/loading.gif") no-repeat center;
+  background-size: auto 100%;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+}
+.ml {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 100, 100, 0.3);
+  top: 0;
+  left: 0;
+}
+.ml .ld-icon {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin: -2.5em auto auto -2.5em;
+  padding: 1em;
+  width: 5em;
+  height: 5em;
+  background: rgba(100, 100, 100, 0.6);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.ml .ld-icon img {
+  display: block;
+  margin: 0 auto;
+  width: 3em;
+  height: 3em;
+}

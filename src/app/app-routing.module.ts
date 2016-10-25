@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/10/21.
  */
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Routes,RouterModule} from '@angular/router';
 import {ListComponent} from './comp/list/list.comp';
 import {DetailComponent} from './comp/detail/detail.comp';
 import {AddressbkComponent} from './comp/addressbk/addressbk.comp';

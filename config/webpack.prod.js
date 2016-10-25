@@ -185,7 +185,7 @@ module.exports = function (env) {
 
       /**
        * Plugin: CompressionPlugin
-       * Description: Prepares compressed versions of assets to serve
+       * Description: Prepares compressed versions of assets to service
        * them with Content-Encoding
        *
        * See: https://github.com/webpack/compression-webpack-plugin

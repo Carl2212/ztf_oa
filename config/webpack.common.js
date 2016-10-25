@@ -73,7 +73,7 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
        */
-      extensions: ['.ts', '.js', '.json'],
+      extensions: ['.ts', '.js', '.json','less'],
 
       // An array of directory names to be resolved to the current directory
       modules: [helpers.root('src'), 'node_modules'],
@@ -148,7 +148,7 @@ module.exports = function (options) {
         {
           test: /\.less$/,
           exclude: /node_modules/,
-          loader: 'raw-loader!less-loader'
+          loaders: ['raw-loader','less-loader']
         }
       ],
 
@@ -207,17 +207,17 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([{
-        from: 'src/resources/css/test.css',
-        to: 'resources/test.css',
-      },{
-        from : 'node_modules/bootstrap/dist/css/bootstrap.min.css',
-        to : 'src/resources/css/bootstrap.min.css'
+        from: 'src/resources/custom_bootstrap/custom_bootstrap.css',
+        to: 'resources/custom_bootstrap/custom_bootstrap.css',
+      } , {
+        from : 'src/resources/images',
+        to : 'resources/images'
       } ]),
 
 
       /*
        * Plugin: HtmlWebpackPlugin
-       * Description: Simplifies creation of HTML files to serve your webpack bundles.
+       * Description: Simplifies creation of HTML files to service your webpack bundles.
        * This is especially useful for webpack bundles that include a hash in the filename
        * which changes every compilation.
        *
