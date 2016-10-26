@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<toptip-alert [toptips]="toptips"></toptip-alert>
+<router-outlet (toptipsEvent)="toptipsEvent(tip)"></router-outlet>

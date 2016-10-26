@@ -4,10 +4,10 @@
 
 export const Config : any = {
     pagesize : 8,
-    //global_qybm: 'AYY',
-    //global_xmbm: 'AYYOA',
+    global_qybm: 'GJGS',
+    global_xmbm: 'GJGSOA',
     author_check: false,
-    global_url: 'http://192.168.200.67:61002/ms/',
+    global_url: 'http://192.168.200.67:61002/ms',
     //current_user_action: '/wx/user',
     wx_login: '/wap/execute?cmd=login_user&command=login_user',
     login: '/wap/execute?cmd=login&command=login',

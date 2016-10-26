@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';//
 import { RouterModule } from '@angular/router';
 
+
 import { ENV_PROVIDERS } from './environment';
 import { AppRoutingModule } from './app-routing.module';
 import {AppComponent} from './comp/index/app.comp';
@@ -19,9 +20,9 @@ import { AlertModule , DropdownModule , AccordionModule  } from 'ng2-bootstrap/n
 import {CoreModule} from '../core/core.module';
 
 @NgModule({
-    imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule],
+    imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule ],
     declarations : [ AppComponent,HomeComponent ,ListComponent,DetailComponent,AddressbkComponent,SearchComponent],
-    bootstrap : [ AppComponent ],
+    bootstrap : [ AppComponent],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,
     ]
