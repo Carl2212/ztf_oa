@@ -2,6 +2,7 @@
  * Created by Administrator on 2016/10/26.
  */
 import {Component,ElementRef,ChangeDetectorRef,Input} from '@angular/core';
+import {GlobalEventManager} from "../service/globaleventmanager";
 
 @Component({
     selector : 'toptip-alert',
@@ -9,16 +10,26 @@ import {Component,ElementRef,ChangeDetectorRef,Input} from '@angular/core';
     styleUrls : ['./scomp.less']
 })
 export class ToptipAlertComponent {
-    @Input() toptips : Array<string>;
-    constructor () {
-        //setInterval(function(){
-        //    if(_me.tests.length > 0) {
-        //        _me.tests = [];
-        //    }else{
-        //        _me.tests = ['1111111111'];
-        //    }
-        //    _me.cdr.detectChanges();
-        //},5000);
+    private toptips : Array<string> = [];
+    constructor (private globalevent : GlobalEventManager) {
+        let _me = this;
+        this.globalevent.showtoptip.subscribe((tip)=>{
+            console.log('tip',tip);
+            _me.toptips.push(tip);
+            (function(attr,tip) {
+                setTimeout(function () {
+                    _me.removeval(attr,tip);
+                }, 5000);
+            })(_me.toptips, tip);
+        })
+    }
+    removeval(arr,val) {
+        console.log(arr,val);
+        let index = arr.indexOf(val);
+        if(index > -1) {
+            arr.splice(index,1);
+        }
+        return arr;
     }
     create() {
 

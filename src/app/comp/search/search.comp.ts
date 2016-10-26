@@ -3,7 +3,9 @@
  */
 import {Component} from '@angular/core';
 @Component({
-    template : '<alert>hello world</alert>'
+    templateUrl : './search.comp.html',
+    styleUrls : ['./search.comp.less']
 })
 export class SearchComponent {
+
 }
