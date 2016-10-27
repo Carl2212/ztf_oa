@@ -1,0 +1,30 @@
+@import "./bootstrap/less/variables";
+@import "./custom_bootstrap/custom_variables";
+.topbar {
+  height : 3em;
+  background : @brand-primary;
+  text-align: center;
+  color : #fff;
+  .back-icon,  .sure-select{
+    color : #fff;
+    position: fixed;
+    z-index : 10000;
+    top : .5em;
+    display: block;
+    height : 2em;
+    line-height : 2em;
+  }
+  .back-icon {
+    left : 1em;
+    float :left;
+  }
+  .bartitle {
+    font-size: large;
+    font-weight: bold;
+    line-height : 2.5em;
+  }
+  .sure-select{
+    right : 1em;
+    float :right;
+  }
+}

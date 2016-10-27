@@ -7,9 +7,10 @@ import {Component ,Input, Output, EventEmitter} from '@angular/core';
 @Component({
     selector : 'selectbox',
     templateUrl : './selectbox.html',
-    styleUrls : ['../../shared.less'],
+    styleUrls : ['./selectbox.less'],
 })
 export class SelectBoxComponent {
+    public ywyf : boolean =false;
     @Input() selectitems : any;
     @Input() selectusers : any;
     @Input() multiuser : any;

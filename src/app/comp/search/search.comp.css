@@ -1,25 +1,3 @@
-.searchcomp .topbar {
-  height: 3em;
-  background: #cd0018;
-  text-align: center;
-  color: #fff;
-}
-.searchcomp .topbar .back-icon {
-  color: #fff;
-  position: fixed;
-  z-index: 10000;
-  top: .5em;
-  left: 1em;
-  display: block;
-  float: left;
-  height: 2em;
-  line-height: 2em;
-}
-.searchcomp .topbar .bartitle {
-  font-size: large;
-  font-weight: bold;
-  line-height: 2.5em;
-}
 .searchcomp .content {
   background: #fff;
 }

@@ -250,3 +250,12 @@ input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
   color: #fff;
 }
+
+/*补充*/
+.checkbox-nothing label::before {
+  border : none;
+}
+.checkbox-nothing input[type="checkbox"]:checked + label::after, .checkbox-nothing input[type="radio"]:checked + label::after{
+  color :#d9534f;
+}
+

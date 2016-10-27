@@ -1,0 +1,29 @@
+.topbar {
+  height: 3em;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.topbar .back-icon,
+.topbar .sure-select {
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  top: .5em;
+  display: block;
+  height: 2em;
+  line-height: 2em;
+}
+.topbar .back-icon {
+  left: 1em;
+  float: left;
+}
+.topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.topbar .sure-select {
+  right: 1em;
+  float: right;
+}

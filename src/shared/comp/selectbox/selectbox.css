@@ -1,0 +1,79 @@
+.topbar {
+  height: 3em;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.topbar .back-icon,
+.topbar .sure-select {
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  top: .5em;
+  display: block;
+  height: 2em;
+  line-height: 2em;
+}
+.topbar .back-icon {
+  left: 1em;
+  float: left;
+}
+.topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.topbar .sure-select {
+  right: 1em;
+  float: right;
+}
+.selectbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: #eee;
+}
+.selectbox .content {
+  width: 100%;
+  background: #fff;
+  margin-top: 1em;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.selectbox .content .select-group {
+  padding-left: 0;
+}
+.selectbox .content .select-group .group-item {
+  width: 100%;
+  list-style: none;
+  line-height: 3em;
+}
+.selectbox .content .select-group .group-item .select-title {
+  border-bottom: 1px solid #eee;
+  margin-left: 1em;
+}
+.selectbox .content .select-group .group-item .select-title .checkbox-nothing {
+  line-height: normal;
+  padding: .5em 1.5em;
+  position: relative;
+}
+.selectbox .content .select-group .group-item .select-title .checkbox-nothing label {
+  font-weight: bold;
+}
+.selectbox .content .select-group .group-item .select-title .checkbox-nothing span.glyphicon {
+  color: #c1c1c1;
+  display: block;
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  margin-top: -0.5em;
+}
+.selectbox .content .select-group .group-item .select-child .child-li {
+  padding: .5em 0;
+  list-style: none;
+  line-height: normal;
+  border-bottom: 1px solid #eee;
+}

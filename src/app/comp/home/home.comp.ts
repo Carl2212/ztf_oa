@@ -4,20 +4,22 @@
 import {Component ,Output ,EventEmitter} from '@angular/core';
 import {Request} from "../../../core/comp/service/request";
 import {GlobalEventManager} from "../../../core/comp/service/globaleventmanager";
-import {LocalStorage} from 'angular2-localstorage/WebStorage';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
     templateUrl : './home.comp.html',
 })
 export class HomeComponent {
     private umoption : any = true;
-    @LocalStorage() public username : string = '';
-    constructor(private request : Request,private globalevent : GlobalEventManager) {
+    constructor(private request : Request,private globalevent : GlobalEventManager,private localstorage : LocalStorageService) {
         let params = {username : 'zhqiq'}
-        this.request.getJsonp(params , 'wx_login' , function(data){
-
-            console.log('success',data);
-        });
+        let _me = this;
+        //this.request.getJsonp(params , 'wx_login' , function(data){
+        //
+        //    console.log('success',data);
+        //});
+        _me.localstorage.add('username','wxh wxh wxh');
+        console.log(_me.localstorage.get('username'));
     }
     ngOninit() {
         console.log('1111111');

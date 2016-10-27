@@ -10,7 +10,7 @@ import {Component ,Input, Output, EventEmitter} from '@angular/core';
     styleUrls : ['../../shared.less'],
 })
 export class RouterBoxComponent {
-    openitem : boolean = true;
+    openitem : boolean = false;
     @Input() defaultuser : any;
     @Input() departmentparam : any;
     @Input() item : any;

@@ -1,0 +1,55 @@
+@import "../../../resources/common";
+.selectbox {
+  position: absolute;
+  top : 0;
+  left: 0;
+  width : 100%;
+  height : 100%;
+  z-index:10000;
+  background : #eee;
+  .content{
+    width : 100%;
+    background : #fff;
+    margin-top : 1em;
+    border-top : 1px solid #eee;
+    border-bottom : 1px solid #eee;
+      .select-group {
+        padding-left: 0;
+        .group-item{
+          width: 100%;
+          list-style: none;
+          line-height : 3em;
+          .select-title{
+            border-bottom : 1px solid #eee;
+            margin-left: 1em;
+            .checkbox-nothing{
+              line-height : normal;
+              padding : .5em 1.5em;
+              position: relative;
+              label{
+                font-weight: bold;
+              }
+              span.glyphicon{
+                color : #c1c1c1;
+                display: block;
+                position: absolute;
+                right : 1em;
+                top : 50%;
+                margin-top : -.5em;
+              }
+            }
+          }
+
+          .select-child{
+            .child-li{
+              padding : .5em 0;
+              list-style: none;
+              line-height : normal;
+              border-bottom : 1px solid #eee;
+            }
+          }
+
+        }
+      }
+  }
+}
