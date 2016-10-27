@@ -1,0 +1,67 @@
+@import "../resources/bootstrap/less/variables";
+@import "../resources/custom_bootstrap/custom_variables";
+@gray-shared : #cfcdcd;
+.ldmore{
+  display: block;
+  margin : 5px auto;
+  width : 80%;
+  font-size : large;
+  font-weight: bold;
+  background : darken(#ee001c, 6.5%) !important;
+}
+.optionsbox{
+  width : 100%;
+  border-bottom : 1px solid #c1c1c1;
+  margin : 1em 0;
+  background : #fff;
+  .input-box{
+    height : 8em;
+    width : 100%;
+    padding : 1em;
+    overflow: scroll;
+    border : none;
+    resize : none;
+  }
+
+  .bottom-bar{
+    border-top  : 1px solid #eee;
+    margin-left : 1em;
+    padding-left : 1em;
+    display: block;
+    height : 3em;
+    line-height : 3em;
+    font-size: @font-size-base;
+    color: #cfcdcd;
+    span {
+      display: inline-block;
+      text-align: center;
+    }
+    em {
+      font-style: normal;
+      display: inline-block;
+      width: 85%;
+    }
+  }
+}
+/*路由 选择操作*/
+.routerbox{
+  width: 100%;
+  padding : .5em;
+  margin: .8em 0;
+  position: relative;
+  background : #fff;
+  .routertitle{
+    border-bottom : 1px solid #eee;
+    .fl-right{
+      display: block;
+      position: absolute;
+      top : 1.5em ;
+      right : 1.5em;
+      color : @gray-shared
+    }
+  }
+  .select-group{
+    min-height : 5em;
+    height : auto;
+  }
+}

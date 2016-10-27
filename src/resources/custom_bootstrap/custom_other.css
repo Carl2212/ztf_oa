@@ -1,0 +1,39 @@
+.top-tip {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 10%;
+  height: auto;
+  width: 80%;
+  padding: 0;
+}
+.top-tip li {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  width: 100%;
+  height: 0;
+  border: none;
+  line-height: 42px;
+  overflow: hidden;
+  animation: toptip 5s linear;
+  -webkit-animation: toptip 5s linear;
+}
+@keyframes toptip {
+  0% {
+    height: 0px;
+    border: none;
+  }
+  3% {
+    height: 42px;
+    border: 1px solid #faebcc;
+  }
+  97% {
+    height: 42px;
+    border: 1px solid #faebcc;
+  }
+  100% {
+    height: 0px;
+    border: none;
+  }
+}

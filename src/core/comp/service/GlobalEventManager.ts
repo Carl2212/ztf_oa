@@ -7,5 +7,6 @@ import { Injectable ,EventEmitter} from '@angular/core';
 
 export class GlobalEventManager {
     public showtoptip = new EventEmitter<any>();
+    public showloading = new EventEmitter<any>();
     constructor(){}
 }

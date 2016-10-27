@@ -4,21 +4,22 @@
  */
 import { ModuleWithProviders , NgModule , Optional , SkipSelf  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {LoadingComponent} from './comp/scomp/loading';
-import {LoadingMoreComponent} from './comp/scomp/loading_more';
+import  {HttpModule ,JsonpModule} from '@angular/http';
+
 import { ModalModule , AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-import {LaddaModule} from 'angular2-ladda';
+
+import {LoadingComponent} from './comp/scomp/loading';
 import { ToptipAlertComponent} from './comp/scomp/toptip';
-import  {HttpModule ,JsonpModule} from '@angular/http';
+
 import {Request} from './comp/service/request';
 import {GlobalEventManager} from './comp/service/globaleventmanager';
 
 @NgModule({
-    imports : [CommonModule , ModalModule ,AlertModule ,LaddaModule ,HttpModule ,JsonpModule],
-    declarations : [LoadingComponent , LoadingMoreComponent ,ToptipAlertComponent],
-    exports : [LoadingComponent ,LoadingMoreComponent ,ToptipAlertComponent],
-    providers : [Request , GlobalEventManager]
+    imports : [CommonModule , ModalModule ,AlertModule ,HttpModule ,JsonpModule],
+    declarations : [LoadingComponent ,ToptipAlertComponent],
+    exports : [LoadingComponent ,ToptipAlertComponent],
+    providers : [Request , GlobalEventManager ]
 })
 export class CoreModule {
     constructor (@Optional() @SkipSelf() parentModule: CoreModule) {

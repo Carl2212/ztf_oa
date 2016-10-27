@@ -1,0 +1,10 @@
+<div class="optionsbox" >
+    <textarea class="input-box"   [(ngModel)]="myoptions" (ngModelChange)="outdata($event)"  placeholder="请输入您的意见~" ngDefaultControl >
+
+    </textarea>
+    <a class="bottom-bar" *ngIf="umoption" (click)="openumopinion()">
+        <span class="glyphicon glyphicon-comment"></span>
+        <em class="mce-txt"> 常用意见 </em>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
