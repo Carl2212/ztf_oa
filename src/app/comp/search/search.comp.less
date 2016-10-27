@@ -1,0 +1,61 @@
+
+@import "../../../resources/custom_bootstrap/custom_variables";
+.searchcomp {
+  .topbar {
+    height : 3em;
+    background : @brand-primary;
+    text-align: center;
+    color : #fff;
+    .back-icon {
+      color : #fff;
+      position: fixed;
+      z-index : 10000;
+      top : .5em;
+      left : 1em;
+      display: block;
+      float :left;
+      height : 2em;
+      line-height : 2em;
+    }
+    .bartitle {
+      font-size: large;
+      font-weight: bold;
+      line-height : 2.5em;
+    }
+  }
+  .content{
+    background : #fff;
+    .search{
+      background : #eee;
+      padding : 10px 20px;
+      margin : 0;
+    }
+    .history{
+      padding : 2em;
+      .history-title-bar{
+        color : #555;
+        .del {
+          color : #555;
+          display: block;
+          float : right;
+          margin-right: 10px;
+        }
+      }
+      .history-list{
+        margin: 1em 0 auto 0;
+        padding-left: 0;
+        width: 100%;
+        overflow: hidden;
+        li {
+          float : left;
+          list-style: none;
+          height : 2em;
+          line-height : 2em;
+          padding : 0 .5em;
+          margin : .3em;
+          background : #eee;
+        }
+      }
+    }
+  }
+}

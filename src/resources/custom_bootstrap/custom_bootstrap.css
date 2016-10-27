@@ -6647,6 +6647,7 @@ button.close {
 .top-tip li {
   list-style: none;
   padding: 0 20px;
+  margin: 0;
   width: 100%;
   height: 0;
   border: none;

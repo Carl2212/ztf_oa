@@ -1,0 +1,57 @@
+.searchcomp .topbar {
+  height: 3em;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.searchcomp .topbar .back-icon {
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  top: .5em;
+  left: 1em;
+  display: block;
+  float: left;
+  height: 2em;
+  line-height: 2em;
+}
+.searchcomp .topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.searchcomp .content {
+  background: #fff;
+}
+.searchcomp .content .search {
+  background: #eee;
+  padding: 10px 20px;
+  margin: 0;
+}
+.searchcomp .content .history {
+  padding: 2em;
+}
+.searchcomp .content .history .history-title-bar {
+  color: #555;
+}
+.searchcomp .content .history .history-title-bar .del {
+  color: #555;
+  display: block;
+  float: right;
+  margin-right: 10px;
+}
+.searchcomp .content .history .history-list {
+  margin: 1em 0 auto 0;
+  padding-left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.searchcomp .content .history .history-list li {
+  float: left;
+  list-style: none;
+  height: 2em;
+  line-height: 2em;
+  padding: 0 .5em;
+  margin: .3em;
+  background: #eee;
+}

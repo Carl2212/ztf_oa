@@ -1,3 +1,4 @@
+@import ''
 .top-tip {
   position: fixed;
   z-index : 10000;
@@ -10,11 +11,14 @@
 .top-tip li {
   list-style: none;
   padding : 0 20px;
+  margin : 0;
   width : 100%;
   height : 0;
   border : none;
   line-height : 42px;
   overflow: hidden;
+  //transition: height 2s;
+  //-webkit-transition: height 2s;
   animation : toptip 5s linear;
   -webkit-animation : toptip 5s linear;
 }
