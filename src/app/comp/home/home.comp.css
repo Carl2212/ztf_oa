@@ -1,0 +1,141 @@
+.topbar {
+  height: 3em;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.topbar .back-icon,
+.topbar .sure-select {
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  top: .5em;
+  display: block;
+  height: 2em;
+  line-height: 2em;
+}
+.topbar .back-icon {
+  left: 1em;
+  float: left;
+}
+.topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.topbar .sure-select {
+  right: 1em;
+  float: right;
+}
+.notice-icon {
+  display: inline-block;
+  min-width: 10px;
+  padding: .3em .6em;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #fc3b52;
+  border-radius: 3px;
+  content: "公告";
+  position: absolute;
+  font-size: 12px;
+  top: 50%;
+  margin-top: -0.9em;
+}
+.more-icon {
+  display: inline-block;
+  min-width: 10px;
+  padding: .3em .6em;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #fc3b52;
+  border-radius: 3px;
+  content: "更多";
+  position: absolute;
+  font-size: 14px;
+  top: 50%;
+  right: 1em;
+  margin-top: -0.9em;
+}
+.home {
+  background: #fff;
+}
+.home .content menu {
+  margin: 0 ;
+  padding: 0;
+  width: 100%;
+}
+.home .content menu .menu-ul {
+  margin-bottom: 0;
+}
+.home .content menu .menu-ul:before,
+.home .content menu .menu-ul:after {
+  content: " ";
+  display: table;
+}
+.home .content menu .menu-ul:after {
+  clear: both;
+}
+.home .content menu .menu-ul .menu-li {
+  float: left;
+  width: 25%;
+  padding: 1em 0;
+}
+.home .content menu .menu-ul .menu-li a {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.home .content menu .menu-ul .menu-li a .badge {
+  position: absolute;
+  top: 0;
+  right: 1em;
+  background-color: #fc3b52;
+}
+.home .content menu .menu-ul .menu-li a .item-img {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+.home .content menu .menu-ul .menu-li a .item-name {
+  color: #000;
+  margin: .5em auto;
+  font-weight: bold;
+  text-align: center;
+}
+.home .content .banner {
+  background: #cfcdcd;
+  padding: .5em;
+  position: relative;
+}
+.home .content .banner h5 {
+  display: inline-block;
+  margin: .5em 1em .5em 4em;
+}
+.home .content .main .header {
+  position: relative;
+  padding: 1.5em 1em !important;
+}
+.home .content .main .header h4 {
+  margin: 0;
+}
+.home .content .main .list-group-item {
+  padding: 1em 15px;
+  border: none;
+  margin-top: 1px;
+  border-bottom: 1px solid #cfcdcd;
+  font-size: 12px;
+}
+.home .content .main .list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
+}

@@ -23,30 +23,7 @@
                     <li *ngSwitchDefault class="child-li">
                         <div class="checkbox checkbox-circle checkbox-danger">
                             <input type="checkbox" id="checkboxselct" class="styled">
-                            <label for="checkboxselct">为什么我比别人矮</label>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li class="group-item">
-                <div class="select-title">
-                    <div class="checkbox checkbox-circle checkbox-nothing">
-                        <input type="checkbox" id="checkboxselct11" class="styled" [(ngModel)]="ywyf">
-                        <label for="checkboxselct11">业务研发部ywyf</label>
-                        <span class="glyphicon" [class.glyphicon-chevron-down]="!ywyf" [class.glyphicon-chevron-up]="ywyf" ></span>
-                    </div>
-                </div>
-                <ul [ngSwitch]="multiuser == 0" class="select-child">
-                    <li *ngSwitchCase="true" class="child-li">
-                        <div class="radio radio-danger">
-                            <input type="checkbox" id="radioselect1" class="styled" >
-                            <label for="radioselect1">发生了什么事</label>
-                        </div>
-                    </li>
-                    <li *ngSwitchDefault class="child-li">
-                        <div class="checkbox checkbox-circle checkbox-danger">
-                            <input type="checkbox" id="checkboxselct2" class="styled">
-                            <label for="checkboxselct2">为什么我比别人矮</label>
+                            <label for="checkboxselct">为什么</label>
                         </div>
                     </li>
                 </ul>

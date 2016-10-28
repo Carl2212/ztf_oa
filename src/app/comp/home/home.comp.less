@@ -1,0 +1,105 @@
+@import "../../../resources/bootstrap/less/mixins/clearfix";
+@import "../../../resources/common";
+@icon-border-radius : 3px;
+.base-icon() {
+  display: inline-block;
+  min-width: 10px;
+  padding: .3em .6em;
+  font-size: @font-size-small;
+  font-weight: @badge-font-weight;
+  color: @badge-color;
+  line-height: @badge-line-height;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: @red-deep;
+  border-radius: @icon-border-radius;
+}
+.notice-icon {
+  .base-icon();
+  content : "公告";
+  position: absolute;
+  font-size:@font-size-small;
+  top : 50%;
+  margin-top : -.9em;
+}
+.more-icon{
+  .base-icon();
+  content : "更多";
+  position: absolute;
+  font-size:@font-size-base;
+  top : 50%;
+  right : 1em;
+  margin-top : -.9em;
+}
+.home {
+  background :#fff;
+  .content {
+    menu {
+      margin : 0 ;
+      padding : 0;
+      width: 100%;
+      .menu-ul{
+        .clearfix();
+        margin-bottom : 0;
+        .menu-li{
+          float : left;
+          width: 25%;
+          padding : 1em 0;
+          a{
+            position: relative;
+            display: block;
+            width: 100%;
+            .badge{
+              position: absolute;
+              top:0;
+              right : 1em;
+              background-color: @red-deep;
+            }
+            .item-img{
+              display: block;
+              width: 50%;
+              margin : 0 auto;
+            }
+            .item-name{
+              color : #000;
+              margin : .5em auto;
+              font-weight: bold;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    .banner{
+      background : @gray-shallow;
+      padding : .5em;
+      position: relative;
+      h5{
+        display: inline-block;
+        margin: .5em 1em .5em 4em;
+      }
+    }
+    .main{
+      .header{
+        position: relative;
+        padding : 1.5em 1em !important;
+        h4{
+          margin : 0;
+        }
+      }
+      .list-group-item{
+        padding : 1em 15px;
+        border : none;
+        margin-top:1px;
+        border-bottom : 1px solid @gray-shallow;
+        font-size: @font-size-small;
+        .type-txt{
+          display: block;
+          float:right;
+          color: @gray-shallow;
+        }
+      }
+    }
+  }
+}

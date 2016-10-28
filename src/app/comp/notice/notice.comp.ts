@@ -6,7 +6,7 @@ import {Router , ActivatedRoute} from '@angular/router';
 @Component({
     template : '<alert>hello world</alert>'
 })
-export class ListComponent {
+export class NoticeComponent {
     private listpage : string ;
     constructor(private router : Router , private route : ActivatedRoute) {
         //this.listpage = this.route.queryParams.subscribe((data)=>console.log(data['v']));

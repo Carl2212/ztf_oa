@@ -4,6 +4,7 @@
 
 export const Config : any = {
     pagesize : 8,
+    author_check : false,
     global_qybm: 'GJGS',
     global_xmbm: 'GJGSOA',
     author_check: false,

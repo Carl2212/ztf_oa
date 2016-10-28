@@ -1,32 +1,71 @@
 <div class="home">
-    <h2 class="wxh">ok,it is done!</h2>
-    <my-options [umoption]="umoption" (onoptions)="onoptions($event)"></my-options>
-    <router-box></router-box>
-    <router-box></router-box>
-    <a role="menuitem" tabindex="-1" routerLink="/search" class="btn-primary">搜索公文</a>
-    <a role="menuitem" tabindex="-1" routerLink="/addressbk">通讯录</a>
-    <a role="menuitem" tabindex="-1" routerLink="/list/todo">待办</a>
-    <a role="menuitem" tabindex="-1" routerLink="/list/toread">待阅</a>
-    <div dropdown>
-        <div dropdownToggle>主题<span class="caret"></span></div>
-        <ul dropdownMenu>
-            <li role="presentation">
-                <a role="menuitem" tabindex="-1" routerLink="/search">搜索公文</a>
-            </li>
-            <li role="presentation">
-                <a role="menuitem" tabindex="-1" routerLink="/addressbk">通讯录</a>
-            </li>
-            <li role="presentation">
-                <a role="menuitem" tabindex="-1" routerLink="/list">列表</a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation">
-                <a role="menuitem" tabindex="-1" routerLink="/detail">详情</a>
-            </li>
-        </ul>
+    <div class="topbar">
+        <span class="bartitle">中通服国际公司办公系统</span>
     </div>
+    <div class="content">
+        <menu>
+            <ul class="menu-ul">
+                <li class="menu-li">
+                    <a routerLink="/notice">
+                        <img class="item-img" src="../../../resources/static/index-icon-red.png">
+                        <h4 class="item-name">通知公告</h4>
+                    </a>
+                </li>
+                <li class="menu-li">
+                    <a routerLink="/addressbk">
+                        <img class="item-img" src="../../../resources/static/index-icon-blue.png">
+                        <h4 class="item-name">通讯录</h4>
+                    </a>
+                </li>
+                <li class="menu-li">
+                    <a routerLink="/search">
+                        <img class="item-img" src="../../../resources/static/index-icon-purple.png">
+                        <h4 class="item-name">搜索公文</h4>
+                    </a>
+                </li>
+                <li class="menu-li">
+                    <a (click)="openpage('toread')">
+                        <img class="item-img" src="../../../resources/static/index-icon-pink.png">
+                        <span class="badge">{{toreadnum}}</span>
+                        <h4 class="item-name">待阅文件</h4>
+                    </a>
+                </li>
+            </ul>
+        </menu>
+        <div class="banner">
+            <span class="notice-icon">公告</span>
+            <h5>中国通信服务国际有限公司关于2016年国庆放假通知</h5>
+        </div>
+        <div class="list-group main">
+            <div class="list-group-item header">
+                <h4><span class="icon-rectangle"></span> 我的待办</h4>
+                <a (click)="openpage('todo')"><span class="more-icon">更多 ({{todonum}}项)</span></a>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
+            <div class="list-group-item">
+                关于中国通信服务国际有限公司领导班子考核评分
+                <span class="type-txt">发文管理</span>
+            </div>
 
-    <!--<toptip-alert>hello world</toptip-alert>-->
-    <!--<loading></loading>-->
-    <loading-more></loading-more>
+        </div>
+    </div>
 </div>

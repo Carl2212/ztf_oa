@@ -9,6 +9,7 @@ import {Config} from './config';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import {isArray} from "util";
 
 
 @Injectable()
@@ -64,6 +65,9 @@ export class Request {
         console.log('error',error);
         this.global.showtoptip.emit(error);
     }
+    /**
+     * 参数转成 url携带的字符串参数
+     */
     ParamsToString(params) {
         let sparams = '';
         for (var param in params ) {
@@ -71,12 +75,16 @@ export class Request {
         }
         return sparams;
     }
+    /**
+     *  参数转成 post需要的格式
+     */
     ToParams(params) {
         let sparams = new URLSearchParams();
         for (var param in params ) {
-            console.log(param,params[param]);
             sparams.set(param , params[param]);
         }
         return sparams;
     }
+
+
 }

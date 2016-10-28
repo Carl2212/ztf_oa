@@ -17,11 +17,11 @@ module.exports = function(config) {
      */
     frameworks: ['jasmine'],
 
-    // list of files to exclude
+    // modulelist of files to exclude
     exclude: [ ],
 
     /*
-     * list of files / patterns to load in the browser
+     * modulelist of files / patterns to load in the browser
      *
      * we are building the test environment in ./spec-bundle.js
      */

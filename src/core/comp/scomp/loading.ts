@@ -16,6 +16,6 @@ export class LoadingComponent {
     private isshow : boolean = false;
     constructor (private global : GlobalEventManager) {
         let _me = this;
-        this.global.showloading.subscribe((bl)=>_me.isshow = bl)
+        this.global.showloading.subscribe((bl)=>_me.isshow = bl);
     }
 }

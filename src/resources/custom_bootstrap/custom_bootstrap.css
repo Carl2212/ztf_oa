@@ -1,10 +1,22 @@
+@import "../Font-Awesome/css/font-awesome.min.css";
+html,
+body,
+menu,
+div,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import "../Font-Awesome/css/font-awesome.min.css";
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
