@@ -20,20 +20,22 @@ export class CommonService {
         let _me = this;
         console.log(userinfo);
         if(!userinfo) userinfo = this.localstorage.get('userinfo');
-
-        let params = {username : userinfo.username,userid : userinfo.userid,doctype : doctype};
-        let action = 'modulelist';
-        _me.request.getJsonp(params , action,function(data){
-            console.log(data.modulelist);
-            var modulelist = data.modulelist;
-            var total_count = 0;
-            if (modulelist) {
-                for (var items of modulelist) {
-                    total_count += parseInt(items.count);
+        if(userinfo) {
+            let params = {username : userinfo.username,userid : userinfo.userid,doctype : doctype};
+            let action = 'modulelist';
+            _me.request.getJsonp(params , action,function(data){
+                console.log(data.modulelist);
+                var modulelist = data.modulelist;
+                var total_count = 0;
+                if (modulelist) {
+                    for (var items of modulelist) {
+                        total_count += parseInt(items.count);
+                    }
                 }
-            }
-            console.log(total_count, modulelist);
-            callback && callback(total_count, modulelist);
-        });
+                console.log(total_count, modulelist);
+                callback && callback(total_count, modulelist);
+            });
+        }
+
     }
 }

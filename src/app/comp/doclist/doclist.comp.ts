@@ -9,25 +9,36 @@ import {Request} from "../../../core/comp/service/request";
 import {isArray} from "util";
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 @Component({
-    templateUrl : './doclist.comp.html'
+    templateUrl : './doclist.comp.html',
+    styleUrls : ['./doclist.comp.less']
 })
 export class DocListComponent {
     private moduleid : string;
     private doclist : any;//二级文件列表数据
     private doctype :string;
     private userinfo : any;
+    pageinfo:any;//页面参数数据
 
     constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService) {
         //获取链接携带的参数
         this.moduleid = this.route.snapshot.params['moduleid'];
         this.doctype = this.route.snapshot.params['pagename'];
+        let pagearray = {
+            todo: {pagename: '待办'  },
+            toread: {pagename: '待阅' }
+        };
+        this.pageinfo = pagearray[this.doctype];
     }
 
     ngOnInit() {
         //读取存储数据
         this.userinfo= this.localstorage.get('userinfo');
         //post参数
-        this.gotdoclist(1);
+        if(this.userinfo) {
+            this.gotdoclist(1);
+        }else{
+            //弹出提示信息并且显示no-content页面
+        }
     }
     gotdoclist (pageindex) {
         let action = 'doclist';

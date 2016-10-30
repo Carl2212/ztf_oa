@@ -27,3 +27,9 @@
   right: 1em;
   float: right;
 }
+.list-group-item a {
+  color: #000;
+}
+.list-group-item .list-group-item-heading {
+  color: #c1c1c1;
+}

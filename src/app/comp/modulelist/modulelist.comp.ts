@@ -9,12 +9,13 @@ import {Config} from "../../../core/comp/service/config";
 import {isArray} from "util";
 import {CommonService} from "../../../core/comp/service/common";
 @Component({
-    templateUrl : './modulelist.comp.html'
+    templateUrl : './modulelist.comp.html',
+    styleUrls : ['./modulelist.comp.less']
 })
 export class ModuleListComponent {
-    private pageinfo:any;//页面参数数据
-    private modulelist:any;//列表数据
-    private doctype : string;
+    pageinfo:any;//页面参数数据
+    modulelist:any;//列表数据
+    doctype : string;
 
     constructor(private route:ActivatedRoute, private global:GlobalEventManager, private common : CommonService) {
         //获取当天链接携带的参数

@@ -1,11 +1,54 @@
-
-html,body,menu,div,ul,li {
-  padding : 0;
-  margin : 0;
+/*css reset*/
+html,body,head,header,footer,/*大架构*/
+article,aside,nav,div,section,/*布局*/
+table,th,td,tr,form,input,img,figure,figcaption,/*表格表单图片*/
+ul,li,ol,dl,dd,dt,/*列表*/
+a,p,pre,code,/*文字连接*/
+h1,h2,h3,h4,h5,h6,details {
+  /*标题*/
+  margin: 0;
+  padding: 0;
 }
 
-li {
+body {
+  position: relative;
+  font-family: "微软雅黑", sans-serif;
+  color: #000;
+  font-size: 1.4rem
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input[type=text] {
+  border: none;
+  padding: 0.1rem;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+ul,ol {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0 !important;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+b,i,em {
+  font-weight: normal;
+  font-style: normal;
 }
 @import "../bootstrap/less/bootstrap.less"; //这个引用到原有的bootstrap文件2
 @import "custom_variables.less"; //3
