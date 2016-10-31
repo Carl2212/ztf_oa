@@ -7,7 +7,7 @@
         <ul class="select-group">
             <li class="group-item" *ngFor="let items of selectitems">
                 <div class="select-title" (click)="nextselectfn(items)">
-                    <span class="glyphicon" [class.glyphicon-chevron-right]="!nextselect[items.groupid]['isopen']" [class.glyphicon-chevron-down]="nextselect[items.groupid]['isopen']" ></span>
+                    <span class="glyphicon glyphicon-chevron-right" [class.glyphicon-chevron-down]="nextselect && nextselect[items.groupid]  && nextselect[items.groupid]['isopen']" ></span>
                     <em>{{items.groupname}}</em>
                     <div class="checkbox checkbox-danger">
                         <input type="checkbox" id="checkboxselct1" class="styled" [(ngModel)] ="nextcheckbox[items.groupid]" >
