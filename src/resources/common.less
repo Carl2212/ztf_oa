@@ -1,9 +1,14 @@
 @import "./bootstrap/less/variables";
 @import "./custom_bootstrap/custom_variables";
+@import "./bootstrap/less/mixins/border-radius";
 @gray-deep : #c1c1c1;
 @gray-shallow : #cfcdcd;
 @gray-mid : #e8e8e8;
 @red-deep : #fc3b52;
+.content {
+  margin-top : .8em;
+  background : #fff;
+}
 
 .topbar {
   height : 3em;
@@ -34,6 +39,9 @@
   }
 }
 .list-group-item {
+  .border-bottom-radius(0);
+  border : none;
+  border-bottom : 1px solid @gray-shallow;
   a {
     color : #000;
   }

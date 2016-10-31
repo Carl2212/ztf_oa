@@ -1,3 +1,7 @@
+.content {
+  margin-top: .8em;
+  background: #fff;
+}
 .topbar {
   height: 3em;
   background: #cd0018;
@@ -26,6 +30,12 @@
 .topbar .sure-select {
   right: 1em;
   float: right;
+}
+.list-group-item {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+  border-bottom: 1px solid #cfcdcd;
 }
 .list-group-item a {
   color: #000;
@@ -60,19 +70,12 @@
 .selectbox .content .select-group .group-item .select-title {
   border-bottom: 1px solid #eee;
   margin-left: 1em;
-}
-.selectbox .content .select-group .group-item .select-title .checkbox-nothing {
-  line-height: normal;
-  padding: .5em 1.5em;
   position: relative;
 }
-.selectbox .content .select-group .group-item .select-title .checkbox-nothing label {
-  font-weight: bold;
-}
-.selectbox .content .select-group .group-item .select-title .checkbox-nothing span.glyphicon {
-  color: #c1c1c1;
-  display: block;
+.selectbox .content .select-group .group-item .select-title .checkbox {
   position: absolute;
+  height: 1em;
+  line-height: 1em;
   right: 1em;
   top: 50%;
   margin-top: -0.5em;

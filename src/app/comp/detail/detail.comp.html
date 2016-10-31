@@ -1,0 +1,22 @@
+<div class="detail">
+    <div class="topbar">
+        <span class="bartitle">{{pageinfo.pagename}}</span>
+    </div>
+    <div class="content">
+        <div class="bar-menu">
+            <button class="btn-default" (click)="tabname = 'detail'">详情</button>
+            <button class="btn-default" (click)="tabname = 'process'">审批过程</button>
+            <span *ngIf="doctype == 'toread'" class="fl-l">
+                <button class="btn-danger">已阅</button>
+                <button class="btn-danger">转传阅</button>
+            </span>
+            <span *ngIf="doctype == 'todo'" class="fl-r">
+                <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">审批</button>
+            </span>
+        </div>
+        <div class="main">
+            <detailtab *ngIf="tabname == 'detail'" [detail]="detail"></detailtab>
+            <processtab *ngIf="tabname == 'process'" [process]="process"></processtab>
+        </div>
+    </div>
+</div>

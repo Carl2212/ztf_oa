@@ -4,11 +4,8 @@
     </div>
     <div class="content">
         <ul class="main">
-            <li class="main-li"><a><h4>查文审批</h4><span class="badge">18</span> </a></li>
-            <li class="main-li"><a><h4>查文审批</h4><span class="badge">18</span> </a></li>
-            <li class="main-li"><a><h4>查文审批</h4><span class="badge">18</span> </a></li>
             <li class="main-li" *ngFor="let module of modulelist">
-                <a routerLink="doclist/doctype/module.module_id"><h4>{{module.module_name}}</h4><span class="badge">{{module.count}}</span> </a>
+                <a routerLink="/doclist/{{doctype}}/{{module.module_id}}"><h4>{{module.module_name}}</h4><span class="badge">{{module.count}}</span> </a>
             </li>
         </ul>
     </div>

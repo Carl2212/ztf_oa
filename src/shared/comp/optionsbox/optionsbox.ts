@@ -10,7 +10,7 @@ import {Component ,Input, Output, EventEmitter , ViewChild} from '@angular/core'
     styleUrls : ['../../shared.less'],
 })
 export class OptionsBoxComponent {
-    myoptions : string = '';
+    @Input() myoptions : string = '';
     @Input() umoption : any;
     //@Input() presentAlert : any;
     @Output() onoptions = new EventEmitter<any>();

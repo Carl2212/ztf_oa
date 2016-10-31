@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/10/25.
  * 加载Loading 模块
  */
-import {Component} from '@angular/core';
+import {Component , Input ,Output , EventEmitter} from '@angular/core';
 
 @Component({
     selector : 'loading-more',
@@ -10,13 +10,12 @@ import {Component} from '@angular/core';
     styleUrls : ['../shared.less']
 })
 export class LoadingMoreComponent {
-    private isactive : boolean = false;
+    @Input() isactive : boolean = false;
+    @Output() loadmore = new EventEmitter<any>();
     constructor() {
 
     }
     loadingmore() {
-        //this.eleRef.nativeElement.querySelector('button')
-        console.log('loadingmore........................');
-        this.isactive = !this.isactive;
+        this.loadmore.emit(true);
     }
 }

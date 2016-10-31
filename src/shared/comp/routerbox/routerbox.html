@@ -1,11 +1,12 @@
-<div class="routerbox">
-    <div class="routertitle">
-        <div class="checkbox checkbox-circle checkbox-danger">
-            <input type="checkbox" id="checkbox1" class="styled" [(ngModel)]="openitem">
-            <label for="checkbox1">人事部</label>
+<div class="routerbox" >
+        <div class="routertitle">
+            <div class="checkbox checkbox-circle checkbox-danger">
+                <input type="checkbox" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()">
+                <label [attr.for]="item?.nodeid">{{item?.nodename ? item?.nodename : "传阅"}}</label>
+            </div>
+            <a class="fl-right"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
         </div>
-        <a class="fl-right"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
+        <div class="select-group"></div>
     </div>
-    <div class="select-group"></div>
-</div>
-<selectbox *ngIf="openitem"></selectbox>
+
+<selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "item?.multiuser" [departmentparam] ="departmentparam"  [selectusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>

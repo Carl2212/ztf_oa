@@ -1,15 +1,22 @@
 /**
  * Created by Administrator on 2016/10/28.
  */
-import {Component} from '@angular/core';
+import {Component ,Input} from '@angular/core';
 @Component({
-    template : `<div class="ml">
-                    <div class="ld-icon"><img src="../../../resources/images/loading.gif">
-                    </div>
-                 </div>`,
-    styleUrls : ['./scomp.less']
+    selector : 'processtab',
+    template : `<ul class="processtab">
+                    <li *ngFor="let ps of process" >
+                        <dl class="tb-grid" *ngFor="let p of ps">
+                            <dd>{{p.label}}</dd>
+                            <dt>{{p.text}}</dt>
+                        </dl>
+                    </li>
+                </ul>`,
+    styleUrls : ['./processtab.less'],
 })
 export class ProcessTabComponent {
+    @Input() process : any;
     constructor () {
+        console.log(process);
     }
 }

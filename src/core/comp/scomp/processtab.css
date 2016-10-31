@@ -43,38 +43,29 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
-.searchcomp .content {
-  background: #fff;
+.processtab {
+  padding: 1em auto;
 }
-.searchcomp .content .search {
-  background: #eee;
-  padding: 10px 20px;
-  margin: 0;
+.processtab li {
+  width: 95%;
+  margin: 1em auto;
 }
-.searchcomp .content .history {
-  padding: 2em;
+.processtab li .tb-grid {
+  height: 3em;
+  border: 1px solid #c1c1c1;
+  margin-bottom: 0;
 }
-.searchcomp .content .history .history-title-bar {
-  color: #555;
+.processtab li .tb-grid dd {
+  width: 30%;
+  border-right: 1px solid #c1c1c1;
+  text-align: center;
 }
-.searchcomp .content .history .history-title-bar .del {
-  color: #555;
-  display: block;
-  float: right;
-  margin-right: 10px;
+.processtab li .tb-grid dt {
+  padding-left: 1em;
+  width: 69%;
 }
-.searchcomp .content .history .history-list {
-  margin: 1em 0 auto 0;
-  padding-left: 0;
-  width: 100%;
-  overflow: hidden;
-}
-.searchcomp .content .history .history-list li {
+.processtab li .tb-grid dd,
+.processtab li .tb-grid dt {
+  line-height: 3em;
   float: left;
-  list-style: none;
-  height: 2em;
-  line-height: 2em;
-  padding: 0 .5em;
-  margin: .3em;
-  background: #eee;
 }

@@ -1,32 +1,39 @@
 <div class="selectbox">
     <div class="topbar">
         <span class="bartitle">选择发送人</span>
-        <a class="sure-select"> 完成 </a>
+        <a class="sure-select" (click)="sureselectfn()"> 完成 </a>
     </div>
     <div class="content">
         <ul class="select-group">
-            <li class="group-item">
-                <div class="select-title">
-                    <div class="checkbox checkbox-circle checkbox-nothing">
-                        <input type="checkbox" id="checkboxselct1" class="styled" [(ngModel)]="ywyf">
-                        <label for="checkboxselct1">业务研发部ywyf</label>
-                        <span class="glyphicon" [class.glyphicon-chevron-down]="!ywyf" [class.glyphicon-chevron-up]="ywyf" ></span>
+            <li class="group-item" *ngFor="let items of selectitems">
+                <div class="select-title" (click)="nextselectfn(items)">
+                    <span class="glyphicon" [class.glyphicon-chevron-right]="!nextselect[items.groupid]['isopen']" [class.glyphicon-chevron-down]="nextselect[items.groupid]['isopen']" ></span>
+                    <em>{{items.groupname}}</em>
+                    <div class="checkbox checkbox-danger">
+                        <input type="checkbox" id="checkboxselct1" class="styled" [(ngModel)] ="nextcheckbox[items.groupid]" >
+                        <label for="checkboxselct1"></label>
                     </div>
                 </div>
-                <ul [ngSwitch]="multiuser == 0" class="select-child">
-                    <li *ngSwitchCase="true" class="child-li">
-                        <div class="radio radio-danger">
-                            <input type="checkbox" id="radioselect" class="styled" >
-                            <label for="radioselect">发生了什么事</label>
-                        </div>
-                    </li>
-                    <li *ngSwitchDefault class="child-li">
-                        <div class="checkbox checkbox-circle checkbox-danger">
-                            <input type="checkbox" id="checkboxselct" class="styled">
-                            <label for="checkboxselct">为什么</label>
-                        </div>
-                    </li>
-                </ul>
+                <div  *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']">
+                    <div [ngSwitch]="multiuser == 0">
+                        <ul *ngSwitchCase="true"  class="select-child" [(ngModel)]="selectradio" >
+                            <li class="child-li" *ngFor="let useritem of nextselect[items.groupid]">
+                                <div class="radio radio-danger">
+                                    <input type="checkbox" id="radioselect" class="styled" checked="{{selectusers && selectusers[useritem.userid+'@'+useritem.username] == true}}" value="{{useritem.userid+'@'+useritem.username}}">
+                                    <label for="radioselect">{{useritem.username}}</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul *ngSwitchDefault>
+                            <li class="child-li" *ngFor="let useritem of nextselect[items.groupid]">
+                                <div class="checkbox checkbox-circle checkbox-danger" *ngFor="let useritem of nextselect[items.groupid]">
+                                    <input type="checkbox" id="checkboxselct" class="styled" [(ngModel)] = "selectusers[useritem.userid+'@'+useritem.username]">
+                                    <label for="checkboxselct">{{useritem.username}}</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </li>
         </ul>
 

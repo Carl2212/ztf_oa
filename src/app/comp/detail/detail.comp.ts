@@ -6,25 +6,34 @@ import {Router , ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 import {Request} from "../../../core/comp/service/request";
 @Component({
-    templateUrl : './detail.comp.html'
+    templateUrl : './detail.comp.html',
+    styleUrls : ['./detail.comp.less']
 })
 export class DetailComponent {
     private userinfo  : any;
     private doctype : string;
-    private moduleid : string;
-    private nodeid : string;
-    private docid : string;
-    private appid : string;
-    private detail : string;
-    private process : string;
+    moduleid : string;
+    nodeid : string;
+    docid : string;
+    appid : string;
+
+    pageinfo:any;//页面参数数据
+    detail : string;
+    process : string;
+    tabname : string = 'detail';
     constructor(private localstorage : LocalStorageService , private request : Request , private route:ActivatedRoute) {
         let _me = this;
+        let pagearray = {
+            todo: {pagename: '待办' },
+            toread: {pagename: '待阅'  }
+        };
         this.route.params.forEach(param=>{
             _me.doctype = param['pagename'];
             _me.moduleid = param['moduleid'];
             _me.nodeid = param['nodeid'];
             _me.docid = param['docid'];
             _me.appid = param['appid'];
+            _me.pageinfo = pagearray[this.doctype];
         });
     }
     ngOnInit() {
@@ -50,6 +59,7 @@ export class DetailComponent {
         _me.request.getJsonp(params,action,function(data){
             _me.detail = data.detail.item;
             _me.process = data.detail.tracelist;
+            console.log(_me.detail,_me.process);
         });
     }
     ////传阅（进入dotosubmit）

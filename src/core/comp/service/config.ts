@@ -14,7 +14,7 @@ export const Config : any = {
     login: '/wap/execute?cmd=login&command=login',
 
     //通讯录组别-用户查询
-    grouplist:'/wap/execute?cmd=grouplist&command=grouplist',
+    grouplist_action:'/wap/execute?cmd=grouplist&command=grouplist',
     userlist_action:'/wap/execute?cmd=userlist&command=userlist',
     searchuser:'/wap/execute?cmd=searchuser&command=searchuser',
 
@@ -30,7 +30,7 @@ export const Config : any = {
 
     //流程项 包括常用意见
     nextroute: '/wap/execute?cmd=nextroute&command=nextroute',
-    nextroute_group:'/wap/execute?cmd=nextroute_group&command=nextroute_group',
+    nextroute_group_action:'/wap/execute?cmd=nextroute_group&command=nextroute_group',
     nextroute_user_action: '/wap/execute?cmd=nextroute_user&command=nextroute_user',
 
     //待办待阅已阅数量

@@ -4,13 +4,16 @@
  */
 import {Pipe,PipeTransform} from '@angular/core';
 
-/*处理数据dotosubmit页面，将数组key中的数据提取*/
-@Pipe({name : 'keytoparams'})
-export class KeyToParamsPipe implements PipeTransform {
-    transform(value :any , args : string) : any {
-        let items;
-        items = value.split('@');
-        return items[args];
+/*转化为key-value的数组转成{key:xxx,value:xxx}方便遍历*/
+@Pipe({name: 'keyvalue'})
+export class KeysPipe implements PipeTransform {
+    transform(value : any, args:string[]) : any {
+        let keys = [];
+        for (let key in value) {
+            keys.push({key: key, value: value[key]});
+        }
+        return keys;
     }
 }
+
 
