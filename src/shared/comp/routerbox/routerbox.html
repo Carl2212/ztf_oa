@@ -1,12 +1,25 @@
 <div class="routerbox" >
         <div class="routertitle">
-            <div class="checkbox checkbox-circle checkbox-danger">
-                <input type="checkbox" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()">
-                <label [attr.for]="item?.nodeid">{{item?.nodename ? item?.nodename : "传阅"}}</label>
+            <div class="radio radio-danger">
+                <input type="radio" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()" checked="{{ischeck}}">
+                <label [attr.for]="item?.nodeid">{{item?.nodename ? item?.nodename : "传阅"}}{{ischeck}}</label>
             </div>
-            <a class="fl-right"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
+            <a class="fl-right" (click)="delall()"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
         </div>
-        <div class="select-group"></div>
+        <div class="select-group">
+            <ul *ngIf="selectusers?.length > -1">
+                <li *ngFor="let group of selectusers">
+                    <span>{{group.groupname}}</span>
+                    <span *ngFor="let user of group.userselect">
+                        <button class="withclosebadge"  (click)="del(sel.key)">
+                            {{user.username}} |
+                            <span>x</span>
+                        </button>
+                    </span>
+                </li>
+            </ul>
+
+        </div>
     </div>
 
 <selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "item?.multiuser" [departmentparam] ="departmentparam"  [selectusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>

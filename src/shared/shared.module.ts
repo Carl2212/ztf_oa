@@ -12,13 +12,15 @@ import {LoadingMoreComponent} from './comp/loading_more';
 import {OptionsBoxComponent} from './comp/optionsbox/optionsbox';
 import {RouterBoxComponent} from './comp/routerbox/routerbox';
 import {SelectBoxComponent} from './comp/selectbox/selectbox';
+import {GrouplistComponent} from './comp/groupselect/grouplist';
+import {UserselectComponent} from './comp/userselect/userselect';
 //import {KeysPipe} from './pipe/pipe';
 
 
 @NgModule({
     imports : [CommonModule ,LaddaModule ,FormsModule ],
-    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent ,RouterBoxComponent,SelectBoxComponent],//
-    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule ,RouterBoxComponent,SelectBoxComponent]//
+    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent],//
+    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent]//
 })
 export class SharedModule {
 

@@ -7,8 +7,8 @@
             <button class="btn-default" (click)="tabname = 'detail'">详情</button>
             <button class="btn-default" (click)="tabname = 'process'">审批过程</button>
             <span *ngIf="doctype == 'toread'" class="fl-l">
-                <button class="btn-danger">已阅</button>
-                <button class="btn-danger">转传阅</button>
+                <button class="btn-danger" (click)="submittoread()">已阅</button>
+                <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">转传阅</button>
             </span>
             <span *ngIf="doctype == 'todo'" class="fl-r">
                 <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">审批</button>

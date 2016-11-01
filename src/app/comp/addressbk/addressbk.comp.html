@@ -1,0 +1,38 @@
+<div class="detail">
+    <div class="topbar">
+        <span class="bartitle">通讯录</span>
+    </div>
+    <div class="content">
+        <ul *ngIf="!selectedItem">
+            <li *ngFor="let item of items" (click)="itemTapped($event, item)">
+                <em>{{item.groupname}}</em>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </li>
+        </ul>
+        <ul *ngIf="selectedItem && !selecteduser">
+            <li *ngFor="let user of useritems" (click)="userinfo($event, user)">
+                <span class="col-3">{{user.cnname}}</span>
+                <span class="col-3">{{user.mobile}}</span>
+                <span class="col-3"><span class=""></span> </span>
+                <span class="col-3"><span class=""></span> </span>
+            </li>
+        </ul>
+        <div class="userinfo-card" *ngIf="selectedItem && selecteduser">
+            <dl>
+                <dd class="list-group-item">成员信息</dd>
+                <dt></dt>
+                <dd class="list-group-item">姓名</dd>
+                <dt>{{selecteduser.cnname}}</dt>
+                <dd class="list-group-item">部门</dd>
+                <dt>{{selecteduser.groupname}}</dt>
+                <dd class="list-group-item">办公电话</dd>
+                <dt>{{selecteduser.officephone}}</dt>
+                <dd class="list-group-item">手机号</dd>
+                <dt>{{selecteduser.mobile}}</dt>
+                <dd class="list-group-item">邮箱</dd>
+                <dt>{{selecteduser.email}}</dt>
+            </dl>
+            <span><button item-right (click)="closecard()">关闭</button></span>
+        </div>
+    </div>
+</div>

@@ -62,27 +62,28 @@ export class DetailComponent {
             console.log(_me.detail,_me.process);
         });
     }
-    ////传阅（进入dotosubmit）
-    //sendread() {
-    //    this.navcontrol.push(DoToSubmitPage,{nextparam : this.nextparam[0],detailinfo : this.detailinfo});
-    //}
-    //
-    ////审批（进入dotosubmit）
-    //approval () {
-    //    this.navcontrol.push(DoToSubmitPage,{nextparam : this.nextparam[1],detailinfo : this.detailinfo});
-    //}
-    //提交已阅(只是单纯接口先不做)
-    readed() {
+    /*********************************************
+     * 已阅
+     * ajax
+     *********************************************/
+    submittoread() {
+        let _me = this;
+        let params = {
+            userid  : this.userinfo.userid,
+            appid : this.appid,
+            docid : this.docid,
+            opinion : '已阅',
+            submittype: '2',//?????????????????
+        };
+        let action = 'submittoread';
+        _me.request.getJsonp(params, action, function (data) {
+            if (data.header.code == 1 && data.result.success == 1) {
+                //弹出提示并且跳转回list页面
 
-    }
-
-    //取待办下一个节点
-    nextroute() {
-
-    }
-    //提交待办
-    submitTodo(){
-
+            } else {
+                //弹出错误
+            }
+        });
     }
 }
 

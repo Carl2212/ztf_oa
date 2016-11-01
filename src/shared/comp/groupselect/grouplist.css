@@ -1,0 +1,21 @@
+.select-group {
+  padding-left: 0;
+}
+.select-group .group-item {
+  width: 100%;
+  list-style: none;
+  line-height: 3em;
+}
+.select-group .group-item .select-title {
+  border-bottom: 1px solid #eee;
+  margin-left: 1em;
+  position: relative;
+}
+.select-group .group-item .select-title .checkbox {
+  position: absolute;
+  height: 1em;
+  line-height: 1em;
+  right: 1em;
+  top: 50%;
+  margin-top: -0.5em;
+}

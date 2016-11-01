@@ -1,41 +1,9 @@
 <div class="selectbox">
     <div class="topbar">
         <span class="bartitle">选择发送人</span>
-        <a class="sure-select" (click)="sureselectfn()"> 完成 </a>
+        <a class="sure-select" (click)="sureselectfn(userselect.outusers())"> 完成 </a>
     </div>
     <div class="content">
-        <ul class="select-group">
-            <li class="group-item" *ngFor="let items of selectitems">
-                <div class="select-title" (click)="nextselectfn(items)">
-                    <span class="glyphicon glyphicon-chevron-right" [class.glyphicon-chevron-down]="nextselect && nextselect[items.groupid]  && nextselect[items.groupid]['isopen']" ></span>
-                    <em>{{items.groupname}}</em>
-                    <div class="checkbox checkbox-danger">
-                        <input type="checkbox" id="checkboxselct1" class="styled" [(ngModel)] ="nextcheckbox[items.groupid]" >
-                        <label for="checkboxselct1"></label>
-                    </div>
-                </div>
-                <div  *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']">
-                    <div [ngSwitch]="multiuser == 0">
-                        <ul *ngSwitchCase="true"  class="select-child" [(ngModel)]="selectradio" >
-                            <li class="child-li" *ngFor="let useritem of nextselect[items.groupid]">
-                                <div class="radio radio-danger">
-                                    <input type="checkbox" id="radioselect" class="styled" checked="{{selectusers && selectusers[useritem.userid+'@'+useritem.username] == true}}" value="{{useritem.userid+'@'+useritem.username}}">
-                                    <label for="radioselect">{{useritem.username}}</label>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul *ngSwitchDefault>
-                            <li class="child-li" *ngFor="let useritem of nextselect[items.groupid]">
-                                <div class="checkbox checkbox-circle checkbox-danger" *ngFor="let useritem of nextselect[items.groupid]">
-                                    <input type="checkbox" id="checkboxselct" class="styled" [(ngModel)] = "selectusers[useritem.userid+'@'+useritem.username]">
-                                    <label for="checkboxselct">{{useritem.username}}</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
+        <grouplist [selectitems] = "selectitems" [departmentparam]="departmentparam" #userselect></grouplist>
     </div>
 </div>

@@ -4,6 +4,7 @@
  */
 import {Component ,Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
+import {Config} from "../../../core/comp/service/config";
 
 @Component({
     selector : 'router-box',
@@ -16,7 +17,6 @@ export class RouterBoxComponent {
     public isnull : boolean = true;
     private toreadcheckbox : boolean = false;
     private openitems:any = false;//是否展开显示selectbox
-    private addressType:string = '0';//'0' or 'C'
     private nextcheckbox : any = [];
 
     @Input() defaultuser : any;
@@ -24,62 +24,70 @@ export class RouterBoxComponent {
     @Input() item : any;
     @Input() multiroute : string;//单选框还是复选框
     @Input() nodelist : any;
+    @Input() ischeck : boolean;
     @Output() onrouter = new EventEmitter<any>();
     constructor(private commonfn : CommonService) {
 
     }
-    ngOnInit() {
-        console.log(this.selectitems,this.departmentparam,this.selectusers,this.item,this.multiroute ,this.nodelist);
-    }
     onselect(event) {
         //接收selectbox子组件返回的数据
-        this.selectusers =event;
-        if(!this.selectusers || this.commonfn.isEmptyObject(this.selectusers)) {
-            this.isnull = true;
+        let temp =[] ;
+        for(let group of event) {
+            var tempusers = group.selectusers;
+            var tmp = [];
+            for(let k in tempusers) {
+                if(tempusers[k]) {
+                    var user = k.split('@');
+                    tmp.push({userid : user[0] , username : user[1]});
+                }
+            }
+            temp.push({groupname : group.group.groupname , userselect : tmp});
         }
+        this.selectusers =temp;
+        //if(!this.selectusers || this.commonfn.isEmptyObject(this.selectusers)) {
+        //    this.isnull = true;
+        //}
         this.openitems = false;
-        this.selusers();
+        //this.selusers();
         this.cancelroute();//取消其他路由的选择
-        this.onrouter.emit(event);
     }
+    //弹出数据 到父组件
+    outputdata() {
+        let type = this.departmentparam ? 'todo' : 'toread';//'todo'数据作为节点数据形式转化,'toread',转成touserid字符串形式
+        return {selectusers:this.selectusers ,type : type ,node : this.item };
+    }
+
+
     /*********************************************
      * 展开部门通讯录
      * input : none
      *********************************************/
     selectitemsfn() {
-        console.log('selectitemsfn');
-        if(this.item && (this.item.ispointtoend == 'S' || this.item.ispointtoend == 'Y' )) {
-            //取消其他路由的选择
-            this.cancelroute();
-            return ;
-        }else if(this.defaultuser) {
-            var tmp = {};
-            for(var duser of this.defaultuser) {
-                tmp[duser.userid+'@'+ duser.username]= true;
-            }
-            this.selectusers = tmp;
-            this.isnull = false;
-            this.cancelroute();//取消其他路由的选择
-            //this.cdr.detectChanges();
-            return ;
-        }
         var _me = this;
         var type : number;
         var parent : any;
-        console.log('_me.item',_me.item);
-        if(!_me.item) {
-            type = 1;
-            parent = 0;
-        }else if(_me.item.isdefaultroute){
-            type = 3;
-            parent = _me.departmentparam;
+        if(!_me.item || _me.item.ispointtoend == 'N') {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
+            this.commonfn.getGroupOrUserList(1, 0, function (data) {
+                _me.commonfn.getGroupOrUserList(1, data[0].groupid, function (data) {
+                    _me.selectitems = data;
+                    _me.openitems = true;
+                });
+            });
+        }else if(_me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S'){
+            console.log('defaultuser.............................................',_me.defaultuser,_me.defaultuser[0].userid);
+            if(_me.defaultuser) {
+                this.selectusers = [{userselect : _me.defaultuser}];
+                console.log(this.selectusers);
+                //取消其他路由的选择
+                this.cancelroute();
+                return;
+            }
+            this.commonfn.getGroupOrUserList(3, _me.departmentparam, function (data) {
+                _me.selectitems = data;
+                _me.openitems = true;
+            });
         }
-        console.log('type,parent',type,parent);
-        this.commonfn.getGroupOrUserList(type, parent, this.addressType, function (data) {
-            _me.selectitems = data;
-            _me.openitems = true;
-            console.log(_me.selectitems, _me.openitems);
-        });
+
         if(this.item && this.item.multiuser != 0 && !this.toreadcheckbox) {
             this.nextcheckbox = [];
             this.selectusers = {};
@@ -87,21 +95,23 @@ export class RouterBoxComponent {
         }
     }
 
-
+    //单选路由，互斥路由
     cancelroute() {
         if(this.item.multiroute == 0) {
-
-        }else {//再判断是否有互斥路由
-
+            this.unSelectExclude();
+        }else if(this.item.exclude&&''!=this.item.exclude.replace(/\s/g,"")){//互斥路由
+            this.unSelectExclude(this.item.exclude);
         }
+    }
+    //弹出数据到父组件取消路由选择
+    unSelectExclude(exclude?) {
+        this.onrouter.emit({exclude : exclude , nodeid : this.item.nodeid});
     }
 
 
+    delall() {
 
-
-
-
-
+    }
 
 
     /*********************************************
@@ -134,7 +144,6 @@ export class RouterBoxComponent {
             for(var i in this.selectusers) {
                 if(this.selectusers[i]) {
                     this.isnull = false;
-                    //this.cdr.detectChanges();
                     return;
                 }
             }

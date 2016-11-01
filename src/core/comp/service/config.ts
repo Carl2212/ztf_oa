@@ -4,6 +4,8 @@
 
 export const Config : any = {
     pagesize : 8,
+    addressType : 'O',
+    alsouser : 'Y',
     author_check : false,
     global_qybm: 'GJGS',
     global_xmbm: 'GJGSOA',

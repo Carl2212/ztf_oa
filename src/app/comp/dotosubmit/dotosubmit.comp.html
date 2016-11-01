@@ -1,7 +1,7 @@
 <div class="dotosubmit">
     <div class="topbar">
         <span class="bartitle">{{pageinfo.pagename}}</span>
-        <a class="back-icon right" routerLink=""> 提交</a>
+        <a class="back-icon right" (click)="dotosubmit()"> 提交</a>
     </div>
     <div class="content">
         <!----------------------------------------------意见输入框--------------------------------------------------->
@@ -10,7 +10,7 @@
         <!---------------------------------------------- 操作项组件 --------------------------------------------------->
         <div *ngIf="nodelist">
             <div *ngFor="let node of nodelist">
-                <router-box [multiroute]="multiroute" [nodelist]="nodelist" [defaultuser] = "node.defaultuser" [departmentparam] = "node.departmentparam" [item] = "node.item" (onrouter)="onrouter($event)" ></router-box>
+                <router-box [ischeck]="isrouter(node.item.nodeid)" [nodelist]="nodelist" [defaultuser] = "node.defaultuser" [departmentparam] = "node.departmentparam" [item] = "node.item" (onrouter)="unSelectExclude($event)" ></router-box>
             </div>
         </div>
         <!----------------------------------------------------------------------------------------------------------->

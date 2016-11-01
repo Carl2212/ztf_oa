@@ -22,9 +22,9 @@ export class CommonService {
      * @param addressType
      * @param callback 回调函数
      */
-    getGroupOrUserList(type,parentid,addressType,callback) {
+    getGroupOrUserList(type,parentid,callback) {
         //type = 1 为grouplist  2为userlist
-        console.log(type,parentid,addressType);
+        console.log(type,parentid);
         var _me = this;
         let userinfo = this.localstorage.get('userinfo');
         let action = '';
@@ -32,10 +32,11 @@ export class CommonService {
             //数据
             let params = {
                 userid : userinfo.userid,
-                type : addressType
+                type : Config.addressType
             };
             if(type == 1) {
                 params['parentid'] = parentid;
+                params['alsouser'] = Config.alsouser;
                 action = 'grouplist_action' ;
             }else if(type ==2 ){
                 params['groupid']=parentid;
@@ -49,7 +50,7 @@ export class CommonService {
                 params['moduleid'] = parentid.moduleid;
                 params['docid'] = parentid.docid;
                 params['nextnodeid'] = parentid.nextnodeid;
-                params['groupid'] = 'Role';
+                params['groupid'] = parentid.groupid;
                 action = 'nextroute_user_action';
             }
             console.log(type == 3,action);
