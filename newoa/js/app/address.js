@@ -1,0 +1,248 @@
+/**
+ * Edited by wxh on 2016/7/15.
+ *
+ */
+
+var username, userid, state, selfGroupId,hisLength=0,addressType;
+var ssHelper = new SStorageHelper(); //sessionStorage
+var navList = [{id:'0', name:'通讯录', idx:1}];
+var orgList = [];
+var currentList = [];
+var navDiv = $("#navDiv");
+var listDiv = $("#listDiv");
+
+var navHtmlStr = '<button type="button" role="nav" class="btn btn-primary" groupid="{groupid}" idx="{idx}">{orgname}</button>';
+var groupHtmlStr = '<li class="list-group-item" role="groupInfo" idx="{idx}"><span class="glyphicon glyphicon-list"></span> {groupname}</li>';
+var userHtmlStr = '<li class="list-group-item" role="userInfo" idx="{idx}"> <span class="glyphicon glyphicon-user"></span> {username}</li>';
+
+var userMobileHtmlStr = '<li class="list-group-item" role="userInfo" idx="{idx}"> <span class="glyphicon glyphicon-user"></span> {username}'
+//    +'&nbsp;&nbsp;&nbsp;&nbsp;手机'
+    +'<span class="pull-right">{mobile}'
+        +'&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:{mobile}"><span class="glyphicon glyphicon-phone"></span></a>'
+        +'&nbsp;&nbsp;&nbsp;&nbsp;<a href="sms:{mobile}"><span class="glyphicon glyphicon-envelope"></span></a>'
+    +'</span>'
++'</li>';
+
+$(function(){
+    state = getURLParam('state');
+    $(".cdc-scroll-panel-body").height($(window).height()-90);
+
+    //判断sessionStorage是否有用户信息
+    username = ssHelper.getValue('username');
+    cnname = ssHelper.getValue('cnname');
+    if(!username) {
+        alert(Config.nouserinfotip);
+    }
+    showBg(cnname);
+
+    if('selfgroup'==state){ //本部门
+        addressType='O';
+        window.location.hash="#"+selfGroupId;
+        //getList(selfGroupId);
+    }else if('common'==state){ //常用分组
+        addressType='C';
+        window.location.hash="#0";
+        //getList(selfGroupId);
+    }else{ //公司通讯录
+        addressType='O';
+        window.location.hash="#0";
+        //getList('0');
+    }
+
+    window.onhashchange = hashchangeHandler;
+});
+
+
+
+
+
+function showBg(_name){
+	var bgs = $("span[role=bg]");
+	$.each(bgs,function(idx, item){
+		$(item).html(_name);
+	});
+};
+
+/**
+  * @type: 'group' / 'user'
+  * 
+ */
+function getGroupOrUserList(type, parentid, callback){
+	var opts = {};
+	
+	opts.data = {};
+	opts.data.username = username;
+	opts.data.userid = userid;
+	opts.data.parentid = parentid;
+	opts.data.groupid = parentid;
+	opts.data.type = addressType;
+	opts.data.qybm = Config.global_qybm;
+	opts.data.xmbm = Config.global_xmbm;
+	opts.url = Config.global_url + ('group'==type?Config.grouplist_action:Config.userlist_action);
+	opts.success = function(data,status, jqXHR){
+		if("1"==data.header.code){
+			var groupList = data.result.grouplist;
+			if(groupList&&"string" != typeof(groupList)){
+				$.each(groupList, function(idx, item){
+					currentList.push(item);
+				});
+			}
+			
+			var userList = data.result.userlist;
+			if(userList&&"string" != typeof(userList)){
+				$.each(userList, function(idx, user){
+					var userInfo = {};
+					$.each(user, function(_idx, item){
+						userInfo[item.name] = item.text;
+					})
+										
+					currentList.push(userInfo);
+					
+				});
+			}
+			
+		}
+		callback&&callback();
+	};
+	
+	$.jsonPost(opts);
+};
+
+function setNav(){
+	navDiv.html('');
+	var tmp = '';
+	$.each(navList, function(idx, item){
+		tmp = navHtmlStr.replace("{orgname}", item.name+">").replace("{groupid}", item.id).replace("{idx}", item.idx);
+		navDiv.append(tmp);
+	});
+	
+	$("button[role=nav]").on('click', function(){
+		var groupid = $(this).attr('groupid');
+		var idx = $(this).attr('idx');
+		if(idx<navList.length){
+			window.history.go(idx - navList.length);
+		}
+		/*navList = navList.slice(0, idx);
+		if(orgList[groupid]){
+			currentList = orgList[groupid];
+			setNav();
+			setList();
+		}else{
+			getList(groupid);
+		}*/
+		
+	});
+	
+};
+
+function setList(){
+	listDiv.html('');
+	var tmp = '';
+	$.each(currentList,function(idx, item){
+		if(item.userid &&''!=item.userid){
+			if(item.mobile&&''!=item.mobile){
+				tmp = userMobileHtmlStr.replace("{username}", item.cnname).replace("{idx}", idx).replace(/{mobile}/g, item.mobile);
+			}else{
+				tmp = userHtmlStr.replace("{username}", item.cnname).replace("{idx}", idx);
+			}
+			
+		}else{
+			
+			tmp = groupHtmlStr.replace("{groupname}", item.groupname).replace("{idx}", idx);
+		}
+		listDiv.append(tmp);
+	});
+	$("li[role=groupInfo]").on('click', function(){
+		var data = currentList[$(this).attr('idx')];
+		console.log(data);
+		var nav = {};
+		nav.id=data.groupid;
+		nav.name = data.groupname;
+		nav.idx = navList.length+1;
+		navList.push(nav);
+		window.location.hash="#"+data.groupid;
+		//getList(data.groupid);
+	});
+	
+	
+	
+	$("li[role=userInfo]").on('click', function(event){
+		if(event.target.classList.contains('glyphicon-phone')||event.target.classList.contains('glyphicon-envelope')){
+			return true;
+		}
+		
+		var data = currentList[$(this).attr('idx')];
+		$("#cnname").html(data.cnname);
+		$("#groupname").html(data.groupname);
+		
+		if(data.officephone && ''!=data.officephone){
+			$("#officephone").html(data.officephone + '&nbsp;&nbsp;<a href="tel:'+data.officephone+'" style="font-size:18px">'
+											          + '<span class="glyphicon glyphicon-phone"></span>'
+											   + '</a>');
+		}else{
+			$("#officephone").html('');
+		}
+		
+		if(data.mobile && ''!=data.mobile){
+			$("#mobile").html(data.mobile + '&nbsp;&nbsp;<a href="tel:'+data.mobile+'" style="font-size:18px">'
+									          + '<span class="glyphicon glyphicon-phone"></span>'
+									        + '</a>'
+								         	+ '&nbsp;&nbsp;&nbsp;&nbsp;<a href="sms:'+data.mobile+'" style="font-size:18px">'
+									          + '<span class="glyphicon glyphicon-envelope"></span>'
+									        + '</a>');
+		}else{
+			$("#mobile").html('');
+		}
+		
+		if(data.email && ''!=data.email){
+			$("#email").html(data.email);
+		}else{
+			$("#email").html('');
+		}
+		
+		
+		$("#myModal").modal('show');
+	});
+};
+
+function getList(parentid){
+	currentList = [];
+	if('C'==addressType && '0'!=parentid){ //常用分组，只有一级
+		getGroupOrUserList('user', parentid, function(){
+			orgList[parentid] = currentList;
+			setNav();
+			setList();
+		});
+	}else{
+		getGroupOrUserList('group', parentid, function(){
+			getGroupOrUserList('user', parentid, function(){
+				orgList[parentid] = currentList;
+				setNav();
+				setList();
+			});
+		});
+	}
+	
+};
+
+function hashchangeHandler(){
+	var hash = window.location.hash;
+	var inStack = false;
+	if(hash && hash!=null && ''!=hash){
+		$.each(navList, function(idx, item){
+			if('#'+item.id==hash){
+				navList = navList.slice(0, idx+1);
+				if(orgList[item.id]){
+					inStack = true;
+					currentList = orgList[item.id];
+					setNav();
+					setList();
+				}
+			}
+		});
+		if(!inStack){
+			getList(hash.substr(1));
+		}
+	}
+}
+

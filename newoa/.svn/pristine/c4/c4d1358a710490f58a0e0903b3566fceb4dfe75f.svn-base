@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html manifest="offline.appcache">
+   <head>
+      <title>jsapi_demo</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <!-- 引入 Bootstrap -->
+      <link href="../lib/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
+      <!-- <link href="../css/app.css" rel="stylesheet"> -->
+      <script type="text/javascript">
+    	document.write('<link href="../css/app.css?r='+Math.random()+'" rel="stylesheet">');
+      </script>
+
+   </head>
+   <body style="padding:10px 5px">
+   
+   	<div class="cdc-bg">
+       
+    </div>
+   <!-- <div id="username"></div> -->
+      <div class="panel panel-primary">
+		   <div class="panel-heading">jsapi_demo</div>
+		   <div class="panel-body">
+		         <button id="addPicBtn">添加图片 </button>
+		         <button id="uploadPicBtn">上传到微信 </button>
+		         <div id="serverId"></div>
+		         <div><img id="img" alt="pic" src="" style="width:100px;"></div>
+		   </div>
+		   
+	  </div>
+	  
+	  
+	  
+
+      <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+      <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+      <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+      <!-- 包括所有已编译的插件 -->
+      <script src="../lib/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+      <script src="../js/common/Base64.js"></script>
+      <script src="../js/common/config.js"></script>
+      <script src="../js/common/util.js"></script>
+      <script src="../js/common/Html5Helper.js"></script>
+      <script type="text/javascript">
+    	document.write('<script type="text/javascript" src="../js/app/jsapi_demo.js?'+Math.random()+'"><\/script>');
+      </script>
+   </body>
+</html>
