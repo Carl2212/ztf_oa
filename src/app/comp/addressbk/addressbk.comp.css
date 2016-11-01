@@ -43,3 +43,52 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
+.addressbk {
+  background: #c1c1c1;
+}
+.addressbk .content .list-card .list-group-item {
+  position: relative;
+  height: 3em;
+  line-height: 3em;
+}
+.addressbk .content .list-card .list-group-item .right {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+  right: 1em;
+}
+.addressbk .content .userinfo-card {
+  border: 1px solid #cfcdcd;
+  padding: 1em;
+  position: relative;
+}
+.addressbk .content .userinfo-card h3 {
+  text-align: center;
+  padding: .5em 0;
+  border-bottom: 1px solid #cfcdcd;
+}
+.addressbk .content .userinfo-card dl:before,
+.addressbk .content .userinfo-card dl:after {
+  content: " ";
+  display: table;
+}
+.addressbk .content .userinfo-card dl:after {
+  clear: both;
+}
+.addressbk .content .userinfo-card dl dd,
+.addressbk .content .userinfo-card dl dt {
+  height: 3em;
+  line-height: 3em;
+  float: left;
+}
+.addressbk .content .userinfo-card dl dd {
+  width: 30%;
+}
+.addressbk .content .userinfo-card dl dt {
+  width: 69%;
+}
+.addressbk .content .userinfo-card .close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}

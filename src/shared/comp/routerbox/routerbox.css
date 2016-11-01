@@ -43,28 +43,6 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
-.listpage {
-  background: #cfcdcd;
-}
-.listpage .content .main {
-  width: 100%;
-}
-.listpage .content .main .main-li {
-  width: 100%;
-}
-.listpage .content .main .main-li a {
-  display: block;
-  width: 100%;
-  position: relative;
-  padding: 1em;
-  border-bottom: 1px solid #cfcdcd;
-}
-.listpage .content .main .main-li a .badge {
-  position: absolute;
-  top: 50%;
-  margin-top: -0.5em;
-  right: 1em;
-}
 .select-group {
   padding: 1em;
 }

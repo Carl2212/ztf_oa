@@ -8,14 +8,16 @@
         </div>
         <div class="select-group">
             <ul *ngIf="selectusers?.length > -1">
-                <li *ngFor="let group of selectusers">
-                    <span>{{group.groupname}}</span>
-                    <span *ngFor="let user of group.userselect">
-                        <button class="withclosebadge"  (click)="del(sel.key)">
-                            {{user.username}} |
-                            <span>x</span>
-                        </button>
-                    </span>
+                <li *ngFor="let group of selectusers" class="group-list">
+                    <h4>{{group.groupname}}</h4>
+                    <div class="items">
+                        <span class="group-items" *ngFor="let user of group.userselect">
+                            <a class="withclosebadge"  (click)="del(sel.key)">
+                                {{user.username}} |
+                                <span>x</span>
+                            </a>
+                        </span>
+                    </div>
                 </li>
             </ul>
 
