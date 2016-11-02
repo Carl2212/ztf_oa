@@ -1,38 +1,39 @@
-<div class="detail">
+<div class="addressbk">
     <div class="topbar">
         <span class="bartitle">通讯录</span>
     </div>
     <div class="content">
-        <ul *ngIf="!selectedItem">
-            <li *ngFor="let item of items" (click)="itemTapped($event, item)">
+        <ul *ngIf="!selectedItem" class="list-card">
+            <li class="list-group-item" *ngFor="let item of items" (click)="itemTapped($event, item)">
                 <em>{{item.groupname}}</em>
-                <span class="glyphicon glyphicon-chevron-down"></span>
+                <span class="glyphicon glyphicon-chevron-right"></span>
             </li>
         </ul>
-        <ul *ngIf="selectedItem && !selecteduser">
-            <li *ngFor="let user of useritems" (click)="userinfo($event, user)">
-                <span class="col-3">{{user.cnname}}</span>
-                <span class="col-3">{{user.mobile}}</span>
-                <span class="col-3"><span class=""></span> </span>
-                <span class="col-3"><span class=""></span> </span>
+        <ul *ngIf="selectedItem && !selecteduser" class="user-card">
+            <li *ngFor="let user of useritems" (click)="userinfo($event, user)" class="list-group-item">
+                <div class="row">
+                    <span class="col-md-3">{{user.cnname}}</span>
+                    <span class="col-md-3">{{user.mobile}}</span>
+                    <span class="col-md-3"><span class="glyphicon glyphicon-phone"></span> </span>
+                    <span class="col-md-3"><span class="glyphicon glyphicon-envelope"></span> </span>
+                </div>
             </li>
         </ul>
         <div class="userinfo-card" *ngIf="selectedItem && selecteduser">
+            <h3>成员信息</h3>
             <dl>
-                <dd class="list-group-item">成员信息</dd>
-                <dt></dt>
-                <dd class="list-group-item">姓名</dd>
+                <dd>姓名</dd>
                 <dt>{{selecteduser.cnname}}</dt>
-                <dd class="list-group-item">部门</dd>
+                <dd>部门</dd>
                 <dt>{{selecteduser.groupname}}</dt>
-                <dd class="list-group-item">办公电话</dd>
+                <dd>办公电话</dd>
                 <dt>{{selecteduser.officephone}}</dt>
-                <dd class="list-group-item">手机号</dd>
+                <dd>手机号</dd>
                 <dt>{{selecteduser.mobile}}</dt>
-                <dd class="list-group-item">邮箱</dd>
+                <dd>邮箱</dd>
                 <dt>{{selecteduser.email}}</dt>
             </dl>
-            <span><button item-right (click)="closecard()">关闭</button></span>
+            <span class="close"><a (click)="closecard()">x</a></span>
         </div>
     </div>
 </div>
