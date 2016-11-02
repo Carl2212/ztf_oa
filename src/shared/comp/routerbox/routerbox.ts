@@ -25,10 +25,15 @@ export class RouterBoxComponent {
     @Input() multiroute : string;//单选框还是复选框
     @Input() nodelist : any;
     @Input() ischeck : boolean;
+    @Input() isdefaultroute :any;
     @Output() onrouter = new EventEmitter<any>();
     constructor(private commonfn : CommonService) {
 
     }
+    ngOnInit() {
+        console.log(this.multiroute);
+    }
+
     onselect(event) {
         //接收selectbox子组件返回的数据
         let temp =[] ;
@@ -59,39 +64,31 @@ export class RouterBoxComponent {
 
 
     /*********************************************
-     * 展开部门通讯录
+     * 展开部门通讯录(包括路由选择和路由显示)
      * input : none
      *********************************************/
     selectitemsfn() {
         var _me = this;
         var type : number;
         var parent : any;
-        if(!_me.item || _me.item.ispointtoend == 'N') {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
+        if(_me.item && _me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S') {
+            this.cancelroute();
+            return;
+        }else if(!_me.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
             this.commonfn.getGroupOrUserList(1, 0, function (data) {
                 _me.commonfn.getGroupOrUserList(1, data[0].groupid, function (data) {
                     _me.selectitems = data;
                     _me.openitems = true;
                 });
             });
-        }else if(_me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S'){
-            console.log('defaultuser.............................................',_me.defaultuser,_me.defaultuser[0].userid);
-            if(_me.defaultuser) {
-                this.selectusers = [{userselect : _me.defaultuser}];
-                console.log(this.selectusers);
-                //取消其他路由的选择
-                this.cancelroute();
-                return;
-            }
+            this.cancelroute();
+            return;
+        }else{
             this.commonfn.getGroupOrUserList(3, _me.departmentparam, function (data) {
                 _me.selectitems = data;
                 _me.openitems = true;
             });
-        }
-
-        if(this.item && this.item.multiuser != 0 && !this.toreadcheckbox) {
-            this.nextcheckbox = [];
-            this.selectusers = {};
-            this.isnull = true;
+            this.cancelroute();
         }
     }
 
@@ -101,6 +98,11 @@ export class RouterBoxComponent {
             this.unSelectExclude();
         }else if(this.item.exclude&&''!=this.item.exclude.replace(/\s/g,"")){//互斥路由
             this.unSelectExclude(this.item.exclude);
+        }
+        if(this.isdefaultroute == 1) {
+            if(this.defaultuser) {
+                this.selectusers = [{userselect : this.defaultuser}];
+            }
         }
     }
     //弹出数据到父组件取消路由选择

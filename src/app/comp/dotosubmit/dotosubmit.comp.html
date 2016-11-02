@@ -10,7 +10,7 @@
         <!---------------------------------------------- 操作项组件 --------------------------------------------------->
         <div *ngIf="nodelist">
             <div *ngFor="let node of nodelist">
-                <router-box [ischeck]="isrouter(node.item.nodeid)" [nodelist]="nodelist" [defaultuser] = "node.defaultuser" [departmentparam] = "node.departmentparam" [item] = "node.item" (onrouter)="unSelectExclude($event)" ></router-box>
+                <router-box [ischeck]="isrouter(node.item.nodeid)" [nodelist]="nodelist" [multiroute] = "node.multiroute" [isdefaultroute]="node?.isdefaultroute" [defaultuser] = "node.defaultuser" [departmentparam] = "node.departmentparam" [item] = "node.item" (onrouter)="unSelectExclude($event)" ></router-box>
             </div>
         </div>
         <!----------------------------------------------------------------------------------------------------------->
