@@ -3,7 +3,7 @@
  */
 
 export const Config : any = {
-    pagesize : 8,
+    pagesize : 10,
     addressType : 'O',
     alsouser : 'Y',
     author_check : false,

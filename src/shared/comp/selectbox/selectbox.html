@@ -4,6 +4,6 @@
         <a class="sure-select" (click)="sureselectfn(userselect.outusers())"> 完成 </a>
     </div>
     <div class="content">
-        <grouplist [selectitems] = "selectitems" [departmentparam]="departmentparam" #userselect></grouplist>
-    </div>
+        <grouplist [selectitems] = "selectitems"  [multiuser] ="multiuser" [historyusers]="historyusers" [departmentparam]="departmentparam" #userselect></grouplist>
+    </div><!--[selectusers]="selectusers"-->
 </div>

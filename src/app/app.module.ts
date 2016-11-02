@@ -33,7 +33,7 @@ let localStorageServiceConfig = {
 
 @NgModule({
     imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule ,SharedModule ],
-    declarations : [ AppComponent,HomeComponent ,NoticeComponent,KeysPipe,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent],
+    declarations : [ AppComponent,HomeComponent ,NoticeComponent,KeysPipe,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent],//
     bootstrap : [ AppComponent],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,LocalStorageService,{provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig}

@@ -17,25 +17,22 @@ export class SelectBoxComponent {
     public nextcheckbox :any=[];//组 是否被选择
 
     @Input() selectitems : any;
-    @Input() selectusers : any;
+    @Input() historyusers : any;//已经选择的数据（父组件传下来）
     @Input() multiuser : any;
     @Input() departmentparam : any;
+
     @Output() onselect = new EventEmitter<any>();
     constructor(private commonfn : CommonService) {
 
     }
     ngOnInit() {
-        console.log('departmentparam',this.departmentparam);
+        console.log('historyusers',this.historyusers);
     }
     /*********************************************
      * 确定按钮【控制选项框与内容框的切换】
      * input : none
      *********************************************/
     sureselectfn(data) {
-        if(this.selectradio) {
-            this.selectusers = [];
-            this.selectusers[this.selectradio] = true;
-        }
         this.onselect.emit(data);
     }
 

@@ -1,3 +1,53 @@
+.content {
+  margin-top: .8em;
+  background: #fff;
+}
+.topbar {
+  height: 3em;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.topbar .back-icon,
+.topbar .sure-select,
+.topbar .submit-icon {
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  top: .5em;
+  display: block;
+  height: 2em;
+  line-height: 2em;
+}
+.topbar .submit-icon {
+  right: 1em;
+  float: right;
+}
+.topbar .back-icon {
+  left: 1em;
+  float: left;
+}
+.topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.topbar .sure-select {
+  right: 1em;
+  float: right;
+}
+.list-group-item {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+  border-bottom: 1px solid #cfcdcd;
+}
+.list-group-item a {
+  color: #000;
+}
+.list-group-item .list-group-item-heading {
+  color: #c1c1c1;
+}
 .ldmore {
   display: block;
   margin: 5px auto;
@@ -6,11 +56,56 @@
   font-weight: bold;
   background: #cd0018 !important;
 }
+.modal-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.modal-card .umopinion-card {
+  background: #fff;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid #cfcdcd;
+  position: absolute;
+  z-index: 10000;
+  width: 90%;
+  top: 6em;
+  left: 5%;
+  padding: 1em;
+}
+.modal-card .umopinion-card .close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.modal-card .umopinion-card h4 {
+  width: 100%;
+  text-align: center;
+  height: 3em;
+  line-height: 3em;
+  border-bottom: 1px solid #cfcdcd;
+}
+.modal-card .umopinion-card .umopinion-select {
+  padding: 1em;
+  height: 12em;
+  overflow: scroll;
+}
+.modal-card .umopinion-card .umopinion-select li {
+  padding: .5em 0;
+}
+.modal-card .umopinion-card .btn {
+  display: block;
+  margin: 0 auto;
+}
 .optionsbox {
   width: 100%;
   border-bottom: 1px solid #c1c1c1;
   margin: 1em 0;
   background: #fff;
+  position: relative;
 }
 .optionsbox .input-box {
   height: 8em;
@@ -60,4 +155,22 @@
 .routerbox .select-group {
   min-height: 5em;
   height: auto;
+}
+/*no-content 样式*/
+.no-content {
+  padding: 1em;
+}
+.no-content .no-content-img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+.no-content .no-content-tip {
+  display: block;
+  width: 80%;
+  margin: .5em auto;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bolder;
+  color: #cfcdcd;
 }

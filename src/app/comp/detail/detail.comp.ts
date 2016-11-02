@@ -25,7 +25,8 @@ export class DetailComponent {
         let _me = this;
         let pagearray = {
             todo: {pagename: '待办' },
-            toread: {pagename: '待阅'  }
+            toread: {pagename: '待阅'  },
+            notice: {pagename: '通知公告' }
         };
         this.route.params.forEach(param=>{
             _me.doctype = param['pagename'];
@@ -39,9 +40,29 @@ export class DetailComponent {
     ngOnInit() {
         this.getDocDetail();
     }
-
+    getNoticeDetail() {
+        //获取存储的个人信息数据
+        var _me = this;
+        this.userinfo = this.localstorage.get('userinfo');
+        let params = {
+            userid : this.userinfo.userid,
+            moduleid:this.moduleid,
+            noticeid:this.docid,
+        };
+        let action = 'noticedetail';
+        //请求
+        _me.request.getJsonp(params,action,function(data){
+            _me.detail = data.detail.item;
+            _me.process = data.detail.tracelist;
+            console.log(_me.detail,_me.process);
+        });
+    }
     //请求doc详情
     getDocDetail(){
+        if(this.doctype == 'notice') {
+            this.getNoticeDetail();
+            return;
+        }
         //获取存储的个人信息数据
         var _me = this;
         this.userinfo = this.localstorage.get('userinfo');

@@ -1,16 +1,24 @@
 <div class="doclist">
     <div class="topbar">
+        <a class="back-icon" href="javascript:history.go(-1);"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
         <span class="bartitle">{{pageinfo.pagename}}</span>
     </div>
     <div class="content">
-        <!--<ul class="list-group main">-->
-            <!--<li class="list-group-item" *ngFor="let list of doclist">-->
-                <!--<a routerLink="/detail/{{doctype}}/{{list?.detailparam?.moduleid}}/{{list?.detailparam?.nodeid}}/{{list?.detailparam?.docid}}/{{list?.detailparam?.appid}}">-->
-                    <!--<h4>{{list?.view?.topic}}</h4>-->
-                    <!--<span class="list-group-item-heading">{{list?.view?.datetime}}</span>-->
-                <!--</a>-->
-            <!--</li>-->
-        <!--</ul>-->
+        <ul class="list-group main">
+            <li class="list-group-item" *ngFor="let list of doclist">
+                <div [ngSwitch]="doctype">
+                    <a *ngSwitchCase="notice" routerLink="/detail/{{doctype}}/1/1/{{list?.detailparam?.docid}}">
+                        <h4>{{list?.view?.topic}}</h4>
+                        <span class="list-group-item-heading">{{list?.view?.datetime}}</span>
+                    </a>
+                    <a *ngSwitchDefault routerLink="/detail/{{doctype}}/{{list?.detailparam?.moduleid}}/{{list?.detailparam?.nodeid}}/{{list?.detailparam?.docid}}/{{list?.detailparam?.appid}}">
+                        <h4>{{list?.view?.topic}}</h4>
+                        <span class="list-group-item-heading">{{list?.view?.datetime}}</span>
+                    </a>
+                </div>
+
+            </li>
+        </ul>
 
         <loading-more [isactive]="loadmoreactive" (loadmore)="loadmore($event)"></loading-more>
     </div>

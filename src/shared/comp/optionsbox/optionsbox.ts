@@ -11,19 +11,29 @@ import {Component ,Input, Output, EventEmitter , ViewChild} from '@angular/core'
 })
 export class OptionsBoxComponent {
     @Input() myoptions : string = '';
-    @Input() umoption : any;
+    @Input() umopinion : any;
     //@Input() presentAlert : any;
     @Output() onoptions = new EventEmitter<any>();
+    isopenumopinion : boolean = false;
+    select : string ;
     constructor() {
-
+    }
+    ngOnInit() {
+        console.log('umopinion',this.umopinion);
     }
     outdata(event){
         console.log(event);
         this.onoptions.emit(event);
     }
     openumopinion() {
-        console.log(this.myoptions);
-        console.log('ok. it open an umoption box');
+        this.isopenumopinion = true;
+    }
+    selumopinion() {
+        this.myoptions = this.select;
+        this.isopenumopinion = false;
+    }
+    selectvalue(value) {
+        this.select = value;
     }
 
 }

@@ -6,7 +6,7 @@
         <menu>
             <ul class="menu-ul">
                 <li class="menu-li">
-                    <a routerLink="/notice">
+                    <a routerLink="/doclist/notice/PublishInfo">
                         <img class="item-img" src="../../../resources/static/index-icon-red.png">
                         <h4 class="item-name">通知公告</h4>
                     </a>
@@ -41,31 +41,13 @@
                 <h4><span class="icon-rectangle"></span> 我的待办</h4>
                 <a (click)="openpage('todo')"><span class="more-icon">更多 ({{todonum}}项)</span></a>
             </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
+            <div *ngIf="doclist">
+                <div class="list-group-item" *ngFor="let doc of doclist">
+                    <em>{{doc.view.topic}}</em>
+                    <span class="type-txt">{{doc.view.modulename}}</span>
+                </div>
             </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
-            </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
-            </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
-            </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
-            </div>
-            <div class="list-group-item">
-                关于中国通信服务国际有限公司领导班子考核评分
-                <span class="type-txt">发文管理</span>
-            </div>
-
+            <no-content  *ngIf="!doclist"></no-content>
         </div>
     </div>
 </div>

@@ -4,12 +4,15 @@
             <span class="glyphicon glyphicon-chevron-right" [class.glyphicon-chevron-down]="nextselect && nextselect[items.groupid]  && nextselect[items.groupid]['isopen']" ></span>
             <em>{{items.groupname}}</em>
             <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
-            <div class="checkbox checkbox-danger" *ngIf="multiuser == 1">
-                <input type="checkbox" id="checkboxselct1" class="styled" [(ngModel)] ="nextcheckbox[items.groupid]" >
-                <label for="checkboxselct1"></label>
+            <div class="all">
+                <div class="checkbox checkbox-danger" *ngIf="multiuser != 0">
+                    <input type="checkbox" id="checkboxselct1" class="styled" (click)="selectall(items)" [ngModel]="status[items.groupid]">
+                    <label for="checkboxselct1"></label>
+                </div>
             </div>
+
             <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
         </div>
-        <userselect *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']" [userlist] ="nextselect[items.groupid]" [multiuser]="multiuser" [group]="items" (outusers)="selectusersfn($evnet)"></userselect>
+        <userselect *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']" [historyusers]="historyusers" [userlist] ="nextselect[items.groupid]" [multiuser]="multiuser" [group]="items" (outusers)="selectusersfn($evnet)"></userselect>
     </li>
 </ul>

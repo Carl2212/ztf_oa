@@ -47,6 +47,7 @@ export class AddressbkComponent {
     closecard() {
         this.selecteduser = false;
     }
-
-
+    closeusercard() {
+        this.selectedItem = false;
+    }
 }

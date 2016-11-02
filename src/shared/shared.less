@@ -1,5 +1,7 @@
 @import "../resources/bootstrap/less/variables";
 @import "../resources/custom_bootstrap/custom_variables";
+@import "../resources/bootstrap/less/mixins/border-radius";
+@import "../resources/common";
 @gray-shared : #cfcdcd;
 .ldmore{
   display: block;
@@ -9,11 +11,57 @@
   font-weight: bold;
   background : darken(#ee001c, 6.5%) !important;
 }
+.modal-card {
+  position: absolute;
+  top : 0;
+  left : 0;
+  width: 100%;
+  //height: 100%;
+  //background : rgba(100,100,100,.3);
+  .umopinion-card{
+    background : #fff;
+    .border-bottom-radius(5px);
+    .border-top-radius(5px);
+    border : 1px solid @gray-shallow;
+    position: absolute;
+    z-index : 10000;
+    width: 90%;
+    top : 6em;
+    left : 5%;
+    padding : 1em;
+    .close{
+      position: absolute;
+      top : 1em;
+      right : 1em;
+    }
+    h4{
+      width: 100%;
+      text-align: center;
+      height : 3em;
+      line-height: 3em;
+      border-bottom: 1px solid @gray-shallow;
+    }
+    .umopinion-select{
+      padding : 1em;
+      height : 12em;
+      overflow: scroll;
+      li {
+        padding : .5em 0;
+      }
+    }
+    .btn{
+      display: block;
+      margin : 0 auto;
+    }
+  }
+}
+
 .optionsbox{
   width : 100%;
   border-bottom : 1px solid #c1c1c1;
   margin : 1em 0;
   background : #fff;
+  position: relative;
   .input-box{
     height : 8em;
     width : 100%;
@@ -22,7 +70,6 @@
     border : none;
     resize : none;
   }
-
   .bottom-bar{
     border-top  : 1px solid #eee;
     margin-left : 1em;
@@ -63,5 +110,24 @@
   .select-group{
     min-height : 5em;
     height : auto;
+  }
+}
+/*no-content 样式*/
+.no-content{
+  padding : 1em;
+  .no-content-img{
+    width: 50%;
+    display: block;
+    margin : 0 auto;
+  }
+  .no-content-tip{
+    display: block;
+    width: 80%;
+    margin : .5em auto;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bolder;
+    color : @gray-shallow;
+
   }
 }

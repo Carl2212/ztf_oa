@@ -15,7 +15,7 @@ import {isObject} from "rxjs/util/isObject";
 })
 export class DocListComponent {
     private moduleid : string;
-    private doclist : any;//二级文件列表数据
+    private doclist : any =[];//二级文件列表数据
     private doctype :string;
     private userinfo : any;
     pageinfo:any;//页面参数数据
@@ -29,7 +29,8 @@ export class DocListComponent {
         this.doctype = this.route.snapshot.params['pagename'];
         let pagearray = {
             todo: {pagename: '待办' },
-            toread: {pagename: '待阅' }
+            toread: {pagename: '待阅' },
+            notice: {pagename: '通知公告' }
         };
         this.pageinfo = pagearray[this.doctype];
     }
@@ -45,12 +46,16 @@ export class DocListComponent {
             //弹出提示信息并且显示no-content页面
         }
     }
-    gotdoclist (callback?) {
-        let action = 'doclist';
+
+    /**
+     * 获取公告列表
+     * @param callback
+     */
+    gotnoticelist(callback?) {
+        let action = 'noticelist';
         let params = {
-            username : this.userinfo.username,
             userid : this.userinfo.userid,
-            doctype : this.doctype,
+            ptype : this.doctype,
             moduleid : this.moduleid,
             pageindex : this.pageindex,
             pagesize :Config.pagesize
@@ -65,6 +70,42 @@ export class DocListComponent {
             }
             callback && callback();
         });
+    }
+
+    /**
+     * 获取列表
+     * @param callback
+     */
+    gotdoclist (callback?) {
+        if(this.doctype == 'notice') {
+            this.gotnoticelist();
+            return;
+        }
+        let action = 'doclist';
+        let params = {
+            username : this.userinfo.username,
+            userid : this.userinfo.userid,
+            doctype : this.doctype,
+            moduleid : this.moduleid,
+            pageindex : this.pageindex,
+            pagesize :Config.pagesize
+        };
+        let _me = this;
+        this.request.getJsonp(params, action, function (data) {
+            if(isObject(data.doclist)) {
+                _me.doclist = _me.concatarray( _me.doclist ,_me.ParamsToJson(data.doclist));
+                _me.pageindex += 1;
+            }else{
+                _me.global.showtoptip.emit('暂无数据');
+            }
+            callback && callback();
+        });
+    }
+    concatarray(a,b) {
+        for(let tmp of b) {
+            a.push(tmp);
+        }
+        return a;
     }
     loadmore(event) {
         console.log('event',event);

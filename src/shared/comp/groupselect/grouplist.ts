@@ -20,8 +20,10 @@ export class GrouplistComponent {
     @Input() departmentparam :any;
     @Input() isopen : boolean = false;
     @Input() multiuser :boolean;
-    nextselect : any;
-    selectusers : any;
+    @Input() historyusers : any;
+
+    nextselect : any;//子组件的数据
+    status : any =[] ;//每个group全选框的状态
     constructor(private commonfn : CommonService ) {
 
     }
@@ -95,6 +97,20 @@ export class GrouplistComponent {
             temp.push(data);
         });
         return temp;
+    }
+
+    /*********************************************
+     * 二级父checkbox选择框
+     * input : aa userid e  boolean 选择项的值
+     *********************************************/
+    selectall(items) {
+        var _me = this;
+        this.nextselectfn(items,false);
+        this.useritems.toArray().forEach((child)=>{
+            if(items.groupid == child.group.groupid) {
+                child.ChooseallOrnot(_me.status[items.groupid])
+            }
+        });
     }
 
 }

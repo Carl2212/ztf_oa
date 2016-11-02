@@ -1,0 +1,29 @@
+@import "../../../resources/common";
+@import "../../../resources/bootstrap/less/mixins/border-radius";
+@import "../../../resources/bootstrap/less/mixins/clearfix";
+.select-group{
+  padding : 1em;
+  .group-list{
+    padding : 0;
+    margin : .5em;
+    h4{
+
+    }
+    .items {
+      .clearfix();
+      .group-items{
+        float : left;
+        display: block;
+        border : 1px solid @gray-mid;
+        background : @gray-deep;
+        padding : .3em .5em;
+        margin : .3em .5em;
+        .border-bottom-radius(3px);
+        .border-top-radius(3px);
+        .withclosebadge{
+
+        }
+      }
+    }
+  }
+}

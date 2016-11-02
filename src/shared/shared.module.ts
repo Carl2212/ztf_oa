@@ -14,13 +14,14 @@ import {RouterBoxComponent} from './comp/routerbox/routerbox';
 import {SelectBoxComponent} from './comp/selectbox/selectbox';
 import {GrouplistComponent} from './comp/groupselect/grouplist';
 import {UserselectComponent} from './comp/userselect/userselect';
+import {NoContentComponent} from './comp/nocontent/nocontent';
 //import {KeysPipe} from './pipe/pipe';
 
 
 @NgModule({
     imports : [CommonModule ,LaddaModule ,FormsModule ],
-    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent],//
-    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent]//
+    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent , NoContentComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent],//
+    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule, NoContentComponent ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent  ]// ,
 })
 export class SharedModule {
 

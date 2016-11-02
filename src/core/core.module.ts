@@ -15,6 +15,7 @@ import {DetailTabComponent} from './comp/scomp/detailtab';
 
 import {Request} from './comp/service/request';
 import {CommonService} from './comp/service/common';
+import {UrlUtilService} from './comp/service/urlutil';
 import {GlobalEventManager} from './comp/service/globaleventmanager';
 import {Config} from './comp/service/config';
 
@@ -22,7 +23,7 @@ import {Config} from './comp/service/config';
     imports : [CommonModule , ModalModule ,AlertModule ,HttpModule ,JsonpModule],
     declarations : [LoadingComponent ,ToptipAlertComponent ,ProcessTabComponent,DetailTabComponent],
     exports : [LoadingComponent ,ToptipAlertComponent,ProcessTabComponent,DetailTabComponent],
-    providers : [Request , GlobalEventManager, CommonService ]
+    providers : [Request , GlobalEventManager, CommonService ,UrlUtilService]
 })
 export class CoreModule {
     constructor (@Optional() @SkipSelf() parentModule: CoreModule) {

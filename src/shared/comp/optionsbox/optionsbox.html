@@ -2,9 +2,24 @@
     <textarea class="input-box"   [(ngModel)]="myoptions" (ngModelChange)="outdata($event)"  placeholder="请输入您的意见~" ngDefaultControl >
 
     </textarea>
-    <a class="bottom-bar" *ngIf="umoption" (click)="openumopinion()">
+    <a class="bottom-bar" *ngIf="umopinion" (click)="openumopinion()">
         <span class="glyphicon glyphicon-comment"></span>
         <em class="mce-txt"> 常用意见 </em>
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
+</div>
+<div class="modal-card" *ngIf="isopenumopinion">
+    <div class="umopinion-card">
+        <h4>请选择常用意见</h4>
+        <span class="close" (click)="isopenumopinion == false">X</span>
+        <ul class="umopinion-select">
+            <li *ngFor="let option of umopinion" >
+                <div class="radio radio-danger">
+                    <input type="radio" [attr.id]="option.name" name="umopinion" (click)="selectvalue(option.text)" class="styled" [attr.value]="option.text" >
+                    <label [attr.for]="option.name">{{option.text}}</label>
+                </div>
+            </li>
+        </ul>
+        <button (click)="selumopinion()" class="btn btn-danger">确定</button>
+    </div>
 </div>

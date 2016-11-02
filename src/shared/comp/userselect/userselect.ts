@@ -5,6 +5,7 @@
 import {Component ,Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
+import {isArray} from "util";
 
 @Component({
     selector : 'userselect',
@@ -13,48 +14,49 @@ import {Config} from "../../../core/comp/service/config";
 })
 export class UserselectComponent {
     @Input() userlist : any;
-    @Input() group : string;
+    @Input() group : any;
     @Input() multiuser : boolean;
-    selectusers : any =[];
+    @Input() historyusers : any =[];//传下来的已经选择的数据
+    @Input() chooseallornot : boolean;
+    selectusers : any =[];//要传上去的选择的数据
 
     @Output() outusers = new EventEmitter<any>();
     constructor(private commonfn : CommonService) {
 
     }
     ngOnInit() {
-        console.log(this.group);
+        if(isArray(this.historyusers)) {
+            for(let g of this.historyusers) {
+                if(g.group.groupid == this.group.groupid) {
+                    for(let user of g.userselect) {
+                        this.selectusers[user.userid+'@'+user.username] = true;
+                    }
+                }
+            }
+        }
     }
     outputdata() {
+        console.log(this.selectusers);
         return {selectusers:this.selectusers , group : this.group};
     }
-
-    /*********************************************
-     * 二级父checkbox选择框
-     * input : aa userid e  boolean 选择项的值
-     *********************************************/
-    selectall(aa : string,e : any) {
-        //var _me = this;
-        //this.nextselectfn(aa,false,function() {
-        //    _me.ChooseallOrnot(e,_me.nextselect[aa]);
-        //});
+    nomultiuser(user) {
+        this.selectusers = [];
     }
     /*********************************************
      * 全选以及全不选
      * input :  e  boolean 选择项的值 tmpdata 子部门数据
      *********************************************/
-    ChooseallOrnot(e,tmpdata) {
+    ChooseallOrnot(e) {
         if(e) {
             //全选
-            for(let t of tmpdata) {
-                this.selectusers[t.userid+'@'+t.username] = true;
+            for(let t of this.userlist) {
+                this.selectusers[t.userid + '@' + t.username] = true;
             }
         }else{
             //全不选
-            for(let t of tmpdata) {
+            for(let t of this.userlist) {
                 this.selectusers[t.userid + '@' + t.username] = false;
             }
         }
-        //this.selusers();
     }
-
 }

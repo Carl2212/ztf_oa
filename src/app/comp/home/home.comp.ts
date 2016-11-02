@@ -8,6 +8,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import {Router , ActivatedRoute} from '@angular/router';
 import {Config} from "../../../core/comp/service/config";
 import {CommonService} from "../../../core/comp/service/common";
+import {isObject} from "rxjs/util/isObject";
+import {isArray} from "util";
 
 @Component({
     templateUrl : './home.comp.html',
@@ -20,6 +22,8 @@ export class HomeComponent {
     public toreadlist : any;
     public todolist: any;
     private userinfo : any={} ;
+
+    public doclist : any; //首页待办列表获取
     constructor(private request : Request,
                 private global : GlobalEventManager,
                 private localstorage : LocalStorageService ,
@@ -37,13 +41,34 @@ export class HomeComponent {
             _me.islogin(function(){
                 _me.gotTodoCount();
                 _me.gotToreadCount();
+                _me.gotdoclist();
+
             });
         });
     }
-
+    gotdoclist () {
+        let action = 'doclist';
+        let params = {
+            username : this.userinfo.username,
+            userid : this.userinfo.userid,
+            doctype : 'todo',
+            moduleid : '',
+            pageindex : 1,
+            pagesize :Config.pagesize
+        };
+        let _me = this;
+        this.request.getJsonp(params, action, function (data) {
+            if(isObject(data.doclist)) {
+                _me.doclist = _me.common.DocToJson(data.doclist);
+                console.log(_me.doclist);
+            }else{
+                _me.global.showtoptip.emit('暂无数据');
+            }
+        });
+    }
     //
     openpage(doctype){
-        let params = (doctype == 'todo') ? this.todolist : this.toreadlist;
+        //let params = (doctype == 'todo') ? this.todolist : this.toreadlist;
         this.router.navigate(['/modulelist/'+doctype]);
     }
 

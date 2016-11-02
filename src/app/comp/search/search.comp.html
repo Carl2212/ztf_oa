@@ -1,24 +1,31 @@
 <div class="searchcomp">
     <div class="topbar">
-        <a class="back-icon" routerLink=""> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <a class="back-icon" href="javascript:history.go(-1);"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
         <span class="bartitle">搜索公文</span>
     </div>
     <div class="content">
         <div class="search">
             <div class="input-group">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-                <input type="text" class="form-control" placeholder="搜索公文">
+                <input type="text" class="form-control" placeholder="搜索公文" [(ngModel)]="searchvalue">
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">搜索</button>
+            <button class="btn btn-default" type="button" (click)="search(searchvalue)">搜索</button>
         </span>
             </div>
         </div>
-        <div class="history">
-            <div class="history-title-bar"><span class="glyphicon glyphicon-star"></span> 历史记录 <a class="del"><span class="glyphicon glyphicon-trash"></span> </a> </div>
+        <div class="history" *ngIf="!doclist && history">
+            <div class="history-title-bar"><span class="glyphicon glyphicon-star"></span> 历史记录 <a class="del" (click)="delhistory()"><span class="glyphicon glyphicon-trash"></span> </a> </div>
             <ul class="history-list">
-                <li>111111</li> <li>2222222</li> <li>33333333</li>
+                <li *ngFor="let h of history">{{h}}</li>
             </ul>
         </div>
+        <div *ngIf="doclist">
+            <div class="list-group-item" *ngFor="let doc of doclist">
+                <em>{{doc.view.topic}}</em>
+                <span class="type-txt">{{doc.view.modulename}}</span>
+            </div>
+        </div>
+        <no-content  *ngIf="!doclist"></no-content>
     </div>
 
 </div>

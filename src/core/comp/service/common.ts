@@ -110,5 +110,21 @@ export class CommonService {
         }
         return true;
     }
+    DocToJson(params) {
+        if (!params || (isArray(params) && params.length <= 0)) return params;
+        let jdata = [];
+        for (var param of params) {
+            var view = {};
+            for (var it of param.view) {
+                view[it.name] = it.text;
+            }
+            var detailparam = {};
+            for (var it of param.detailparam) {
+                detailparam[it.name] = it.text;
+            }
+            jdata.push({view: view, detailparam: detailparam});
+        }
+        return jdata;
+    }
 
 }

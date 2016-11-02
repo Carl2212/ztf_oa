@@ -9,10 +9,10 @@
         <div class="select-group">
             <ul *ngIf="selectusers?.length > -1">
                 <li *ngFor="let group of selectusers" class="group-list">
-                    <h4>{{group.groupname}}</h4>
+                    <h4 *ngIf="!departmentparam">{{group.group.groupname}}</h4>
                     <div class="items">
                         <span class="group-items" *ngFor="let user of group.userselect">
-                            <a class="withclosebadge"  (click)="del(sel.key)">
+                            <a class="withclosebadge"  (click)="del(group,user)">
                                 {{user.username}} |
                                 <span>x</span>
                             </a>
@@ -24,4 +24,4 @@
         </div>
     </div>
 
-<selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "item?.multiuser" [departmentparam] ="departmentparam"  [selectusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>
+<selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "item?.multiuser" [departmentparam] ="departmentparam"  [historyusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>

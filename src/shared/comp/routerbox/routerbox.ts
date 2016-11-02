@@ -5,11 +5,12 @@
 import {Component ,Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
+import {isEmpty} from "rxjs/operator/isEmpty";
 
 @Component({
     selector : 'router-box',
     templateUrl : './routerbox.html',
-    styleUrls : ['../../shared.less'],
+    styleUrls : ['../../shared.less','./routerbox.less'],
 })
 export class RouterBoxComponent {
     public selectitems:any;
@@ -22,7 +23,7 @@ export class RouterBoxComponent {
     @Input() defaultuser : any;
     @Input() departmentparam : any;
     @Input() item : any;
-    @Input() multiroute : string;//单选框还是复选框
+    @Input() multiroute : string;//单选路由还是多选路由
     @Input() nodelist : any;
     @Input() ischeck : boolean;
     @Input() isdefaultroute :any;
@@ -46,15 +47,11 @@ export class RouterBoxComponent {
                     tmp.push({userid : user[0] , username : user[1]});
                 }
             }
-            temp.push({groupname : group.group.groupname , userselect : tmp});
+            temp.push({group : group.group , userselect : tmp});
+
         }
         this.selectusers =temp;
-        //if(!this.selectusers || this.commonfn.isEmptyObject(this.selectusers)) {
-        //    this.isnull = true;
-        //}
         this.openitems = false;
-        //this.selusers();
-        this.cancelroute();//取消其他路由的选择
     }
     //弹出数据 到父组件
     outputdata() {
@@ -71,16 +68,15 @@ export class RouterBoxComponent {
         var _me = this;
         var type : number;
         var parent : any;
-        if(_me.item && _me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S') {
-            this.cancelroute();
-            return;
-        }else if(!_me.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
+        if(!_me.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
             this.commonfn.getGroupOrUserList(1, 0, function (data) {
                 _me.commonfn.getGroupOrUserList(1, data[0].groupid, function (data) {
                     _me.selectitems = data;
                     _me.openitems = true;
                 });
             });
+            return;
+        }else if(_me.item && _me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S') {
             this.cancelroute();
             return;
         }else{
@@ -94,9 +90,9 @@ export class RouterBoxComponent {
 
     //单选路由，互斥路由
     cancelroute() {
-        if(this.item.multiroute == 0) {
+        if(this.multiroute == 0) {
             this.unSelectExclude();
-        }else if(this.item.exclude&&''!=this.item.exclude.replace(/\s/g,"")){//互斥路由
+        }else if(this.item.exclude && ''!=this.item.exclude.replace(/\s/g,"")){//互斥路由
             this.unSelectExclude(this.item.exclude);
         }
         if(this.isdefaultroute == 1) {
@@ -112,26 +108,26 @@ export class RouterBoxComponent {
 
 
     delall() {
-
+        this.selectusers =[];
     }
 
 
     /*********************************************
-     * 删除最终选择项
+     * 删除最终选择项selectusers
      * input : key
      *********************************************/
-    del(key:string) {
-        this.selectusers[key] = false;
-        var close = true;
-        for(var i in this.selectusers) {
-            if(this.selectusers[i]) close = false;
-        }
-        if(close) {
-            this.nextcheckbox = [];
-            this.selectusers = {};
-            this.isnull = true;
-            this.toreadcheckbox = false;
-            //this.cdr.detectChanges();
+    del(group , user) {
+        for (let g in this.selectusers) {
+            if(this.selectusers[g] == group) {
+                for(let u in this.selectusers[g].userselect) {
+                    if(this.selectusers[g].userselect[u] == user) {
+                        this.selectusers[g].userselect.splice(u,1);
+                    }
+                }
+                if(this.commonfn.isEmptyObject(this.selectusers[g].userselect)) {
+                    this.selectusers.splice(g,1);
+                }
+            }
         }
     }
     /*********************************************

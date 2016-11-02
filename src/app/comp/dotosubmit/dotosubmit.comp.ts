@@ -10,6 +10,7 @@ import {isArray} from "util";
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 import {isObject} from "rxjs/util/isObject";
 import {CommonService} from "../../../core/comp/service/common";
+import {UrlUtilService} from "../../../core/comp/service/urlutil";
 import {RouterBoxComponent} from "../../../shared/comp/routerbox/routerbox";
 @Component({
     templateUrl : './dotosubmit.comp.html',
@@ -25,7 +26,6 @@ export class DotosubmitComponent {
     private appid :string;
     private userinfo : any;
 
-
     //接口要求的参数
     private selecttouserid : string;//传阅人员userid集合
     private node : any = {tagname : 'nodes' , values:[]} ; //node 待办路由节点信息
@@ -39,8 +39,9 @@ export class DotosubmitComponent {
     nodelist : any;
     umopinion : any;
     router : any;
+    multiroute : string;
 
-    constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService) {
+    constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService , private urlutil : UrlUtilService) {
         //获取链接携带的参数
         let _me = this;
         let pagearray = {
@@ -91,8 +92,9 @@ export class DotosubmitComponent {
         //请求
         this.request.getJsonp(params,action,function(data){
             if(data.success ==1 && data.nodelist) {
-                _me.nodelist = data.nodelist;
+                _me.nodelist = data.nodelist.node;
                 _me.umopinion = data.nodelist.umopinion;
+                _me.multiroute = data.multiroute;
                 //_me.cdr.detectChanges();
                 if(!isArray(_me.nodelist)) _me.nodelist = [_me.nodelist];
                 for(var temp in _me.nodelist) {
@@ -113,7 +115,6 @@ export class DotosubmitComponent {
 
     isrouter(nodeid) {
         var isboolean = (this.router && (this.router[nodeid] == true)) ? true : '';
-        console.log(isboolean);
         return isboolean
 
     }
@@ -122,10 +123,12 @@ export class DotosubmitComponent {
      * ajax
      *********************************************/
     unSelectExclude(router) {//互斥路由控制
-        let exclude = router.exclude.split(',');
-        this.router[router.nodeid] = true;
-        for(let nodeid of exclude) {
-            this.router[nodeid] = '';
+        if(router.exclude && ''!=router.exclude.replace(/\s/g,"")) {
+            let exclude = router.exclude.split(',');
+            this.router[router.nodeid] = true;
+            for(let nodeid of exclude) {
+                this.router[nodeid] = '';
+            }
         }
     }
     onoptions(options) {
@@ -135,9 +138,7 @@ export class DotosubmitComponent {
         var tag = {};
         this.routerbox.toArray().forEach((child)=>{
             var data = child.outputdata();
-            console.log('data data data',data);
             if(data.type == 'todo') {
-                console.log('todotodotodo',data.selectusers.length);
                 if(data.selectusers.length > -1) {
                     var temp =[];
                     for(let group of data.selectusers) {
@@ -159,15 +160,13 @@ export class DotosubmitComponent {
                 this.selecttouserid = temp.substring(0,temp.length-1);
             }
         });
-        console.log(this.node , this.selecttouserid);
     }
     /*********************************************
      * 提交待办数据格式转化
      * ajax
      *********************************************/
     nodetostring(node) {
-        let str = "#!#"+JSON.stringify(node);
-        console.log(str);
+        let str = this.urlutil.encode('#!#'+JSON.stringify(node));
         return str;
     }
     /*********************************************
@@ -193,7 +192,7 @@ export class DotosubmitComponent {
         let _me = this;
         let touserid = [];
         let nd = this.nodetostring(this.node);
-        console.log(nd);
+        console.log('nd',nd);
         if (_me.selectusers) {
             for (var user in _me.selectusers) {
                 if(_me.selectusers[user]) {
@@ -211,7 +210,6 @@ export class DotosubmitComponent {
             opinion : this.options,
             username : this.userinfo.username
         };
-        console.log(params);
         _me.request.getJsonp(params, action, function (data) {
             if (data.header.code == 1 && data.result.success == 1) {
                 //弹出提示并且跳转回list页面
