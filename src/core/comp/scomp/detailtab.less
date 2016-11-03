@@ -2,9 +2,9 @@
 .detailtab {
   padding : 1em;
   .tb-grid{
-    height : 3em;
     border : 1px solid @gray-deep;
     margin-bottom : 0;
+    height : 4em;
     dd{
       width: 30%;
       border-right : 1px solid @gray-deep;
@@ -15,8 +15,17 @@
       width: 69%;
     }
     dd,dt{
-      line-height : 3em;
+      height: 100%;
       float : left;
+      line-height: 4em;
+      display: block;
+      span{
+        display: block;
+        line-height: normal;
+        position: relative;
+        top : 50%;
+        margin-top : -.5em;
+      }
     }
   }
 }

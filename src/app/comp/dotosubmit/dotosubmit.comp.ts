@@ -41,7 +41,7 @@ export class DotosubmitComponent {
     router : any;
     multiroute : string;
 
-    constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService , private urlutil : UrlUtilService) {
+    constructor(private route:ActivatedRoute, private rootrouter : Router, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService , private urlutil : UrlUtilService) {
         //获取链接携带的参数
         let _me = this;
         let pagearray = {
@@ -67,7 +67,7 @@ export class DotosubmitComponent {
             if(this.doctype == 'todo') {
                 this.nextroute();
             }
-            if(this.doctype == 'toread' || this.moduleid == 'accept_doc_manager') {
+            if(this.doctype == 'toread') {
                 this.issbread = true;
             }
         }else{
@@ -92,19 +92,32 @@ export class DotosubmitComponent {
         //请求
         this.request.getJsonp(params,action,function(data){
             if(data.success ==1 && data.nodelist) {
+                //不需要路由
+                if(data.isNeedRount == 'false') {
+                    return;
+                }
+                //nodelist 数据整合
                 _me.nodelist = data.nodelist.node;
+                if(!_me.nodelist && data.nodelist.length > 0){
+                    _me.nodelist = data.nodelist;
+                }
+                if(!_me.nodelist.length && (_me.nodelist || data.nodelist)){
+                    let tmp = _me.nodelist || data.nodelist;
+                    _me.nodelist = [tmp];
+                }
                 _me.umopinion = data.nodelist.umopinion;
                 _me.multiroute = data.multiroute;
-                //_me.cdr.detectChanges();
-                if(!isArray(_me.nodelist)) _me.nodelist = [_me.nodelist];
+                //数据整理
                 for(var temp in _me.nodelist) {
-                    if(_me.nodelist[temp]['defaultuser']) {
+                    if(_me.nodelist[temp]['defaultuser']) {//两层数据转化
+                        console.log('defaultuser..........................',_me.nodelist[temp]['defaultuser']);
                         _me.nodelist[temp]['defaultuser'] = _me.commonfn.ParamsToJson(_me.nodelist[temp]['defaultuser']);
+                        console.log('defaultuser..........................',_me.nodelist[temp]['defaultuser']);
                     }
-                    if(_me.nodelist[temp]['departmentparam']) {
+                    if(_me.nodelist[temp]['departmentparam']) {//一层数据转化
                         _me.nodelist[temp]['departmentparam'] = _me.commonfn.OneToJson(_me.nodelist[temp]['departmentparam']);
                     }
-                    if(_me.nodelist[temp]['item']) {
+                    if(_me.nodelist[temp]['item']) {//一层数据转化
                         _me.nodelist[temp]['item'] = _me.commonfn.OneToJson(_me.nodelist[temp]['item']);
                     }
                 }
@@ -114,20 +127,19 @@ export class DotosubmitComponent {
     }
 
     isrouter(nodeid) {
-        var isboolean = (this.router && (this.router[nodeid] == true)) ? true : '';
+        var isboolean = (this.router && (this.router[nodeid] == true)) ? true :false;
         return isboolean
-
     }
     /*********************************************
      * 接收子组件的数据方法
      * ajax
      *********************************************/
-    unSelectExclude(router) {//互斥路由控制
-        if(router.exclude && ''!=router.exclude.replace(/\s/g,"")) {
-            let exclude = router.exclude.split(',');
-            this.router[router.nodeid] = true;
+    unSelectExclude(r) {//互斥路由控制
+        if(r.exclude && ''!=r.exclude.replace(/\s/g,"")) {
+            let exclude = r.exclude.split(',');
+            this.router[r.nodeid] = true;
             for(let nodeid of exclude) {
-                this.router[nodeid] = '';
+                this.router[nodeid] = false;
             }
         }
     }
@@ -211,16 +223,13 @@ export class DotosubmitComponent {
             username : this.userinfo.username
         };
         _me.request.getJsonp(params, action, function (data) {
-            if (data.header.code == 1 && data.result.success == 1) {
-                //弹出提示并且跳转回list页面
-
-            } else {
-                //弹出错误
+            if(!_me.selecttouserid) {//没有待阅弹出提示并且跳转回list页面
+                _me.global.showtoptip.emit('提交成功');
+                _me.rootrouter.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
+            }else{
+                this.toreadfn(false);
             }
         });
-        if(this.selecttouserid) {
-            this.toreadfn(false);
-        }
     }
     /*********************************************
      * 提交传阅信息
@@ -250,12 +259,9 @@ export class DotosubmitComponent {
             toreadmsg : this.options,
         };
         _me.request.getJsonp(params, action, function (data) {
-            if (data.header.code == 1 && data.result.success == 1) {
-                //弹出提示并且跳转回list页面
-
-            } else {
-                //弹出错误
-            }
+            //弹出提示并且跳转回list页面
+            _me.global.showtoptip.emit('提交成功');
+            _me.rootrouter.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
         });
     }
 }

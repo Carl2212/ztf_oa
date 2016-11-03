@@ -11,6 +11,7 @@ import {AppComponent} from './comp/index/app.comp';
 import {HomeComponent} from './comp/home/home.comp';
 import {SearchComponent} from './comp/search/search.comp';
 import {NoticeComponent} from './comp/notice/notice.comp';
+import {NoticeDetailComponent} from './comp/noticedetail/noticedetail.comp';
 import {DotosubmitComponent} from './comp/dotosubmit/dotosubmit.comp';
 @NgModule({
     imports : [
@@ -21,6 +22,7 @@ import {DotosubmitComponent} from './comp/dotosubmit/dotosubmit.comp';
             {path : 'modulelist/:pagename',component : ModuleListComponent},
             {path : 'doclist/:pagename/:moduleid',component : DocListComponent},
             {path : 'notice',component : NoticeComponent},
+            {path : 'noticedetail/:noticeid',component : NoticeDetailComponent},
             {path : 'dotosubmit/:pagename/:moduleid/:nodeid/:docid/:appid',component : DotosubmitComponent},
             {path : 'detail/:pagename/:moduleid/:nodeid/:docid/:appid',component : DetailComponent}
         ])

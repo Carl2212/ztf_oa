@@ -21,6 +21,7 @@ export class DocListComponent {
     pageinfo:any;//页面参数数据
 
     loadmoreactive : boolean = false;
+    isshowloadmore : boolean = false;
     pageindex : number = 1;
 
     constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService) {
@@ -29,8 +30,7 @@ export class DocListComponent {
         this.doctype = this.route.snapshot.params['pagename'];
         let pagearray = {
             todo: {pagename: '待办' },
-            toread: {pagename: '待阅' },
-            notice: {pagename: '通知公告' }
+            toread: {pagename: '待阅' }
         };
         this.pageinfo = pagearray[this.doctype];
     }
@@ -48,39 +48,10 @@ export class DocListComponent {
     }
 
     /**
-     * 获取公告列表
-     * @param callback
-     */
-    gotnoticelist(callback?) {
-        let action = 'noticelist';
-        let params = {
-            userid : this.userinfo.userid,
-            ptype : this.doctype,
-            moduleid : this.moduleid,
-            pageindex : this.pageindex,
-            pagesize :Config.pagesize
-        };
-        let _me = this;
-        this.request.getJsonp(params, action, function (data) {
-            if(isObject(data.doclist)) {
-                _me.doclist = _me.ParamsToJson(data.doclist);
-                _me.pageindex += 1;
-            }else{
-                _me.global.showtoptip.emit('暂无数据');
-            }
-            callback && callback();
-        });
-    }
-
-    /**
      * 获取列表
      * @param callback
      */
     gotdoclist (callback?) {
-        if(this.doctype == 'notice') {
-            this.gotnoticelist();
-            return;
-        }
         let action = 'doclist';
         let params = {
             username : this.userinfo.username,
@@ -93,6 +64,9 @@ export class DocListComponent {
         let _me = this;
         this.request.getJsonp(params, action, function (data) {
             if(isObject(data.doclist)) {
+                if(data.doclist.length >= Config.pagesize) {
+                    _me.isshowloadmore = true;
+                }
                 _me.doclist = _me.concatarray( _me.doclist ,_me.ParamsToJson(data.doclist));
                 _me.pageindex += 1;
             }else{

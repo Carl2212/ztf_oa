@@ -44,6 +44,7 @@
 }
 .list-group-item a {
   color: #000;
+  display: block;
 }
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
@@ -52,9 +53,9 @@
   padding: 1em;
 }
 .detailtab .tb-grid {
-  height: 3em;
   border: 1px solid #c1c1c1;
   margin-bottom: 0;
+  height: 4em;
 }
 .detailtab .tb-grid dd {
   width: 30%;
@@ -67,6 +68,16 @@
 }
 .detailtab .tb-grid dd,
 .detailtab .tb-grid dt {
-  line-height: 3em;
+  height: 100%;
   float: left;
+  line-height: 4em;
+  display: block;
+}
+.detailtab .tb-grid dd span,
+.detailtab .tb-grid dt span {
+  display: block;
+  line-height: normal;
+  position: relative;
+  top: 50%;
+  margin-top: -0.5em;
 }

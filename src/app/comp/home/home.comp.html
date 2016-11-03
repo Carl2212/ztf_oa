@@ -6,7 +6,7 @@
         <menu>
             <ul class="menu-ul">
                 <li class="menu-li">
-                    <a routerLink="/doclist/notice/PublishInfo">
+                    <a routerLink="/notice">
                         <img class="item-img" src="../../../resources/static/index-icon-red.png">
                         <h4 class="item-name">通知公告</h4>
                     </a>
@@ -43,8 +43,10 @@
             </div>
             <div *ngIf="doclist">
                 <div class="list-group-item" *ngFor="let doc of doclist">
-                    <em>{{doc.view.topic}}</em>
-                    <span class="type-txt">{{doc.view.modulename}}</span>
+                    <a routerLink="/detail/todo/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
+                        <em>{{doc?.view?.topic}}</em>
+                        <span class="type-txt">{{doc?.view?.modulename}}</span>
+                    </a>
                 </div>
             </div>
             <no-content  *ngIf="!doclist"></no-content>

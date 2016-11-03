@@ -17,7 +17,7 @@ export class UserselectComponent {
     @Input() group : any;
     @Input() multiuser : boolean;
     @Input() historyusers : any =[];//传下来的已经选择的数据
-    @Input() chooseallornot : boolean;
+    @Input() chooseornot : boolean;
     selectusers : any =[];//要传上去的选择的数据
 
     @Output() outusers = new EventEmitter<any>();
@@ -35,12 +35,19 @@ export class UserselectComponent {
             }
         }
     }
+    ngOnChanges(event) {
+        console.log('event',event,this.chooseornot);
+        this.ChooseallOrnot(this.chooseornot);
+    }
     outputdata() {
         console.log(this.selectusers);
         return {selectusers:this.selectusers , group : this.group};
     }
     nomultiuser(user) {
-        this.selectusers = [];
+        let tmp = {};
+        tmp[user] = true;
+        this.selectusers = tmp;
+        console.log(this.selectusers);
     }
     /*********************************************
      * 全选以及全不选
@@ -50,12 +57,12 @@ export class UserselectComponent {
         if(e) {
             //全选
             for(let t of this.userlist) {
-                this.selectusers[t.userid + '@' + t.username] = true;
+                this.selectusers[t.userid + '@' + t.cnname] = true;
             }
         }else{
             //全不选
             for(let t of this.userlist) {
-                this.selectusers[t.userid + '@' + t.username] = false;
+                this.selectusers[t.userid + '@' + t.cnname] = false;
             }
         }
     }

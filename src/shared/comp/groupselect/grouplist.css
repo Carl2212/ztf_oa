@@ -5,6 +5,12 @@
   width: 100%;
   list-style: none;
   line-height: 3em;
+  position: relative;
+}
+.select-group .group-item .all {
+  position: absolute;
+  top: 0;
+  right: 1em;
 }
 .select-group .group-item .select-title {
   border-bottom: 1px solid #eee;

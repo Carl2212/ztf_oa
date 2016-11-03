@@ -44,6 +44,7 @@
 }
 .list-group-item a {
   color: #000;
+  display: block;
 }
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
@@ -59,9 +60,4 @@
 }
 .user-items .select-child .child-li .checkbox {
   line-height: normal;
-}
-.user-items .select-child .child-li .all {
-  position: absolute;
-  top: -3em;
-  right: 1em;
 }

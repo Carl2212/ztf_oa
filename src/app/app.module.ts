@@ -17,6 +17,7 @@ import {AddressbkComponent} from './comp/addressbk/addressbk.comp';
 import {SearchComponent} from './comp/search/search.comp';
 import {HomeComponent} from './comp/home/home.comp';
 import {NoticeComponent} from './comp/notice/notice.comp';
+import {NoticeDetailComponent} from './comp/noticedetail/noticedetail.comp';
 import {DotosubmitComponent} from './comp/dotosubmit/dotosubmit.comp';
 import { AlertModule , DropdownModule , AccordionModule  } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -33,7 +34,7 @@ let localStorageServiceConfig = {
 
 @NgModule({
     imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule ,SharedModule ],
-    declarations : [ AppComponent,HomeComponent ,NoticeComponent,KeysPipe,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent],//
+    declarations : [ AppComponent,HomeComponent ,NoticeComponent,KeysPipe,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent ,NoticeDetailComponent],//
     bootstrap : [ AppComponent],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,LocalStorageService,{provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig}

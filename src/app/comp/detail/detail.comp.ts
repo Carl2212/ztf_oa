@@ -5,6 +5,7 @@ import {Component} from '@angular/core';
 import {Router , ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 import {Request} from "../../../core/comp/service/request";
+import {GlobalEventManager} from "../../../core/comp/service/globaleventmanager";
 @Component({
     templateUrl : './detail.comp.html',
     styleUrls : ['./detail.comp.less']
@@ -18,15 +19,18 @@ export class DetailComponent {
     appid : string;
 
     pageinfo:any;//页面参数数据
+    //detail 的重要参数
     detail : string;
     process : string;
+    isSecrecy : string; //是否是机密文件
+    docStatus : string;
+    routeparam : any;
     tabname : string = 'detail';
-    constructor(private localstorage : LocalStorageService , private request : Request , private route:ActivatedRoute) {
+    constructor(private localstorage : LocalStorageService ,private router : Router , private global : GlobalEventManager , private request : Request , private route:ActivatedRoute) {
         let _me = this;
         let pagearray = {
             todo: {pagename: '待办' },
-            toread: {pagename: '待阅'  },
-            notice: {pagename: '通知公告' }
+            toread: {pagename: '待阅'  }
         };
         this.route.params.forEach(param=>{
             _me.doctype = param['pagename'];
@@ -40,29 +44,9 @@ export class DetailComponent {
     ngOnInit() {
         this.getDocDetail();
     }
-    getNoticeDetail() {
-        //获取存储的个人信息数据
-        var _me = this;
-        this.userinfo = this.localstorage.get('userinfo');
-        let params = {
-            userid : this.userinfo.userid,
-            moduleid:this.moduleid,
-            noticeid:this.docid,
-        };
-        let action = 'noticedetail';
-        //请求
-        _me.request.getJsonp(params,action,function(data){
-            _me.detail = data.detail.item;
-            _me.process = data.detail.tracelist;
-            console.log(_me.detail,_me.process);
-        });
-    }
+
     //请求doc详情
     getDocDetail(){
-        if(this.doctype == 'notice') {
-            this.getNoticeDetail();
-            return;
-        }
         //获取存储的个人信息数据
         var _me = this;
         this.userinfo = this.localstorage.get('userinfo');
@@ -78,6 +62,10 @@ export class DetailComponent {
         let action = 'docdetail';
         //请求
         _me.request.getJsonp(params,action,function(data){
+            _me.isSecrecy = data.isSecrecy;
+            //_me.routeparam = data.routeparam;
+            //_me.docStatus = data.status;
+
             _me.detail = data.detail.item;
             _me.process = data.detail.tracelist;
             console.log(_me.detail,_me.process);
@@ -98,12 +86,8 @@ export class DetailComponent {
         };
         let action = 'submittoread';
         _me.request.getJsonp(params, action, function (data) {
-            if (data.header.code == 1 && data.result.success == 1) {
-                //弹出提示并且跳转回list页面
-
-            } else {
-                //弹出错误
-            }
+            //弹出提示并且跳转回list页面
+            _me.router.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
         });
     }
 }

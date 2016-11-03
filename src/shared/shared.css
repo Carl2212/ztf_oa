@@ -44,6 +44,7 @@
 }
 .list-group-item a {
   color: #000;
+  display: block;
 }
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
@@ -158,10 +159,10 @@
 }
 /*no-content 样式*/
 .no-content {
-  padding: 1em;
+  padding: 3em 0;
 }
 .no-content .no-content-img {
-  width: 50%;
+  width: 40%;
   display: block;
   margin: 0 auto;
 }

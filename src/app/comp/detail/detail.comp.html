@@ -7,7 +7,7 @@
         <div class="bar-menu">
             <button class="btn-default" (click)="tabname = 'detail'">详情</button>
             <button class="btn-default" (click)="tabname = 'process'">审批过程</button>
-            <span *ngIf="doctype == 'toread'" class="fl-l">
+            <span *ngIf="doctype == 'toread'" class="fl-r">
                 <button class="btn-danger" (click)="submittoread()">已阅</button>
                 <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">转传阅</button>
             </span>
@@ -16,7 +16,7 @@
             </span>
         </div>
         <div class="main">
-            <detailtab *ngIf="tabname == 'detail'" [detail]="detail"></detailtab>
+            <detailtab *ngIf="tabname == 'detail'" [isSecrecy] ="isSecrecy" [detail]="detail"></detailtab>
             <processtab *ngIf="tabname == 'process'" [process]="process"></processtab>
         </div>
     </div>

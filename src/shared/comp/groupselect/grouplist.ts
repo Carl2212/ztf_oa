@@ -106,11 +106,6 @@ export class GrouplistComponent {
     selectall(items) {
         var _me = this;
         this.nextselectfn(items,false);
-        this.useritems.toArray().forEach((child)=>{
-            if(items.groupid == child.group.groupid) {
-                child.ChooseallOrnot(_me.status[items.groupid])
-            }
-        });
     }
 
 }

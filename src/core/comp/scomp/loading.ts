@@ -7,7 +7,7 @@ import { GlobalEventManager } from '../service/globaleventmanager';
 @Component({
     selector : 'loading',
     template : `<div class="ml" *ngIf="isshow">
-                    <div class="ld-icon"><img src="../../../resources/images/loading.gif">
+                    <div class="ld-icon"><img src="../../../resources/static/loading.gif">
                     </div>
                  </div>`,
     styleUrls : ['./scomp.less']

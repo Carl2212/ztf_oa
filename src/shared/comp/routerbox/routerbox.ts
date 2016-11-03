@@ -14,27 +14,33 @@ import {isEmpty} from "rxjs/operator/isEmpty";
 })
 export class RouterBoxComponent {
     public selectitems:any;
-    public selectusers: any = {};//最终的选择数据 承上启下的作用子组件---》此组件---》父组件
+    public selectusers: any = [];//最终的选择数据 承上启下的作用子组件---》此组件---》父组件
     public isnull : boolean = true;
     private toreadcheckbox : boolean = false;
     private openitems:any = false;//是否展开显示selectbox
     private nextcheckbox : any = [];
 
-    @Input() defaultuser : any;
-    @Input() departmentparam : any;
-    @Input() item : any;
+    @Input() node : any;
+
     @Input() multiroute : string;//单选路由还是多选路由
     @Input() nodelist : any;
     @Input() ischeck : boolean;
-    @Input() isdefaultroute :any;
+
+    @Input() routertype : string ;//路由类型 ====》决定接口传输数据转化形式
     @Output() onrouter = new EventEmitter<any>();
-    constructor(private commonfn : CommonService) {
-
-    }
+    constructor(private commonfn : CommonService) {}
     ngOnInit() {
-        console.log(this.multiroute);
+        if(this.node.isdefaultroute && (this.node.isdefaultroute = 'Y')) {//默认路由
+            this.ischeck = true;
+            if(this.node.defaultuser) {
+                this.pushselectusers(this.node.defaultuser.userid,this.node.defaultuser.username);
+                console.log(this.selectusers);
+            }
+        }
     }
-
+    pushselectusers(userid,username) {
+        this.selectusers.push({userselect : {userid : userid , username : username}});
+    }
     onselect(event) {
         //接收selectbox子组件返回的数据
         let temp =[] ;
@@ -48,15 +54,13 @@ export class RouterBoxComponent {
                 }
             }
             temp.push({group : group.group , userselect : tmp});
-
         }
         this.selectusers =temp;
         this.openitems = false;
     }
     //弹出数据 到父组件
     outputdata() {
-        let type = this.departmentparam ? 'todo' : 'toread';//'todo'数据作为节点数据形式转化,'toread',转成touserid字符串形式
-        return {selectusers:this.selectusers ,type : type ,node : this.item };
+        return {selectusers:this.selectusers ,type : this.routertype ,node : this.node.item };
     }
 
 
@@ -66,9 +70,7 @@ export class RouterBoxComponent {
      *********************************************/
     selectitemsfn() {
         var _me = this;
-        var type : number;
-        var parent : any;
-        if(!_me.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
+        if(!_me.node.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
             this.commonfn.getGroupOrUserList(1, 0, function (data) {
                 _me.commonfn.getGroupOrUserList(1, data[0].groupid, function (data) {
                     _me.selectitems = data;
@@ -76,11 +78,14 @@ export class RouterBoxComponent {
                 });
             });
             return;
-        }else if(_me.item && _me.item.ispointtoend == 'Y'|| _me.item.ispointtoend == 'S') {
+        }else if(_me.node.defaultuser) {
             this.cancelroute();
+            this.pushselectusers(_me.node.defaultuser.userid,_me.node.defaultuser.username);
             return;
+        }else if(_me.node.item && _me.node.item.ispointtoend == 'Y'|| _me.node.item.ispointtoend == 'S') {//这一步到底什么意思 ？？
+            this.cancelroute();
         }else{
-            this.commonfn.getGroupOrUserList(3, _me.departmentparam, function (data) {
+            this.commonfn.getGroupOrUserList(3, _me.node.departmentparam, function (data) {
                 _me.selectitems = data;
                 _me.openitems = true;
             });
@@ -92,18 +97,18 @@ export class RouterBoxComponent {
     cancelroute() {
         if(this.multiroute == 0) {
             this.unSelectExclude();
-        }else if(this.item.exclude && ''!=this.item.exclude.replace(/\s/g,"")){//互斥路由
-            this.unSelectExclude(this.item.exclude);
+        }else if(this.node.item.exclude && ''!=this.node.item.exclude.replace(/\s/g,"")){//互斥路由
+            this.unSelectExclude(this.node.item.exclude);
         }
-        if(this.isdefaultroute == 1) {
-            if(this.defaultuser) {
-                this.selectusers = [{userselect : this.defaultuser}];
+        if(this.node.isdefaultroute == 1) {
+            if(this.node.defaultuser) {
+                this.selectusers = [{userselect : this.node.defaultuser}];
             }
         }
     }
     //弹出数据到父组件取消路由选择
     unSelectExclude(exclude?) {
-        this.onrouter.emit({exclude : exclude , nodeid : this.item.nodeid});
+        this.onrouter.emit({exclude : exclude , nodeid : this.node.item.nodeid});
     }
 
 

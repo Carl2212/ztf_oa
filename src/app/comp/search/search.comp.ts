@@ -55,4 +55,8 @@ export class SearchComponent {
             }
         });
     }
+    inputcontent(h) {
+        this.searchvalue = h;
+        this.gotdoclist (h);
+    }
 }

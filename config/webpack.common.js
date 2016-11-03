@@ -207,12 +207,9 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([{
-        from: 'src/resources/custom_bootstrap/custom_bootstrap.css',
-        to: 'resources/custom_bootstrap/custom_bootstrap.css',
-      } , {
-        from : 'src/resources/images',
-        to : 'resources/images'
-      } ]),
+        from : 'src/resources/static',
+        to : 'resources/static'
+      }]),
 
 
       /*

@@ -1,8 +1,8 @@
 <div class="routerbox" >
         <div class="routertitle">
             <div class="radio radio-danger">
-                <input type="radio" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()" checked="{{ischeck}}">
-                <label [attr.for]="item?.nodeid">{{item?.nodename ? item?.nodename : "传阅"}}{{ischeck}}</label>
+                <input type="radio" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()" [(ngModel)]="ischeck"><!--checked="{{ischeck}}"-->
+                <label [attr.for]="item?.nodeid">{{node?.item?.nodename ? node?.item?.nodename : "传阅"}}</label>
             </div>
             <a class="fl-right" (click)="delall()"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
         </div>
@@ -20,8 +20,7 @@
                     </div>
                 </li>
             </ul>
-
         </div>
     </div>
 
-<selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "item?.multiuser" [departmentparam] ="departmentparam"  [historyusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>
+<selectbox *ngIf="openitems"  [selectitems] = "selectitems" [multiuser] = "node?.item?.multiuser" [departmentparam] ="node?.departmentparam"  [historyusers] = "selectusers" (onselect) = "onselect($event)"></selectbox>

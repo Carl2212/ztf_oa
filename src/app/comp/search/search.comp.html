@@ -16,7 +16,7 @@
         <div class="history" *ngIf="!doclist && history">
             <div class="history-title-bar"><span class="glyphicon glyphicon-star"></span> 历史记录 <a class="del" (click)="delhistory()"><span class="glyphicon glyphicon-trash"></span> </a> </div>
             <ul class="history-list">
-                <li *ngFor="let h of history">{{h}}</li>
+                <li *ngFor="let h of history"><a (click)="inputcontent(h)">{{h}}</a></li>
             </ul>
         </div>
         <div *ngIf="doclist">

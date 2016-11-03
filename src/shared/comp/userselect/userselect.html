@@ -1,18 +1,9 @@
 <div class="user-items">
-    <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
-    <div class="all">
-        <div class="checkbox checkbox-danger" *ngIf="multiuser != 0">
-            <input type="checkbox" id="checkboxselct1" class="styled" (click)="selectall(items)">
-            <label for="checkboxselct1"></label>
-        </div>
-    </div>
-
-    <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
     <div>
         <ul class="select-child">
             <li class="child-li" *ngFor="let useritem of userlist">
                 <div class="checkbox checkbox-circle checkbox-danger">
-                    <input *ngIf="multiuser == 0" type="checkbox" [attr.id]="useritem.userid" class="styled" (click)="nomultiuser(useritem.userid+'@'+useritem.cnname)" [(ngModel)] = "selectusers[useritem.userid+'@'+useritem.cnname]">
+                    <input *ngIf="multiuser == 0" type="checkbox" [attr.id]="useritem.userid" class="styled" (click)="nomultiuser(useritem.userid+'@'+useritem.cnname)" [ngModel] = "selectusers[useritem.userid+'@'+useritem.cnname]">
                     <input *ngIf="multiuser != 0" type="checkbox" [attr.id]="useritem.userid" class="styled" [(ngModel)] = "selectusers[useritem.userid+'@'+useritem.cnname]">
                     <label [attr.for]="useritem.userid">{{useritem.cnname}}</label>
                 </div>

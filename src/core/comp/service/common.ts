@@ -12,9 +12,7 @@ import {isObject} from "rxjs/util/isObject";
 @Injectable()
 export class CommonService {
 
-    constructor(private request : Request , private localstorage : LocalStorageService) {
-
-    }
+    constructor(private request : Request , private localstorage : LocalStorageService) {}
     /**
      * 通用方法之获取通讯录核心方法
      * @param type 组/用户

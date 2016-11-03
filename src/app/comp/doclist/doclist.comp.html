@@ -6,12 +6,8 @@
     <div class="content">
         <ul class="list-group main">
             <li class="list-group-item" *ngFor="let list of doclist">
-                <div [ngSwitch]="doctype">
-                    <a *ngSwitchCase="notice" routerLink="/detail/{{doctype}}/1/1/{{list?.detailparam?.docid}}">
-                        <h4>{{list?.view?.topic}}</h4>
-                        <span class="list-group-item-heading">{{list?.view?.datetime}}</span>
-                    </a>
-                    <a *ngSwitchDefault routerLink="/detail/{{doctype}}/{{list?.detailparam?.moduleid}}/{{list?.detailparam?.nodeid}}/{{list?.detailparam?.docid}}/{{list?.detailparam?.appid}}">
+                <div>
+                    <a routerLink="/detail/{{doctype}}/{{list?.detailparam?.moduleid}}/{{list?.detailparam?.nodeid}}/{{list?.detailparam?.docid}}/{{list?.detailparam?.appid}}">
                         <h4>{{list?.view?.topic}}</h4>
                         <span class="list-group-item-heading">{{list?.view?.datetime}}</span>
                     </a>
@@ -20,6 +16,6 @@
             </li>
         </ul>
 
-        <loading-more [isactive]="loadmoreactive" (loadmore)="loadmore($event)"></loading-more>
+        <loading-more *ngIf="isshowloadmore"  [isactive]="loadmoreactive" (loadmore)="loadmore($event)"></loading-more>
     </div>
 </div>

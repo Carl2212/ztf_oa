@@ -1,0 +1,18 @@
+<div class="doclist">
+    <div class="topbar">
+        <a class="back-icon" href="javascript:history.go(-1);"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <span class="bartitle">通知公告</span>
+    </div>
+    <div class="content">
+        <ul class="list-group main">
+            <li class="list-group-item" *ngFor="let list of doclist">
+                <a routerLink="/noticedetail/{{doctype}}/{{list?.noticeid}}">
+                    <h4>{{list?.title}}</h4>
+                    <span class="list-group-item-heading">{{list?.pubtime}}</span>
+                </a>
+            </li>
+        </ul>
+
+        <loading-more *ngIf="isshowloadmore" [isactive]="loadmoreactive" (loadmore)="loadmore($event)"></loading-more>
+    </div>
+</div>
