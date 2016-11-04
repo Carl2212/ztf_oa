@@ -56,8 +56,10 @@ export class CommonService {
             _me.request.getJsonp(params,action,function(data){
                 //回调
                 if(type == 1 || type == 3) {
+                    console.log(data);
                     callback(data.grouplist);
                 }else{
+                    console.log(_me.ParamsToJson(data.userlist));
                     callback(_me.ParamsToJson(data.userlist));
                 }
             });

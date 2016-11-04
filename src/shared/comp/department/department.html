@@ -1,0 +1,14 @@
+<div class="department">
+    <ul class="small-menu">
+        <li *ngFor="let g of groups">
+            <em> > </em><a (click)="onback(g?.parentid , g?.items)">{{g?.groupname}}</a>
+        </li>
+    </ul>
+    <ul class="list-card" *ngIf="!selectedItem">
+        <li class="list-group-item" *ngFor="let item of items.item" (click)="itemTapped(item)">
+            <em>{{item.groupname}}</em>
+            <span class="glyphicon glyphicon-chevron-right right"></span>
+        </li>
+    </ul>
+</div>
+<users *ngIf="selectedItem" [useritems]="useritems"></users>

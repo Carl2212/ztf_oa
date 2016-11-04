@@ -25,7 +25,7 @@ import {DotosubmitComponent} from './comp/dotosubmit/dotosubmit.comp';
             {path : 'noticedetail/:noticeid',component : NoticeDetailComponent},
             {path : 'dotosubmit/:pagename/:moduleid/:nodeid/:docid/:appid',component : DotosubmitComponent},
             {path : 'detail/:pagename/:moduleid/:nodeid/:docid/:appid',component : DetailComponent}
-        ])
+        ], { useHash: true })
     ],
     exports : [RouterModule]
 })

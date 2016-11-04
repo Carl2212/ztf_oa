@@ -11,8 +11,10 @@
                 <label for="checkboxselct1"></label>
             </div>
         </div>
-
         <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
+        <div class="childgroup">
+            <grouplist *ngIf="nextgroup && nextgroup[items.groupid]" [selectitems] = "nextgroup[items.groupid]"  [multiuser] ="multiuser" [historyusers]="historyusers" [departmentparam]="" #userselect></grouplist>
+        </div>
         <userselect *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']" [historyusers]="historyusers" [chooseornot]="status[items.groupid]" [userlist] ="nextselect[items.groupid]" [multiuser]="multiuser" [group]="items" (outusers)="selectusersfn($evnet)"></userselect>
     </li>
 </ul>

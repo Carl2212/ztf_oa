@@ -30,7 +30,7 @@ export class DotosubmitComponent {
     private selecttouserid : string;//传阅人员userid集合
     private node : any = {tagname : 'nodes' , values:[]} ; //node 待办路由节点信息
     options : string = '请输入意见~';//待办意见、
-
+    private isNeedRount :string;
 
     //子组件数据
     selectusers : any;
@@ -38,7 +38,7 @@ export class DotosubmitComponent {
     pageinfo:any;//页面参数数据
     nodelist : any;
     umopinion : any;
-    router : any;
+    router : any = [];
     multiroute : string;
 
     constructor(private route:ActivatedRoute, private rootrouter : Router, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService , private urlutil : UrlUtilService) {
@@ -92,10 +92,7 @@ export class DotosubmitComponent {
         //请求
         this.request.getJsonp(params,action,function(data){
             if(data.success ==1 && data.nodelist) {
-                //不需要路由
-                if(data.isNeedRount == 'false') {
-                    return;
-                }
+                _me.isNeedRount = data.isNeedRount;//提交是否一定需要路由
                 //nodelist 数据整合
                 _me.nodelist = data.nodelist.node;
                 if(!_me.nodelist && data.nodelist.length > 0){
@@ -137,10 +134,15 @@ export class DotosubmitComponent {
     unSelectExclude(r) {//互斥路由控制
         if(r.exclude && ''!=r.exclude.replace(/\s/g,"")) {
             let exclude = r.exclude.split(',');
-            this.router[r.nodeid] = true;
             for(let nodeid of exclude) {
                 this.router[nodeid] = false;
             }
+            this.router[r.nodeid] = true;
+        }else if(!r.exclude) {//r.exclude 不存在说明是单选路由
+            for(let n of this.nodelist) {
+                this.router[n.item.nodeid] = false;
+            }
+            this.router[r.nodeid] = true;
         }
     }
     onoptions(options) {
@@ -150,8 +152,10 @@ export class DotosubmitComponent {
         var tag = {};
         this.routerbox.toArray().forEach((child)=>{
             var data = child.outputdata();
+            console.log(data);
             if(data.type == 'todo') {
-                if(data.selectusers.length > -1) {
+                console.log(data.selectusers.length);
+                if(data.selectusers && data.selectusers.length > 0) {
                     var temp =[];
                     for(let group of data.selectusers) {
                         for(let users of group.userselect) {
@@ -203,8 +207,11 @@ export class DotosubmitComponent {
         this.onrouternode();
         let _me = this;
         let touserid = [];
+        if(!this.node && this.isNeedRount =='true') {//不存在已取节点 并且接口提交要求需要路由
+            this.global.showtoptip.emit('该操作需要选择操作项');
+            return;
+        }
         let nd = this.nodetostring(this.node);
-        console.log('nd',nd);
         if (_me.selectusers) {
             for (var user in _me.selectusers) {
                 if(_me.selectusers[user]) {

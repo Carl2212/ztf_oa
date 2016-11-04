@@ -15,13 +15,16 @@ import {SelectBoxComponent} from './comp/selectbox/selectbox';
 import {GrouplistComponent} from './comp/groupselect/grouplist';
 import {UserselectComponent} from './comp/userselect/userselect';
 import {NoContentComponent} from './comp/nocontent/nocontent';
-//import {KeysPipe} from './pipe/pipe';
+import {DepartmentComponent} from './comp/department/department';
+import {UsersComponent} from './comp/users/users';
+import {UserInfoComponent} from './comp/userinfo/userinfo';
+//import {KeysPipe} from './pipe/pipe';DepartmentComponent , UsersComponent , UserInfoComponent
 
 
 @NgModule({
     imports : [CommonModule ,LaddaModule ,FormsModule ],
-    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent , NoContentComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent],//
-    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule, NoContentComponent ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent  ]// ,
+    declarations : [ LoadingMoreComponent ,  OptionsBoxComponent , NoContentComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent ,DepartmentComponent , UsersComponent , UserInfoComponent],//
+    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule, NoContentComponent ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent ,DepartmentComponent , UsersComponent , UserInfoComponent ]// ,
 })
 export class SharedModule {
 

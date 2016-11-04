@@ -1,0 +1,18 @@
+<div class="modal-userinfo" *ngIf="selecteduser">
+    <div class="userinfo-card" >
+        <h3>成员信息</h3>
+        <dl>
+            <dd>姓名</dd>
+            <dt>{{selecteduser.cnname}}</dt>
+            <dd>部门</dd>
+            <dt>{{selecteduser.groupname}}</dt>
+            <dd>办公电话</dd>
+            <dt>{{selecteduser.officephone}}</dt>
+            <dd>手机号</dd>
+            <dt>{{selecteduser.mobile}}</dt>
+            <dd>邮箱</dd>
+            <dt>{{selecteduser.email}}</dt>
+        </dl>
+        <span class="close"><a (click)="closecard()">x</a></span>
+    </div>
+</div>

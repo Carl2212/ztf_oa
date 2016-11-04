@@ -54,46 +54,32 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
-.selectbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10000;
-  background: #eee;
+.department .small-menu {
+  padding-left: 1em;
 }
-.selectbox .content {
-  width: 100%;
-  background: #fff;
-  margin-top: 1em;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+.department .small-menu:before,
+.department .small-menu:after {
+  content: " ";
+  display: table;
 }
-.selectbox .content .select-group {
-  padding-left: 0;
+.department .small-menu:after {
+  clear: both;
 }
-.selectbox .content .select-group .group-item {
-  width: 100%;
-  list-style: none;
+.department .small-menu li {
+  float: left;
+  padding: 0 .5em 0 0;
+}
+.department .list-card {
+  border-top: 1px solid #cfcdcd;
+}
+.department .list-card .list-group-item {
+  position: relative;
+  height: 3em;
   line-height: 3em;
 }
-.selectbox .content .select-group .group-item .select-title {
-  border-bottom: 1px solid #eee;
-  margin-left: 1em;
-  position: relative;
-}
-.selectbox .content .select-group .group-item .select-title .checkbox {
+.department .list-card .list-group-item .right {
   position: absolute;
-  height: 1em;
-  line-height: 1em;
-  right: 1em;
   top: 50%;
   margin-top: -0.5em;
-}
-.selectbox .content .select-group .group-item .select-child .child-li {
-  padding: .5em 0;
-  list-style: none;
-  line-height: normal;
-  border-bottom: 1px solid #eee;
+  right: 1em;
 }

@@ -40,6 +40,12 @@ export class DetailComponent {
             _me.appid = param['appid'];
             _me.pageinfo = pagearray[this.doctype];
         });
+        //外部跳转进来必须携带的用户信息
+        let userid = this.route.snapshot.queryParams['userid'];
+        let username = this.route.snapshot.queryParams['username'];
+        this.userinfo = {userid : userid,username : username};
+        console.log('用户数据。。。。。。。。。。。。。。',this.userinfo);
+        this.localstorage.add('userinfo',this.userinfo);
     }
     ngOnInit() {
         this.getDocDetail();
@@ -48,8 +54,9 @@ export class DetailComponent {
     //请求doc详情
     getDocDetail(){
         //获取存储的个人信息数据
+        if(!this.userinfo) this.userinfo = this.localstorage.get('userinfo');
+        console.log(this.userinfo);
         var _me = this;
-        this.userinfo = this.localstorage.get('userinfo');
         let params = {
             username : this.userinfo.username,
             userid : this.userinfo.userid,
@@ -82,7 +89,7 @@ export class DetailComponent {
             appid : this.appid,
             docid : this.docid,
             opinion : '已阅',
-            submittype: '2',//?????????????????
+            submittype: '2',
         };
         let action = 'submittoread';
         _me.request.getJsonp(params, action, function (data) {

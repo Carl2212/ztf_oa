@@ -1,0 +1,26 @@
+@import "../../../resources/bootstrap/less/mixins/clearfix";
+@import "../../../resources/common";
+.department {
+  .small-menu{
+    padding-left : 1em;
+    .clearfix();
+    li {
+      float : left;
+      padding : 0 .5em 0 0;
+    }
+  }
+  .list-card {
+    border-top : 1px solid @gray-shallow;
+    .list-group-item {
+      position: relative;
+      height: 3em;
+      line-height: 3em;
+      .right {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5em;
+        right: 1em;
+      }
+    }
+  }
+}

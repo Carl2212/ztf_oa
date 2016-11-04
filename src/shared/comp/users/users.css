@@ -1,0 +1,14 @@
+.user-card {
+  position: relative;
+}
+.user-card .back {
+  position: absolute;
+  top: -3.8em;
+  left: 1em;
+}
+.user-card .back span {
+  display: block;
+  height: 3em;
+  line-height: 3em;
+  color: #fff;
+}

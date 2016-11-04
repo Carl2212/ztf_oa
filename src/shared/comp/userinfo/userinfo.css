@@ -54,46 +54,43 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
-.selectbox {
+.userinfo-card {
+  border: 1px solid #cfcdcd;
+  padding: 1em;
+  margin: 0 .5em;
   position: absolute;
-  top: 0;
+  top: 5em;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10000;
-  background: #eee;
-}
-.selectbox .content {
-  width: 100%;
+  width: 94%;
   background: #fff;
-  margin-top: 1em;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
 }
-.selectbox .content .select-group {
-  padding-left: 0;
-}
-.selectbox .content .select-group .group-item {
-  width: 100%;
-  list-style: none;
-  line-height: 3em;
-}
-.selectbox .content .select-group .group-item .select-title {
-  border-bottom: 1px solid #eee;
-  margin-left: 1em;
-  position: relative;
-}
-.selectbox .content .select-group .group-item .select-title .checkbox {
-  position: absolute;
-  height: 1em;
-  line-height: 1em;
-  right: 1em;
-  top: 50%;
-  margin-top: -0.5em;
-}
-.selectbox .content .select-group .group-item .select-child .child-li {
+.userinfo-card h3 {
+  text-align: center;
   padding: .5em 0;
-  list-style: none;
-  line-height: normal;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #cfcdcd;
+}
+.userinfo-card dl:before,
+.userinfo-card dl:after {
+  content: " ";
+  display: table;
+}
+.userinfo-card dl:after {
+  clear: both;
+}
+.userinfo-card dl dd,
+.userinfo-card dl dt {
+  height: 3em;
+  line-height: 3em;
+  float: left;
+}
+.userinfo-card dl dd {
+  width: 30%;
+}
+.userinfo-card dl dt {
+  width: 69%;
+}
+.userinfo-card .close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }

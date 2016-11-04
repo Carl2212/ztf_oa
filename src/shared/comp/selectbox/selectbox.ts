@@ -33,7 +33,9 @@ export class SelectBoxComponent {
      * input : none
      *********************************************/
     sureselectfn(data) {
+        console.log('111111111111111111111111',data);
         this.onselect.emit(data);
+
     }
 
 

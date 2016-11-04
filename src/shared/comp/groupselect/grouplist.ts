@@ -7,6 +7,7 @@ import { AfterViewInit, ViewChildren } from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
 import {UserselectComponent} from "../userselect/userselect";
+import {isArray} from "util";
 
 @Component({
     selector : 'grouplist',
@@ -16,12 +17,14 @@ import {UserselectComponent} from "../userselect/userselect";
 })
 export class GrouplistComponent {
     @ViewChildren(UserselectComponent) useritems : QueryList<UserselectComponent>;
+    @ViewChildren(GrouplistComponent) grouplist : QueryList<GrouplistComponent>;
     @Input() selectitems : Array<any>;
     @Input() departmentparam :any;
     @Input() isopen : boolean = false;
     @Input() multiuser :boolean;
     @Input() historyusers : any;
 
+    nextgroup : any = false;
     nextselect : any;//子组件的数据
     status : any =[] ;//每个group全选框的状态
     constructor(private commonfn : CommonService ) {
@@ -59,28 +62,48 @@ export class GrouplistComponent {
             this.departmentparam.groupid = selectitem.groupid;
             type = 4;
             parent = this.departmentparam;
+            var _me = this;
+            this.commonfn.getGroupOrUserList(type, parent, function (tmpdata) {
+                if (_me.nextselect == undefined) {
+                    var tmp = {};
+                    tmp[aa] = tmpdata;
+                    _me.nextselect = tmp;
+                } else if (!_me.nextselect[aa]) {
+                    _me.nextselect[aa] = tmpdata;
+                }
+                if(istoggle) {
+                    _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
+                }else{
+                    _me.nextselect[aa]['isopen'] =  true;
+                }
+                callback && callback();
+            });
         }else{
-            type = 2;
-            parent = aa;
+            var _me = this;
+            this.commonfn.getGroupOrUserList(1, aa, function (tmpdata) {
+                if(isArray(tmpdata)) {
+                    if(!isArray(_me.nextgroup)) _me.nextgroup = {};
+                    _me.nextgroup[aa] = tmpdata;
+                }
+                _me.commonfn.getGroupOrUserList(2, aa, function (tmpdata) {
+                    if (_me.nextselect == undefined) {
+                        var tmp = {};
+                        tmp[aa] = tmpdata;
+                        _me.nextselect = tmp;
+                    } else if (!_me.nextselect[aa]) {
+                        _me.nextselect[aa] = tmpdata;
+                    }
+                    if(istoggle) {
+                        _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
+                    }else{
+                        _me.nextselect[aa]['isopen'] =  true;
+                    }
+                    callback && callback();
+                });
+
+            });
         }
-        var _me = this;
-        this.commonfn.getGroupOrUserList(type, parent, function (tmpdata) {
-            if (_me.nextselect == undefined) {
-                var tmp = {};
-                tmp[aa] = tmpdata;
-                _me.nextselect = tmp;
-            } else if (!_me.nextselect[aa]) {
-                _me.nextselect[aa] = tmpdata;
-            }
-            console.log(_me.nextselect[aa]['isopen']);
-            if(istoggle) {
-                _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
-            }else{
-                _me.nextselect[aa]['isopen'] =  true;
-            }
-            console.log(_me.nextselect[aa]['isopen']);
-            callback && callback();
-        });
+
     }
 
 

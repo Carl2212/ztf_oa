@@ -1,0 +1,36 @@
+@import "../../../resources/bootstrap/less/mixins/clearfix";
+@import "../../../resources/common";
+.userinfo-card{
+  border : 1px solid @gray-shallow;
+  padding :1em;
+  margin: 0 .5em;
+  position: absolute;
+  top : 5em;
+  left : 0;
+  width : 94%;
+  background : #fff;
+  h3{
+    text-align: center;
+    padding : .5em 0;
+    border-bottom: 1px solid @gray-shallow;
+  }
+  dl{
+    .clearfix();
+    dd,dt{
+      height :3em;
+      line-height: 3em;
+      float : left;
+    }
+    dd{
+      width:30%;
+    }
+    dt{
+      width : 69%;
+    }
+  }
+  .close{
+    position: absolute;
+    top : 1em;
+    right : 1em;
+  }
+}

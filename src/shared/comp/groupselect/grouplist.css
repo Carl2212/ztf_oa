@@ -12,6 +12,9 @@
   top: 0;
   right: 1em;
 }
+.select-group .group-item .childgroup {
+  padding-left: 1em;
+}
 .select-group .group-item .select-title {
   border-bottom: 1px solid #eee;
   margin-left: 1em;

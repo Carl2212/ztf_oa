@@ -30,16 +30,31 @@ export class RouterBoxComponent {
     @Output() onrouter = new EventEmitter<any>();
     constructor(private commonfn : CommonService) {}
     ngOnInit() {
-        if(this.node.isdefaultroute && (this.node.isdefaultroute = 'Y')) {//默认路由
-            this.ischeck = true;
-            if(this.node.defaultuser) {
-                this.pushselectusers(this.node.defaultuser.userid,this.node.defaultuser.username);
-                console.log(this.selectusers);
+        if(this.routertype == 'todo') {
+            if(this.node.isdefaultroute && (this.node.isdefaultroute = 'Y')) {//默认路由
+                this.ischeck = true;
+                if(this.node.defaultuser) {
+                    this.pushdetaultusers(this.node.defaultuser);
+                    console.log(this.selectusers);
+                }
             }
         }
     }
-    pushselectusers(userid,username) {
-        this.selectusers.push({userselect : {userid : userid , username : username}});
+    ngOnChanges() {
+        if(this.ischeck == false) {
+            this.selectusers = [];
+        }
+    }
+    pushdetaultusers(users) {
+        if(users && users.length > 0) {
+            this.selectusers= [{userselect : []}];
+            for(let user of users) {
+                this.selectusers[0]['userselect'].push(user);
+            }
+        }else if(users.userid && users.username){
+            this.selectusers= [{userselect : [{userid : users.id , username : users.username}]}];
+        }
+
     }
     onselect(event) {
         //接收selectbox子组件返回的数据
@@ -60,6 +75,7 @@ export class RouterBoxComponent {
     }
     //弹出数据 到父组件
     outputdata() {
+        console.log(this.selectusers);
         return {selectusers:this.selectusers ,type : this.routertype ,node : this.node.item };
     }
 
@@ -70,7 +86,7 @@ export class RouterBoxComponent {
      *********************************************/
     selectitemsfn() {
         var _me = this;
-        if(!_me.node.item) {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
+        if(_me.routertype == 'toread') {//假设是取全公司组织架构，连着请求2次跳过一级公司展示，直接展示部门
             this.commonfn.getGroupOrUserList(1, 0, function (data) {
                 _me.commonfn.getGroupOrUserList(1, data[0].groupid, function (data) {
                     _me.selectitems = data;
@@ -78,14 +94,15 @@ export class RouterBoxComponent {
                 });
             });
             return;
-        }else if(_me.node.defaultuser) {
+        }else if(_me.node.defaultuser) {//取路由并且有默认用户
             this.cancelroute();
-            this.pushselectusers(_me.node.defaultuser.userid,_me.node.defaultuser.username);
+            this.pushdetaultusers(_me.node.defaultuser);
             return;
-        }else if(_me.node.item && _me.node.item.ispointtoend == 'Y'|| _me.node.item.ispointtoend == 'S') {//这一步到底什么意思 ？？
+        }else if(_me.node.item && _me.node.item.ispointtoend == 'Y'|| _me.node.item.ispointtoend == 'S') {//取路由而不取用户
             this.cancelroute();
+            return;
         }else{
-            this.commonfn.getGroupOrUserList(3, _me.node.departmentparam, function (data) {
+            this.commonfn.getGroupOrUserList(3, _me.node.departmentparam, function (data) {//取路由而并且接口取用户
                 _me.selectitems = data;
                 _me.openitems = true;
             });
@@ -95,22 +112,18 @@ export class RouterBoxComponent {
 
     //单选路由，互斥路由
     cancelroute() {
-        if(this.multiroute == 0) {
+        if(this.multiroute == '0') {
+            console.log('单选路由');
             this.unSelectExclude();
         }else if(this.node.item.exclude && ''!=this.node.item.exclude.replace(/\s/g,"")){//互斥路由
+            console.log('互斥路由');
             this.unSelectExclude(this.node.item.exclude);
-        }
-        if(this.node.isdefaultroute == 1) {
-            if(this.node.defaultuser) {
-                this.selectusers = [{userselect : this.node.defaultuser}];
-            }
         }
     }
     //弹出数据到父组件取消路由选择
     unSelectExclude(exclude?) {
         this.onrouter.emit({exclude : exclude , nodeid : this.node.item.nodeid});
     }
-
 
     delall() {
         this.selectusers =[];
@@ -163,5 +176,13 @@ export class RouterBoxComponent {
             return false;
         }
         return true;
+    }
+    ischeckornot(event) {
+        console.log(event);
+        if(event == true) {
+            this.selectitemsfn();
+        }else{
+            this.selectusers = [];
+        }
     }
 }

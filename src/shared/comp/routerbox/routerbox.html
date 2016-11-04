@@ -1,15 +1,19 @@
 <div class="routerbox" >
         <div class="routertitle">
-            <div class="radio radio-danger">
-                <input type="radio" [attr.id]="item?.nodeid" class="styled" (click)="selectitemsfn()" [(ngModel)]="ischeck"><!--checked="{{ischeck}}"-->
-                <label [attr.for]="item?.nodeid">{{node?.item?.nodename ? node?.item?.nodename : "传阅"}}</label>
+            <div class="checkbox checkbox-circle checkbox-danger" *ngIf="routertype == 'todo'">
+                <input type="checkbox" [attr.id]="node?.item?.nodeid" class="styled" [(ngModel)]="ischeck" (ngModelChange)="ischeckornot($event)"><!---->
+                <label [attr.for]="node?.item?.nodeid">{{node?.item?.nodename }}</label>
+            </div>
+            <div class="checkbox checkbox-circle checkbox-danger" *ngIf="routertype == 'toread'">
+                <input type="checkbox" [attr.id]="toreadcheckbox" class="styled" [(ngModel)]="ischeck" (ngModelChange)="ischeckornot($event)"><!---->
+                <label [attr.for]="toreadcheckbox">传阅</label>
             </div>
             <a class="fl-right" (click)="delall()"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
         </div>
         <div class="select-group">
             <ul *ngIf="selectusers?.length > -1">
                 <li *ngFor="let group of selectusers" class="group-list">
-                    <h4 *ngIf="!departmentparam">{{group.group.groupname}}</h4>
+                    <h4 *ngIf="routertype == 'toread'">{{group?.group?.groupname}}</h4>
                     <div class="items">
                         <span class="group-items" *ngFor="let user of group.userselect">
                             <a class="withclosebadge"  (click)="del(group,user)">

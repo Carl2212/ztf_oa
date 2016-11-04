@@ -11,12 +11,12 @@
         <!---------------------------------------------- 操作项组件 --------------------------------------------------->
         <div *ngIf="nodelist">
             <div *ngFor="let node of nodelist">
-                <router-box [ischeck]="router[node?.item?.nodeid]" [nodelist]="nodelist" [multiroute] = "multiroute" [node]="node"  (onrouter)="unSelectExclude($event)" [routertype]="todo"></router-box>
+                <router-box [ischeck]="router && router[node?.item?.nodeid]" [nodelist]="nodelist" [multiroute] = "multiroute" [node]="node"  (onrouter)="unSelectExclude($event)" [routertype]="'todo'"></router-box>
             </div>
         </div>
         <!----------------------------------------------------------------------------------------------------------->
         <!---------------------------------------------- 传阅组件 --------------------------------------------------->
-        <router-box (onrouter)="onrouter($event)" *ngIf="issbread" [routertype]="toread"></router-box>
+        <router-box (onrouter)="onrouter($event)" *ngIf="issbread" [routertype]="'toread'"></router-box>
         <!----------------------------------------------------------------------------------------------------------->
     </div>
 </div>
