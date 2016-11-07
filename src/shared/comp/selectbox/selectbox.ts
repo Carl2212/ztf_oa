@@ -25,15 +25,11 @@ export class SelectBoxComponent {
     constructor(private commonfn : CommonService) {
 
     }
-    ngOnInit() {
-        console.log('historyusers',this.historyusers);
-    }
     /*********************************************
      * 确定按钮【控制选项框与内容框的切换】
      * input : none
      *********************************************/
     sureselectfn(data) {
-        console.log('111111111111111111111111',data);
         this.onselect.emit(data);
 
     }

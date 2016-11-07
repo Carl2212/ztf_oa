@@ -35,7 +35,6 @@ export class RouterBoxComponent {
                 this.ischeck = true;
                 if(this.node.defaultuser) {
                     this.pushdetaultusers(this.node.defaultuser);
-                    console.log(this.selectusers);
                 }
             }
         }
@@ -75,8 +74,8 @@ export class RouterBoxComponent {
     }
     //弹出数据 到父组件
     outputdata() {
-        console.log(this.selectusers);
-        return {selectusers:this.selectusers ,type : this.routertype ,node : this.node.item };
+        let node = this.node ? this.node.item : null;
+        return {selectusers:this.selectusers ,type : this.routertype ,node : node };
     }
 
 
@@ -113,10 +112,8 @@ export class RouterBoxComponent {
     //单选路由，互斥路由
     cancelroute() {
         if(this.multiroute == '0') {
-            console.log('单选路由');
             this.unSelectExclude();
         }else if(this.node.item.exclude && ''!=this.node.item.exclude.replace(/\s/g,"")){//互斥路由
-            console.log('互斥路由');
             this.unSelectExclude(this.node.item.exclude);
         }
     }
@@ -178,7 +175,6 @@ export class RouterBoxComponent {
         return true;
     }
     ischeckornot(event) {
-        console.log(event);
         if(event == true) {
             this.selectitemsfn();
         }else{

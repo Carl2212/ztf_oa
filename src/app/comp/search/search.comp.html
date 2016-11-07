@@ -20,9 +20,11 @@
             </ul>
         </div>
         <div *ngIf="doclist">
-            <div class="list-group-item" *ngFor="let doc of doclist">
-                <em>{{doc.view.topic}}</em>
-                <span class="type-txt">{{doc.view.modulename}}</span>
+            <div class="list-group-item" *ngFor="let doc of doclist" >
+                <a routerLink="/detail/todo/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
+                    <em>{{doc?.view?.topic}}</em>
+                    <span class="type-txt">{{doc?.view?.modulename}}</span>
+                </a>
             </div>
         </div>
         <no-content  *ngIf="!doclist"></no-content>

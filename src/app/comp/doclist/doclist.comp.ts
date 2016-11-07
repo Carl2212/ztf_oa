@@ -9,6 +9,7 @@ import {Request} from "../../../core/comp/service/request";
 import {isArray} from "util";
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 import {isObject} from "rxjs/util/isObject";
+import {CommonService} from "../../../core/comp/service/common";
 @Component({
     templateUrl : './doclist.comp.html',
     styleUrls : ['./doclist.comp.less']
@@ -24,7 +25,7 @@ export class DocListComponent {
     isshowloadmore : boolean = false;
     pageindex : number = 1;
 
-    constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService) {
+    constructor(private route:ActivatedRoute, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService) {
         //获取链接携带的参数
         this.moduleid = this.route.snapshot.params['moduleid'];
         this.doctype = this.route.snapshot.params['pagename'];
@@ -38,7 +39,6 @@ export class DocListComponent {
     ngOnInit() {
         //读取存储数据
         this.userinfo= this.localstorage.get('userinfo');
-        console.log(this.userinfo);
         //post参数
         if(this.userinfo) {
             this.gotdoclist();
@@ -51,7 +51,7 @@ export class DocListComponent {
      * 获取列表
      * @param callback
      */
-    gotdoclist (callback?) {
+    gotdoclist (needloadingmodule=true,callback?) {
         let action = 'doclist';
         let params = {
             username : this.userinfo.username,
@@ -67,26 +67,19 @@ export class DocListComponent {
                 if(data.doclist.length >= Config.pagesize) {
                     _me.isshowloadmore = true;
                 }
-                _me.doclist = _me.concatarray( _me.doclist ,_me.ParamsToJson(data.doclist));
+                _me.doclist = _me.commonfn.concatarray( _me.doclist ,_me.ParamsToJson(data.doclist));
                 _me.pageindex += 1;
             }else{
                 _me.global.showtoptip.emit('暂无数据');
             }
             callback && callback();
-        });
-    }
-    concatarray(a,b) {
-        for(let tmp of b) {
-            a.push(tmp);
-        }
-        return a;
+        },true,needloadingmodule);
     }
     loadmore(event) {
-        console.log('event',event);
         if(event) {
             let _me = this;
             this.loadmoreactive = true;
-            this.gotdoclist(function(){
+            this.gotdoclist(false,function(){
                 _me.loadmoreactive = false;
             });
         }

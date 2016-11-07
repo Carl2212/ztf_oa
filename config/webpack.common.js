@@ -133,7 +133,7 @@ module.exports = function (options) {
          */
         {
           test: /\.html$/,
-          loader: 'raw-loader',
+          loader: 'html-withimg-loader',
           exclude: [helpers.root('src/index.html')]
         },
 
@@ -141,7 +141,7 @@ module.exports = function (options) {
          */
         {
           test: /\.(jpg|png|gif)$/,
-          loader: 'file'
+          loader: 'url-loader?limit=8192'// 'file' url-loader 会打包出图片到相对位置的地方
         },
         /* load less
          */

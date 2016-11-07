@@ -8,6 +8,7 @@ import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
 import {UserselectComponent} from "../userselect/userselect";
 import {isArray} from "util";
+import {isObject} from "rxjs/util/isObject";
 
 @Component({
     selector : 'grouplist',
@@ -29,6 +30,17 @@ export class GrouplistComponent {
     status : any =[] ;//每个group全选框的状态
     constructor(private commonfn : CommonService ) {
 
+    }
+    ngOnInit() {
+        if(isArray(this.historyusers)) {
+            for(let g of this.historyusers) {
+                for(let item of this.selectitems) {
+                    if(g.group && g.group.groupid == item.groupid) {
+                        this.nextselectfn(item,false);
+                    }
+                }
+            }
+        }
     }
     /*********************************************
      * 下一个选择框
@@ -82,17 +94,13 @@ export class GrouplistComponent {
             var _me = this;
             this.commonfn.getGroupOrUserList(1, aa, function (tmpdata) {
                 if(isArray(tmpdata)) {
-                    if(!isArray(_me.nextgroup)) _me.nextgroup = {};
+                    if(!isObject(_me.nextgroup)) _me.nextgroup = {};//没有数据则初始化
                     _me.nextgroup[aa] = tmpdata;
                 }
                 _me.commonfn.getGroupOrUserList(2, aa, function (tmpdata) {
-                    if (_me.nextselect == undefined) {
-                        var tmp = {};
-                        tmp[aa] = tmpdata;
-                        _me.nextselect = tmp;
-                    } else if (!_me.nextselect[aa]) {
-                        _me.nextselect[aa] = tmpdata;
-                    }
+                    if(!isObject(_me.nextselect)) _me.nextselect = {};//没有数据则初始化
+                    _me.nextselect[aa] = tmpdata;
+
                     if(istoggle) {
                         _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
                     }else{
@@ -119,6 +127,10 @@ export class GrouplistComponent {
             var data = child.outputdata();
             temp.push(data);
         });
+        this.grouplist.toArray().forEach((child)=>{
+            let data = child.outusers();
+            this.commonfn.concatarray(temp , data);
+        });
         return temp;
     }
 
@@ -127,7 +139,6 @@ export class GrouplistComponent {
      * input : aa userid e  boolean 选择项的值
      *********************************************/
     selectall(items) {
-        var _me = this;
         this.nextselectfn(items,false);
     }
 

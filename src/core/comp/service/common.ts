@@ -22,7 +22,6 @@ export class CommonService {
      */
     getGroupOrUserList(type,parentid,callback) {
         //type = 1 为grouplist  2为userlist
-        console.log(type,parentid);
         var _me = this;
         let userinfo = this.localstorage.get('userinfo');
         let action = '';
@@ -51,15 +50,12 @@ export class CommonService {
                 params['groupid'] = parentid.groupid;
                 action = 'nextroute_user_action';
             }
-            console.log(type == 3,action);
             //请求
             _me.request.getJsonp(params,action,function(data){
                 //回调
                 if(type == 1 || type == 3) {
-                    console.log(data);
                     callback(data.grouplist);
                 }else{
-                    console.log(_me.ParamsToJson(data.userlist));
                     callback(_me.ParamsToJson(data.userlist));
                 }
             });
@@ -68,13 +64,11 @@ export class CommonService {
     //通用方法之列项数量的获取
     gotCount(doctype, callback,userinfo?) {
         let _me = this;
-        console.log(userinfo);
         if(!userinfo) userinfo = this.localstorage.get('userinfo');
         if(userinfo) {
             let params = {username : userinfo.username,userid : userinfo.userid,doctype : doctype};
             let action = 'modulelist';
             _me.request.getJsonp(params , action,function(data){
-                console.log(data.modulelist);
                 var modulelist = data.modulelist;
                 var total_count = 0;
                 if (modulelist) {
@@ -82,7 +76,6 @@ export class CommonService {
                         total_count += parseInt(items.count);
                     }
                 }
-                console.log(total_count, modulelist);
                 callback && callback(total_count, modulelist);
             });
         }
@@ -125,6 +118,12 @@ export class CommonService {
             jdata.push({view: view, detailparam: detailparam});
         }
         return jdata;
+    }
+    concatarray(a,b) {
+        for(let tmp of b) {
+            a.push(tmp);
+        }
+        return a;
     }
 
 }

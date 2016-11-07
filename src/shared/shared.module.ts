@@ -24,7 +24,7 @@ import {UserInfoComponent} from './comp/userinfo/userinfo';
 @NgModule({
     imports : [CommonModule ,LaddaModule ,FormsModule ],
     declarations : [ LoadingMoreComponent ,  OptionsBoxComponent , NoContentComponent ,RouterBoxComponent,SelectBoxComponent ,GrouplistComponent , UserselectComponent ,DepartmentComponent , UsersComponent , UserInfoComponent],//
-    exports : [ LoadingMoreComponent,OptionsBoxComponent ,FormsModule, NoContentComponent ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent ,DepartmentComponent , UsersComponent , UserInfoComponent ]// ,
+    exports : [ LaddaModule,LoadingMoreComponent,OptionsBoxComponent ,FormsModule, NoContentComponent ,RouterBoxComponent,SelectBoxComponent , GrouplistComponent , UserselectComponent ,DepartmentComponent , UsersComponent , UserInfoComponent ]// ,
 })
 export class SharedModule {
 

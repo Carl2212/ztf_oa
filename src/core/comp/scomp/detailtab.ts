@@ -11,7 +11,7 @@ import {GlobalEventManager} from "../service/globaleventmanager";
                     <dl class="tb-grid" *ngFor="let dl of detail">
                         <dd *ngIf="dl.formtype == 1"><em>{{dl.label}}</em></dd>
                         <dt>
-                            <span (click)="readfile(dl.text , dl.label)" *ngIf="dl.formtype != 1">{{dl.label}}</span>
+                            <span (click)="readfile(dl.text , dl.label)" *ngIf="dl.formtype != 1"><em class="glyphicon glyphicon-paperclip"></em> {{dl.label}}</span>
                             <span *ngIf="dl.formtype == 1">{{dl.text}}</span>
                         </dt>
                     </dl>

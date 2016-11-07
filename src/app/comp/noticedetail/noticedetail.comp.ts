@@ -38,7 +38,6 @@ export class NoticeDetailComponent {
         _me.request.getJsonp(params,action,function(data){
             _me.detail = data.detail.item;
             _me.process = data.detail.tracelist;
-            console.log(_me.detail,_me.process);
         });
     }
 }

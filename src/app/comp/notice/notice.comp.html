@@ -6,7 +6,7 @@
     <div class="content">
         <ul class="list-group main">
             <li class="list-group-item" *ngFor="let list of doclist">
-                <a routerLink="/noticedetail/{{doctype}}/{{list?.noticeid}}">
+                <a routerLink="/noticedetail/{{list?.noticeid}}">
                     <h4>{{list?.title}}</h4>
                     <span class="list-group-item-heading">{{list?.pubtime}}</span>
                 </a>

@@ -12,6 +12,7 @@ import {LoadingComponent} from './comp/scomp/loading';
 import {ToptipAlertComponent} from './comp/scomp/toptip';
 import {ProcessTabComponent} from './comp/scomp/processtab';
 import {DetailTabComponent} from './comp/scomp/detailtab';
+import {AlertComponent} from './comp/scomp/alert';
 
 import {Request} from './comp/service/request';
 import {CommonService} from './comp/service/common';
@@ -23,8 +24,8 @@ import {Config} from './comp/service/config';
 
 @NgModule({
     imports : [CommonModule , ModalModule ,AlertModule ,HttpModule ,JsonpModule],
-    declarations : [LoadingComponent ,ToptipAlertComponent ,ProcessTabComponent,DetailTabComponent],
-    exports : [LoadingComponent ,ToptipAlertComponent,ProcessTabComponent,DetailTabComponent],
+    declarations : [LoadingComponent ,ToptipAlertComponent ,ProcessTabComponent,DetailTabComponent , AlertComponent],
+    exports : [LoadingComponent ,ToptipAlertComponent,ProcessTabComponent,DetailTabComponent , AlertComponent],
     providers : [Request , GlobalEventManager, CommonService ,UrlUtilService ,Base64Service ,FileReaderService]
 })
 export class CoreModule {

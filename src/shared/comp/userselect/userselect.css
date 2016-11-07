@@ -27,6 +27,10 @@
 .topbar .submit-icon {
   right: 1em;
   float: right;
+  background: #cd0018;
+  font-size: inherit;
+  padding: 0.1em .5em;
+  border: none;
 }
 .topbar .back-icon {
   left: 1em;
@@ -53,6 +57,11 @@
 }
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
+}
+.list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
 }
 .user-items {
   padding-left: 3em;

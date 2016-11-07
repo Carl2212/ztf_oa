@@ -2,7 +2,8 @@
 @import "../../../resources/common";
 .department {
   .small-menu{
-    padding-left : 1em;
+    padding: .5em 0 .5em 1em;
+    border-bottom : 1px solid @gray-shallow;
     .clearfix();
     li {
       float : left;
@@ -10,11 +11,10 @@
     }
   }
   .list-card {
-    border-top : 1px solid @gray-shallow;
     .list-group-item {
       position: relative;
-      height: 3em;
-      line-height: 3em;
+      padding : 1em;
+      border : none;
       .right {
         position: absolute;
         top: 50%;

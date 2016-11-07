@@ -21,9 +21,6 @@ export class UserselectComponent {
     constructor(private commonfn : CommonService) {
 
     }
-    ngOnInit() {
-        console.log(this.group);
-    }
     outputdata() {
         return {selectusers:this.selectusers , group : this.group};
     }

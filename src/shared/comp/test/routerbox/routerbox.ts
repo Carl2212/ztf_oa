@@ -30,9 +30,6 @@ export class RouterBoxComponent {
     constructor(private commonfn : CommonService) {
 
     }
-    ngOnInit() {
-        console.log(this.multiroute);
-    }
 
     onselect(event) {
         //接收selectbox子组件返回的数据

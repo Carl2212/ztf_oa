@@ -43,7 +43,6 @@ export class FileReaderService {
 
         var url = this.base64.encode(p_url);
         var fileName = this.base64.encode(p_filename);
-        console.log(url , fileName);
         url = (Config.global_url + '/wap/readonline/openhtml?path=' + url +'&filename=' + fileName).replace(/[+]/g, '%2B').replace(/[ ]/g, '%20');
         window.location.href = url;
     };

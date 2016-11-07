@@ -27,7 +27,6 @@ export class AddressbkComponent {
                 let item = data;
                 let groupid =  data[0].groupid;
                 _me.items = {item : item , groupid : groupid};
-                console.log(_me.items);
             });
         });
     }

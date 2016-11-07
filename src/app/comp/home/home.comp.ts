@@ -22,6 +22,8 @@ export class HomeComponent {
     public toreadlist : any;
     public todolist: any;
     private userinfo : any={} ;
+    private moduleid : string = 'ElectronNotice';
+    notice : any;
 
     public doclist : any; //首页待办列表获取
     constructor(private request : Request,
@@ -42,8 +44,24 @@ export class HomeComponent {
                 _me.gotTodoCount();
                 _me.gotToreadCount();
                 _me.gotdoclist();
-
+                _me.noticesearch();
             });
+        });
+    }
+    noticesearch() {
+        let action = 'noticelist';
+        let params = {
+            userid : this.userinfo.userid,
+            ptype : 1,
+            moduleid : this.moduleid,
+            pageindex : 1,
+            pagesize :1
+        };
+        let _me = this;
+        this.request.getJsonp(params, action, function (data) {
+            if(isObject(data.noticelist)) {
+                _me.notice = _me.common.OneToJson(data.noticelist[0]);
+            }
         });
     }
     gotdoclist () {
@@ -60,7 +78,6 @@ export class HomeComponent {
         this.request.getJsonp(params, action, function (data) {
             if(isObject(data.doclist)) {
                 _me.doclist = _me.common.DocToJson(data.doclist);
-                console.log(_me.doclist);
             }else{
                 _me.global.showtoptip.emit('暂无数据');
             }
@@ -86,7 +103,14 @@ export class HomeComponent {
             });
         }else{
             //通过链接的参数获取用户信息
-            if(!this.username) this.global.showtoptip.emit('您还没登录，无对应用户信息');
+            if(!this.username) {
+                let userinfo = this.localstorage.get('userinfo');
+                if(!userinfo) {
+                    this.global.showtoptip.emit('您还没登录，无对应用户信息');
+                }else{
+                    this.username = userinfo.username;
+                }
+            }
             callback && callback();
         }
     }

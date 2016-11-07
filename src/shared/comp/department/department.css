@@ -27,6 +27,10 @@
 .topbar .submit-icon {
   right: 1em;
   float: right;
+  background: #cd0018;
+  font-size: inherit;
+  padding: 0.1em .5em;
+  border: none;
 }
 .topbar .back-icon {
   left: 1em;
@@ -54,8 +58,14 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
+.list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
+}
 .department .small-menu {
-  padding-left: 1em;
+  padding: .5em 0 .5em 1em;
+  border-bottom: 1px solid #cfcdcd;
 }
 .department .small-menu:before,
 .department .small-menu:after {
@@ -69,13 +79,10 @@
   float: left;
   padding: 0 .5em 0 0;
 }
-.department .list-card {
-  border-top: 1px solid #cfcdcd;
-}
 .department .list-card .list-group-item {
   position: relative;
-  height: 3em;
-  line-height: 3em;
+  padding: 1em;
+  border: none;
 }
 .department .list-card .list-group-item .right {
   position: absolute;

@@ -15,7 +15,7 @@ import {isArray} from "util";
 @Injectable()
 export class Request {
     constructor(private http : Http,private jsonp : Jsonp , private global :GlobalEventManager) {}
-    getJsonp(params : any , action : string , successfn : any,needglobalparams = true  , needloadingmodule = false) : any {
+    getJsonp(params : any , action : string , successfn : any,needglobalparams = true  , needloadingmodule = true) : any {
         //是否需要在请求接口的时候页面呈现loading状态
         if(needloadingmodule) {
             this.global.showloading.emit(true);
@@ -28,7 +28,6 @@ export class Request {
         }
         let searchparams = this.ParamsToString(params);
         let url = Config.global_url + Config[action]+searchparams+'&callback=JSONP_CALLBACK';
-        console.log(searchparams);
         return this.jsonp.request(url)
             .map(data => data.json())
             .subscribe(
@@ -62,7 +61,6 @@ export class Request {
                     );
     }
     handleError(error) {
-        console.log('error',error);
         this.global.showtoptip.emit(error);
     }
     /**

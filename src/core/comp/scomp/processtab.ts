@@ -17,6 +17,5 @@ import {Component ,Input} from '@angular/core';
 export class ProcessTabComponent {
     @Input() process : any;
     constructor () {
-        console.log(process);
     }
 }

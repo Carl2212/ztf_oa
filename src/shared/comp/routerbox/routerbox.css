@@ -27,6 +27,10 @@
 .topbar .submit-icon {
   right: 1em;
   float: right;
+  background: #cd0018;
+  font-size: inherit;
+  padding: 0.1em .5em;
+  border: none;
 }
 .topbar .back-icon {
   left: 1em;
@@ -54,12 +58,20 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
+.list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
+}
 .select-group {
-  padding: 1em;
+  padding: .5em 0;
 }
 .select-group .group-list {
   padding: 0;
-  margin: .5em;
+  margin: .2em;
+}
+.select-group .group-list h4 {
+  padding: .3em 0;
 }
 .select-group .group-list .items:before,
 .select-group .group-list .items:after {
@@ -72,12 +84,15 @@
 .select-group .group-list .items .group-items {
   float: left;
   display: block;
-  border: 1px solid #e8e8e8;
-  background: #c1c1c1;
-  padding: .3em .5em;
-  margin: .3em .5em;
+  padding: .1em .5em;
+  margin: .2em .25em;
+  border: 1px solid #d9534f;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+.select-group .group-list .items .group-items a {
+  color: #d9534f;
+  font-size: small;
 }

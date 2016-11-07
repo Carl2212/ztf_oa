@@ -8,7 +8,7 @@
                 <input type="checkbox" [attr.id]="toreadcheckbox" class="styled" [(ngModel)]="ischeck" (ngModelChange)="ischeckornot($event)"><!---->
                 <label [attr.for]="toreadcheckbox">传阅</label>
             </div>
-            <a class="fl-right" (click)="delall()"> <span class="glyphicon glyphicon-trash"></span> 删除</a>
+            <a class="fl-right" (click)="selectitemsfn()"> <span class="	glyphicon glyphicon-align-justify"></span></a>
         </div>
         <div class="select-group">
             <ul *ngIf="selectusers?.length > -1">

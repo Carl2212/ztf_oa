@@ -27,6 +27,10 @@
 .topbar .submit-icon {
   right: 1em;
   float: right;
+  background: #cd0018;
+  font-size: inherit;
+  padding: 0.1em .5em;
+  border: none;
 }
 .topbar .back-icon {
   left: 1em;
@@ -54,6 +58,11 @@
 .list-group-item .list-group-item-heading {
   color: #c1c1c1;
 }
+.list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
+}
 .searchcomp .content {
   background: #fff;
 }
@@ -66,7 +75,7 @@
   border: 1px solid #c1c1c1;
 }
 .searchcomp .content .history {
-  padding: 2em;
+  padding: 2em 1em;
 }
 .searchcomp .content .history .history-title-bar {
   color: #555;

@@ -21,35 +21,32 @@ export class DepartmentComponent {
     }
     ngOnChanges() {
         this.groups =[{parentid : 0 ,groupname : '通讯录',groupid : this.items.groupid , items : this.items.item}];
-        console.log(this.groups);
     }
     itemTapped(item) {
         var _me = this;
         this.commonfn.getGroupOrUserList(1,item.groupid,function(data) {
-            _me.groups.push({parentid : item.parentid , groupname : item.groupname,groupid : item.groupid , items : data});
             if(isArray(data)) {
                 _me.items.item = data;
             }else{
-                _me.commonfn.getGroupOrUserList(2,item.groupid,function(data) {
-                    _me.useritems =data;
-                    _me.selectedItem = true;
-                    console.log(_me.useritems);
-                });
+                _me.items.item = false;
             }
+            _me.commonfn.getGroupOrUserList(2,item.groupid,function(data) {
+                _me.groups.push({parentid : item.parentid , groupname : item.groupname,groupid : item.groupid , items :  _me.items.item , useritems : data});
+                _me.useritems =data;
+                _me.selectedItem = true;
+            });
         })
     }
-    onback(parentid , items) {
+    onback(item) {
         for(var key in this.groups ) {
-            if(this.groups[key] && this.groups[key].parentid == parentid ) {
-                console.log(this.groups);
+            if(this.groups[key] && this.groups[key].parentid == item.parentid ) {
                 this.groups = this.groups.splice(0,parseInt(key)+1);
-                console.log(this.groups);
             }
         }
-        if(isArray(items))  {
-            this.useritems = [];
-            this.selectedItem = false;
-            this.items.item = items;
+        if(isArray(item.items))  {
+            this.useritems = item.useritems;
+            this.selectedItem = this.useritems ? true : false ;
+            this.items.item = item.items;
         }
     }
 }

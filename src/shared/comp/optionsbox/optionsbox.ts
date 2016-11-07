@@ -18,11 +18,7 @@ export class OptionsBoxComponent {
     select : string ;
     constructor() {
     }
-    ngOnInit() {
-        console.log('umopinion',this.umopinion);
-    }
     outdata(event){
-        console.log(event);
         this.onoptions.emit(event);
     }
     openumopinion() {
@@ -31,6 +27,7 @@ export class OptionsBoxComponent {
     selumopinion() {
         this.myoptions = this.select;
         this.isopenumopinion = false;
+        this.onoptions.emit(this.myoptions);
     }
     selectvalue(value) {
         this.select = value;

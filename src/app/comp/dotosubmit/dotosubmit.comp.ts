@@ -29,7 +29,7 @@ export class DotosubmitComponent {
     //接口要求的参数
     private selecttouserid : string;//传阅人员userid集合
     private node : any = {tagname : 'nodes' , values:[]} ; //node 待办路由节点信息
-    options : string = '请输入意见~';//待办意见、
+    options : string = '';//待办意见、
     private isNeedRount :string;
 
     //子组件数据
@@ -40,6 +40,9 @@ export class DotosubmitComponent {
     umopinion : any;
     router : any = [];
     multiroute : string;
+    submitloading : boolean = false;//ladda状态 提交按钮状态
+    //弹框
+    alertparams : any;
 
     constructor(private route:ActivatedRoute, private rootrouter : Router, private global:GlobalEventManager, private request:Request ,private localstorage : LocalStorageService , private commonfn :CommonService , private urlutil : UrlUtilService) {
         //获取链接携带的参数
@@ -107,9 +110,7 @@ export class DotosubmitComponent {
                 //数据整理
                 for(var temp in _me.nodelist) {
                     if(_me.nodelist[temp]['defaultuser']) {//两层数据转化
-                        console.log('defaultuser..........................',_me.nodelist[temp]['defaultuser']);
                         _me.nodelist[temp]['defaultuser'] = _me.commonfn.ParamsToJson(_me.nodelist[temp]['defaultuser']);
-                        console.log('defaultuser..........................',_me.nodelist[temp]['defaultuser']);
                     }
                     if(_me.nodelist[temp]['departmentparam']) {//一层数据转化
                         _me.nodelist[temp]['departmentparam'] = _me.commonfn.OneToJson(_me.nodelist[temp]['departmentparam']);
@@ -152,9 +153,7 @@ export class DotosubmitComponent {
         var tag = {};
         this.routerbox.toArray().forEach((child)=>{
             var data = child.outputdata();
-            console.log(data);
             if(data.type == 'todo') {
-                console.log(data.selectusers.length);
                 if(data.selectusers && data.selectusers.length > 0) {
                     var temp =[];
                     for(let group of data.selectusers) {
@@ -190,6 +189,7 @@ export class DotosubmitComponent {
      * ajax
      *********************************************/
     dotosubmit() {
+        this.submitloading = true;
         if(this.doctype == 'toread') {
             this.toreadfn();
         }else if(this.doctype == 'todo') {
@@ -203,11 +203,15 @@ export class DotosubmitComponent {
      * ajax
      *********************************************/
     Submittodo() {
+        if(!this.options) {
+            this.global.showtoptip.emit('请输入审批意见~');
+            return;
+        }
         //执行向下（子组件）取数据操作(路由)
         this.onrouternode();
         let _me = this;
         let touserid = [];
-        if(!this.node && this.isNeedRount =='true') {//不存在已取节点 并且接口提交要求需要路由
+        if(this.commonfn.isEmptyObject(this.node.values) && this.isNeedRount =='true') {//不存在已取节点 并且接口提交要求需要路由
             this.global.showtoptip.emit('该操作需要选择操作项');
             return;
         }
@@ -230,6 +234,7 @@ export class DotosubmitComponent {
             username : this.userinfo.username
         };
         _me.request.getJsonp(params, action, function (data) {
+            _me.submitloading =false;
             if(!_me.selecttouserid) {//没有待阅弹出提示并且跳转回list页面
                 _me.global.showtoptip.emit('提交成功');
                 _me.rootrouter.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
@@ -243,6 +248,10 @@ export class DotosubmitComponent {
      * ajax
      *********************************************/
     toreadfn(isonrouternode?) {
+        if(!this.options) {
+            this.global.showtoptip.emit('请输入审批意见~');
+            return;
+        }
         //执行向下（子组件）取数据操作(路由)
         if(isonrouternode !== false) {
             this.onrouternode();
@@ -266,9 +275,36 @@ export class DotosubmitComponent {
             toreadmsg : this.options,
         };
         _me.request.getJsonp(params, action, function (data) {
-            //弹出提示并且跳转回list页面
-            _me.global.showtoptip.emit('提交成功');
-            _me.rootrouter.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
+            _me.submitloading =false;
+            _me.alertparams = {
+                isshow : true,
+                content : '传阅成功，确定转成已阅？',
+                okbutton :true,
+                cancelbutton : true,
+            };
         });
+
+    }
+    /*********************************************
+     * 已阅
+     * ajax
+     *********************************************/
+    submittoread(event) {
+        if(event) {
+            let _me = this;
+            let params = {
+                userid  : this.userinfo.userid,
+                appid : this.appid,
+                docid : this.docid,
+                opinion : '已阅',
+                submittype: '2',
+            };
+            let action = 'submittoread';
+            _me.request.getJsonp(params, action, function (data) {
+                //弹出提示并且跳转回list页面
+                _me.global.showtoptip.emit('内容已转成已阅~');
+                _me.rootrouter.navigate(['/doclist/'+_me.doctype+'/'+_me.moduleid]);
+            });
+        }
     }
 }

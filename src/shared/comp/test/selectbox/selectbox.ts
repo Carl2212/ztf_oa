@@ -24,9 +24,6 @@ export class SelectBoxComponent {
     constructor(private commonfn : CommonService) {
 
     }
-    ngOnInit() {
-        console.log('departmentparam',this.departmentparam);
-    }
     /*********************************************
      * 确定按钮【控制选项框与内容框的切换】
      * input : none

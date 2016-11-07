@@ -14,7 +14,6 @@ export class ToptipAlertComponent {
     constructor (private globalevent : GlobalEventManager) {
         let _me = this;
         this.globalevent.showtoptip.subscribe((tip)=>{
-            console.log('tip',tip);
             _me.toptips.push(tip);
             (function(attr,tip) {
                 setTimeout(function () {
@@ -24,7 +23,6 @@ export class ToptipAlertComponent {
         })
     }
     removeval(arr,val) {
-        console.log(arr,val);
         let index = arr.indexOf(val);
         if(index > -1) {
             arr.splice(index,1);

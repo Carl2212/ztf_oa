@@ -70,13 +70,11 @@ export class GrouplistComponent {
             } else if (!_me.nextselect[aa]) {
                 _me.nextselect[aa] = tmpdata;
             }
-            console.log(_me.nextselect[aa]['isopen']);
             if(istoggle) {
                 _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
             }else{
                 _me.nextselect[aa]['isopen'] =  true;
             }
-            console.log(_me.nextselect[aa]['isopen']);
             callback && callback();
         });
     }

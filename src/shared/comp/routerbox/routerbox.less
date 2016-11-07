@@ -2,24 +2,27 @@
 @import "../../../resources/bootstrap/less/mixins/border-radius";
 @import "../../../resources/bootstrap/less/mixins/clearfix";
 .select-group{
-  padding : 1em;
+  padding : .5em 0;
   .group-list{
     padding : 0;
-    margin : .5em;
+    margin : .2em;
     h4{
-
+      padding : .3em 0;
     }
     .items {
       .clearfix();
       .group-items{
         float : left;
         display: block;
-        border : 1px solid @gray-mid;
-        background : @gray-deep;
-        padding : .3em .5em;
-        margin : .3em .5em;
+        padding : .1em .5em;
+        margin : .2em .25em;
+        border : 1px solid #d9534f;
         .border-bottom-radius(3px);
         .border-top-radius(3px);
+        a{
+          color: #d9534f;
+          font-size: small;
+        }
         .withclosebadge{
 
         }

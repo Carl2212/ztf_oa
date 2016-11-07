@@ -29,7 +29,6 @@ export class NoticeComponent {
     ngOnInit() {
         //读取存储数据
         this.userinfo= this.localstorage.get('userinfo');
-        console.log(this.userinfo);
         //post参数
         if(this.userinfo) {
             this.gotdoclist();
@@ -72,7 +71,6 @@ export class NoticeComponent {
         return a;
     }
     loadmore(event) {
-        console.log('event',event);
         if(event) {
             let _me = this;
             this.loadmoreactive = true;

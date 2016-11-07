@@ -27,7 +27,7 @@ export class UserselectComponent {
     ngOnInit() {
         if(isArray(this.historyusers)) {
             for(let g of this.historyusers) {
-                if(g.group.groupid == this.group.groupid) {
+                if(g.group && (g.group.groupid == this.group.groupid)) {
                     for(let user of g.userselect) {
                         this.selectusers[user.userid+'@'+user.username] = true;
                     }
@@ -36,18 +36,15 @@ export class UserselectComponent {
         }
     }
     ngOnChanges(event) {
-        console.log('event',event,this.chooseornot);
         this.ChooseallOrnot(this.chooseornot);
     }
     outputdata() {
-        console.log(this.selectusers);
         return {selectusers:this.selectusers , group : this.group};
     }
     nomultiuser(user) {
         let tmp = {};
         tmp[user] = true;
         this.selectusers = tmp;
-        console.log(this.selectusers);
     }
     /*********************************************
      * 全选以及全不选

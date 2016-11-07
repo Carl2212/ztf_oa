@@ -49,7 +49,6 @@ export class SearchComponent {
         this.request.getJsonp(params, action, function (data) {
             if(isObject(data.doclist)) {
                 _me.doclist = _me.commonfn.DocToJson(data.doclist);
-                console.log(_me.doclist);
             }else{
                 _me.global.showtoptip.emit('暂无数据');
             }
