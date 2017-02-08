@@ -4,31 +4,33 @@
 import {Component ,Output ,EventEmitter} from '@angular/core';
 import {Request} from "../../../core/comp/service/request";
 import {GlobalEventManager} from "../../../core/comp/service/globaleventmanager";
-import { LocalStorageService } from 'angular-2-local-storage';
 import {Router , ActivatedRoute} from '@angular/router';
 import {Config} from "../../../core/comp/service/config";
 import {CommonService} from "../../../core/comp/service/common";
 import {isObject} from "rxjs/util/isObject";
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
+import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
+import {DropdownModule} from "ng2-bootstrap/components/dropdown";
 
 @Component({
     templateUrl : './home.comp.html',
     styleUrls : ['./home.comp.less'],
 })
 export class HomeComponent {
-    private username :string ;
+    public username :string ;
     public todonum : number = 0;
     public toreadnum : number = 0;
     public toreadlist : any;
     public todolist: any;
-    private userinfo : any={} ;
+    public userinfo : any={} ;
     private moduleid : string = 'ElectronNotice';
-    notice : any;
+    public notice : any;
+    private userlist : any;
 
     public doclist : any; //首页待办列表获取
     constructor(private request : Request,
                 private global : GlobalEventManager,
-                private localstorage : LocalStorageService ,
+                private localstorage : LocalStorageService,
                 private route :ActivatedRoute ,
                 private router : Router,
                 private common : CommonService
@@ -40,13 +42,20 @@ export class HomeComponent {
     ngOnInit() {
         let _me = this;
         this.getUserName(function(){
-            _me.islogin(function(){
+            _me.common.islogin(_me.username,function(userinfo , userlist){
+                _me.userinfo = userinfo;
+                _me.userlist = userlist;
                 _me.gotTodoCount();
                 _me.gotToreadCount();
                 _me.gotdoclist();
                 _me.noticesearch();
             });
         });
+    }
+    //切换用户身份
+    changeuser(user) {
+        this.router.navigateByUrl('/?username='+user);
+        window.location.reload();
     }
     noticesearch() {
         let action = 'noticelist';
@@ -59,6 +68,7 @@ export class HomeComponent {
         };
         let _me = this;
         this.request.getJsonp(params, action, function (data) {
+            _me.notice = null;
             if(isObject(data.noticelist)) {
                 _me.notice = _me.common.OneToJson(data.noticelist[0]);
             }
@@ -67,8 +77,8 @@ export class HomeComponent {
     gotdoclist () {
         let action = 'doclist';
         let params = {
-            username : this.userinfo.username,
-            userid : this.userinfo.userid,
+            username :  this.userinfo.username,
+            userid :this.userinfo.userid ,
             doctype : 'todo',
             moduleid : '',
             pageindex : 1,
@@ -76,6 +86,7 @@ export class HomeComponent {
         };
         let _me = this;
         this.request.getJsonp(params, action, function (data) {
+            _me.doclist = null;
             if(isObject(data.doclist)) {
                 _me.doclist = _me.common.DocToJson(data.doclist);
             }else{
@@ -104,35 +115,19 @@ export class HomeComponent {
         }else{
             //通过链接的参数获取用户信息
             if(!this.username) {
-                let userinfo = this.localstorage.get('userinfo');
-                if(!userinfo) {
-                    this.global.showtoptip.emit('您还没登录，无对应用户信息');
-                }else{
+                let userinfo : any;
+                userinfo = this.localstorage.get('userinfo');
+                if(userinfo && userinfo.username) {
                     this.username = userinfo.username;
+                }else{
+                    this.global.showtoptip.emit('您还没登录，无对应用户信息');
+                    return;
                 }
             }
             callback && callback();
         }
     }
-    /**
-     * 判断登录
-     * @param callback
-     */
-    islogin(callback) {
-        let _me = this;
-        let params = {username : this.username};
-        let action = 'wx_login';
-        this.request.getJsonp(params , action  , function(data){
-            //处理数据
-            if(data.userinfo) {
-                for(var items of data.userinfo) {
-                    _me.userinfo[items.name] = items.text;
-                }
-            }
-            _me.localstorage.add('userinfo',_me.userinfo);
-            callback && callback();
-        });
-    }
+
 
     /**
      * 获取待阅数量

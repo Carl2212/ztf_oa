@@ -4,7 +4,7 @@
         <span class="bartitle">{{pageinfo.pagename}}</span>
     </div>
     <div class="content">
-        <ul class="list-group main">
+        <ul class="list-group main" *ngIf="doclist">
             <li class="list-group-item" *ngFor="let list of doclist">
                 <div>
                     <a routerLink="/detail/{{doctype}}/{{list?.detailparam?.moduleid}}/{{list?.detailparam?.nodeid}}/{{list?.detailparam?.docid}}/{{list?.detailparam?.appid}}">
@@ -17,5 +17,6 @@
         </ul>
 
         <loading-more *ngIf="isshowloadmore"  [isactive]="loadmoreactive" (loadmore)="loadmore($event)"></loading-more>
+        <no-content *ngIf="!userinfo || !doclist"></no-content>
     </div>
 </div>

@@ -11,7 +11,7 @@
 <div class="modal-card" *ngIf="isopenumopinion">
     <div class="umopinion-card">
         <h4>请选择常用意见</h4>
-        <span class="close" (click)="isopenumopinion == false">X</span>
+        <span class="close" (click)="close()">X</span>
         <ul class="umopinion-select">
             <li *ngFor="let option of umopinion" >
                 <div class="radio radio-danger">

@@ -13,7 +13,7 @@
         <div class="select-group">
             <ul *ngIf="selectusers?.length > -1">
                 <li *ngFor="let group of selectusers" class="group-list">
-                    <h4 *ngIf="routertype == 'toread'">{{group?.group?.groupname}}</h4>
+                    <span *ngIf="routertype == 'toread' && group.userselect && group.userselect.length >0">{{group?.group?.groupname}}</span>
                     <div class="items">
                         <span class="group-items" *ngFor="let user of group.userselect">
                             <a class="withclosebadge"  (click)="del(group,user)">

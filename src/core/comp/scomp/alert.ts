@@ -8,7 +8,7 @@ import {Component , Input , Output , EventEmitter} from '@angular/core';
     template : `<div class="ml" *ngIf="alertparams?.isshow">
                     <div class="alertbox">
                         <span class="close" (click)="close()">x</span>
-                        <div class="alert-content">{{alertparams?.content}}</div>
+                        <div class="alert-content"><div class="glyphicon glyphicon-ok-sign ok-red"></div><p>{{alertparams?.content}}</p></div>
                         <div class="btn-bar"><a class="bg-red" *ngIf="alertparams?.okbutton" (click)="okfunction()">是</a><a  class="bg-gray" *ngIf="alertparams?.cancelbutton" (click)="close()">否</a></div>
                     </div>
                  </div>`,

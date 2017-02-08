@@ -1,0 +1,16 @@
+<div class="addressbk">
+    <div class="topbar">
+        <a class="back-icon" href="javascript:history.go(-1);"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <span class="bartitle">pdf文件预览</span>
+    </div>
+    <div class="content">
+        <div class="control-menu right">
+            <a class="btn btn-default" [ngClass]="{active : imgindex == '1'  }" (click)="left()"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+            <a class="btn btn-default" [ngClass]="{active : imgindex == imgcount }" (click)="right()"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+        <div class="pdf-box">
+            <img *ngIf="imggroups && imggroups[imgindex-1]" [attr.src]="imggroups[imgindex-1]">
+        </div>
+    </div>
+</div>
+<no-content *ngIf="!imggroups || imggroups.length <= 0"></no-content>

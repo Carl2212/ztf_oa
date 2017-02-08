@@ -13,21 +13,32 @@
         </span>
             </div>
         </div>
-        <div class="history" *ngIf="!doclist && history">
+        <div class="history" *ngIf="history">
             <div class="history-title-bar"><span class="glyphicon glyphicon-star"></span> 历史记录 <a class="del" (click)="delhistory()"><span class="glyphicon glyphicon-trash"></span> </a> </div>
             <ul class="history-list">
                 <li *ngFor="let h of history"><a (click)="inputcontent(h)">{{h}}</a></li>
             </ul>
         </div>
-        <div *ngIf="doclist">
-            <div class="list-group-item" *ngFor="let doc of doclist" >
-                <a routerLink="/detail/todo/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
-                    <em>{{doc?.view?.topic}}</em>
-                    <span class="type-txt">{{doc?.view?.modulename}}</span>
-                </a>
+        <h5 class="result-bar"><span class="glyphicon glyphicon-star"></span> 搜索结果</h5>
+        <div class="searchresult" *ngIf="todonelist || readdonelist">
+            <div *ngIf="todonelist">
+                <div class="list-group-item"   *ngFor="let doc of todonelist" >
+                    <a routerLink="/detail/todone/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
+                        <em class="left-txt">{{doc?.view?.topic}}</em>
+                        <span class="type-txt">{{doc?.view?.modulename}}</span>
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="readdonelist">
+                <div class="list-group-item" *ngFor="let doc of readdonelist" >
+                    <a routerLink="/detail/readdone/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
+                        <em class="left-txt">{{doc?.view?.topic}}</em>
+                        <span class="type-txt">{{doc?.view?.modulename}}</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <no-content  *ngIf="!doclist"></no-content>
+        <no-content  *ngIf="!todonelist && !todonelist"></no-content>
     </div>
 
 </div>

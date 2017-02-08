@@ -18,7 +18,6 @@ import {NoContentComponent} from './comp/nocontent/nocontent';
 import {DepartmentComponent} from './comp/department/department';
 import {UsersComponent} from './comp/users/users';
 import {UserInfoComponent} from './comp/userinfo/userinfo';
-//import {KeysPipe} from './pipe/pipe';DepartmentComponent , UsersComponent , UserInfoComponent
 
 
 @NgModule({

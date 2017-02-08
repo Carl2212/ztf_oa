@@ -44,7 +44,8 @@
     .umopinion-select{
       padding : 1em;
       height : 12em;
-      overflow: scroll;
+      overflow-x: hidden;
+      overflow-y:scroll;
       li {
         padding : .5em 0;
       }
@@ -66,9 +67,10 @@
     height : 8em;
     width : 100%;
     padding : 1em;
-    overflow: scroll;
     border : none;
     resize : none;
+    overflow-x: hidden;
+    overflow-y:scroll;
   }
   .bottom-bar{
     border-top  : 1px solid #eee;
@@ -115,6 +117,7 @@
 /*no-content 样式*/
 .no-content{
   padding : 3em 0;
+  background : #fff;
   .no-content-img{
     width: 40%;
     display: block;

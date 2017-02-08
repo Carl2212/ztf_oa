@@ -5,14 +5,14 @@
     </div>
     <div class="content">
         <div class="bar-menu">
-            <button class="btn-default" (click)="tabname = 'detail'">详情</button>
-            <button class="btn-default" (click)="tabname = 'process'">审批过程</button>
+            <button class="btn btn-default left" [ngClass]="{active : tabname == 'detail'}" (click)="tabname = 'detail'">详情</button>
+            <button class="btn btn-default" (click)="tabname = 'process'" [ngClass]="{active : tabname == 'process'}">审批过程</button>
             <span *ngIf="doctype == 'toread'" class="fl-r">
-                <button class="btn-danger" (click)="submittoread()">已阅</button>
-                <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">转传阅</button>
+                <button class="btn btn-danger" (click)="submittoread()">已阅</button>
+                <button class="btn btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">转传阅</button>
             </span>
             <span *ngIf="doctype == 'todo'" class="fl-r">
-                <button class="btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">审批</button>
+                <button class="btn btn-danger" routerLink="/dotosubmit/{{doctype}}/{{moduleid}}/{{nodeid}}/{{docid}}/{{appid}}">审批</button>
             </span>
         </div>
         <div class="main">

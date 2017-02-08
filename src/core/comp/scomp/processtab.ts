@@ -6,10 +6,13 @@ import {Component ,Input} from '@angular/core';
     selector : 'processtab',
     template : `<ul class="processtab">
                     <li *ngFor="let ps of process" >
-                        <dl class="tb-grid" *ngFor="let p of ps">
-                            <dd>{{p.label}}</dd>
-                            <dt>{{p.text}}</dt>
-                        </dl>
+                        <table class="tb-box">
+                            <tr class="tb-grid" *ngFor="let p of ps">
+                                <td class="left"> <span class="txt">{{p.label}}</span></td>
+                                <td class="right"><span class="txt">{{p.text}}</span></td>
+                            </tr>
+                        </table>
+
                     </li>
                 </ul>`,
     styleUrls : ['./processtab.less'],

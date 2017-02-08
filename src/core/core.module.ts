@@ -6,8 +6,6 @@ import { ModuleWithProviders , NgModule , Optional , SkipSelf  } from '@angular/
 import { CommonModule } from '@angular/common';
 import  {HttpModule ,JsonpModule} from '@angular/http';
 
-import { ModalModule , AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
-
 import {LoadingComponent} from './comp/scomp/loading';
 import {ToptipAlertComponent} from './comp/scomp/toptip';
 import {ProcessTabComponent} from './comp/scomp/processtab';
@@ -16,17 +14,17 @@ import {AlertComponent} from './comp/scomp/alert';
 
 import {Request} from './comp/service/request';
 import {CommonService} from './comp/service/common';
-import {UrlUtilService} from './comp/service/urlutil';
 import {Base64Service} from './comp/service/base64';
+import {UrlutilService} from './comp/service/urlutil';
 import {FileReaderService} from './comp/service/filereader';
 import {GlobalEventManager} from './comp/service/globaleventmanager';
 import {Config} from './comp/service/config';
 
 @NgModule({
-    imports : [CommonModule , ModalModule ,AlertModule ,HttpModule ,JsonpModule],
+    imports : [CommonModule , HttpModule ,JsonpModule],
     declarations : [LoadingComponent ,ToptipAlertComponent ,ProcessTabComponent,DetailTabComponent , AlertComponent],
     exports : [LoadingComponent ,ToptipAlertComponent,ProcessTabComponent,DetailTabComponent , AlertComponent],
-    providers : [Request , GlobalEventManager, CommonService ,UrlUtilService ,Base64Service ,FileReaderService]
+    providers : [Request , GlobalEventManager, CommonService ,Base64Service , UrlutilService ,FileReaderService ]
 })
 export class CoreModule {
     constructor (@Optional() @SkipSelf() parentModule: CoreModule) {

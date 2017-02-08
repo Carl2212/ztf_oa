@@ -1,0 +1,26 @@
+@import "../../../resources/common";
+@import "../../../resources/bootstrap/less/mixins/clearfix";
+.content {
+  .pdf-box{
+    width: 100%;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .control-menu{
+    .clearfix();
+    margin-right : 1em;
+    float: right;
+    .btn {
+      width: 5em;
+    }
+    .btn-default:hover {
+      background : #fff;
+    }
+    .btn-default.active,.btn-default.active:hover{
+      background : #c1c1c1;
+    }
+  }
+}

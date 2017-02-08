@@ -17,6 +17,7 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+//const CompressionPlugin = require('compression-webpack-plugin');
 
 /**
  * Webpack Constants
@@ -62,7 +63,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-filename
        */
-      filename: '[name].[chunkhash].bundle.js',
+      filename: '[name].bundle.js',//'[name].[chunkhash].bundle.js',
 
       /**
        * The filename of the SourceMaps for the JavaScript files.
@@ -70,7 +71,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
        */
-      sourceMapFilename: '[name].[chunkhash].bundle.map',
+      sourceMapFilename: '[name].bundle.map',//'[name].[chunkhash].bundle.map',
 
       /**
        * The filename of non-entry chunks as relative path
@@ -78,7 +79,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
        */
-      chunkFilename: '[id].[chunkhash].chunk.js'
+      chunkFilename: '[id].[chunkhash].chunk.js'//'[id].[chunkhash].chunk.js'
 
     },
 
@@ -150,16 +151,17 @@ module.exports = function (env) {
         // }, // debug
         // comments: true, //debug
 
-
         beautify: false, //prod
         mangle: {
           screw_ie8: true,
           keep_fnames: true
         }, //prod
+        exclude:  /config\./i ,
         compress: {
-          screw_ie8: true
+          screw_ie8: true,
+          warnings: false
         }, //prod
-        comments: false //prod
+        comments: false, //prod
       }),
 
       /**
@@ -191,10 +193,14 @@ module.exports = function (env) {
        * See: https://github.com/webpack/compression-webpack-plugin
        */
       //  install compression-webpack-plugin
-      // new CompressionPlugin({
-      //   regExp: /\.css$|\.html$|\.js$|\.map$/,
-      //   threshold: 2 * 1024
-      // })
+      //new CompressionPlugin({
+      //  profile : '',
+      //  asset: "[path].gz[query]",
+      //  algorithm: "gzip",
+      //  test: /\.js$|\.html$/,
+      //  threshold: 10240,
+      //  minRatio: 0.8
+      //}),
 
       /**
        * Plugin LoaderOptionsPlugin (experimental)

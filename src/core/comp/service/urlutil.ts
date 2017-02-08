@@ -1,19 +1,23 @@
+/**
+ * Created by Administrator on 2016/11/3.
+ */
 import {Component,Injectable} from '@angular/core';
-@Injectable()
-export class UrlUtilService {
-    constructor() {
+import {escape} from "querystring";
+import {unescape} from "querystring";
 
-    }
-    // public method for url encoding
-    encode(string) {
-    return escape(this._utf8_encode(string));
-    }
+@Injectable()
+export class UrlutilService {
+
+    encode (string) {
+        return escape(this._utf8_encode(string));
+    };
     // public method for url decoding
-    decode(string) {
-    return this._utf8_decode(unescape(string)).replace(/[\\]/g, '/');
-    }
+    decode (string) {
+        return this._utf8_decode(unescape(string)).replace(/[\\]/g, '/');
+    };
+
     // private method for UTF-8 encoding
-    _utf8_encode(string) {
+    _utf8_encode (string) {
         string = string.replace(/\r\n/g,"\n");
         var utftext = "";
         for (var n = 0; n < string.length; n++) {
@@ -36,34 +40,35 @@ export class UrlUtilService {
         }
 
         return utftext;
-    }
+    };
 
     // private method for UTF-8 decoding
     _utf8_decode(utftext) {
-        var string = "";
-        var i = 0;
-        var c ,c1 , c2 ;
+    var string = "";
+    var i = 0;
+    var c , c1 , c2 = 0 , c3;
 
-        while ( i < utftext.length ) {
+    while ( i < utftext.length ) {
 
-            c = utftext.charCodeAt(i);
+        c = utftext.charCodeAt(i);
 
-            if (c < 128) {
-                string += String.fromCharCode(c);
-                i++;
-            }
-            else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
-                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                i += 2;
-            }
-            else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
-                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                i += 3;
-            }
+        if (c < 128) {
+            string += String.fromCharCode(c);
+            i++;
         }
-        return string;
+        else if((c > 191) && (c < 224)) {
+            c2 = utftext.charCodeAt(i+1);
+            string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+            i += 2;
+        }
+        else {
+            c2 = utftext.charCodeAt(i+1);
+            c3 = utftext.charCodeAt(i+2);
+            string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        }
     }
+    return string;
 }
+}
+

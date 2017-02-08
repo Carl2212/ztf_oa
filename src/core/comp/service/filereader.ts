@@ -1,7 +1,8 @@
 import {Component,Injectable} from '@angular/core';
+import {Router , ActivatedRoute} from '@angular/router';
 import {Config} from "./config";
-import {UrlUtilService} from "./urlutil";
 import {Base64Service} from "./base64";
+import {UrlutilService} from "./urlutil";
 @Injectable()
 export class FileReaderService {
     private iosFileTypeSupport : any ={
@@ -21,7 +22,7 @@ export class FileReaderService {
     '.bmp':true,
     '.png':true
     }
-    constructor(private urlutil : UrlUtilService , private base64 : Base64Service) {
+    constructor(private base64 : Base64Service , private urlutil :  UrlutilService , private router : Router) {
 
     }
     readFile(p_url, p_filename){
@@ -59,6 +60,7 @@ export class FileReaderService {
     }
 
     readPdf(p_url, p_filename){
-        window.location.href='readpdf.html?url='+this.urlutil.encode(p_url)+'&filename='+this.urlutil.encode(p_filename);
+        console.log(this.urlutil.encode(p_url)+'&filename='+this.urlutil.encode(p_filename));
+        this.router.navigate(['/readpdf',{url:this.urlutil.encode(p_url),filename:this.urlutil.encode(p_filename)}]);
     }
 }

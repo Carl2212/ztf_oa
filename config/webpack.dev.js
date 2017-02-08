@@ -12,7 +12,6 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-
 /**
  * Webpack Constants
  */
@@ -26,6 +25,8 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   ENV: ENV,
   HMR: HMR
 });
+console.log(commonConfig({env: ENV}).metadata);
+console.log(METADATA);
 
 /**
  * Webpack configuration
@@ -105,7 +106,6 @@ module.exports = function (options) {
           'HMR': METADATA.HMR,
         }
       }),
-
       /**
        * Plugin: NamedModulesPlugin (experimental)
        * Description: Uses file names as module name.

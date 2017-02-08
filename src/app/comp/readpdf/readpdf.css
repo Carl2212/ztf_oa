@@ -1,0 +1,94 @@
+.content {
+  margin-top: 3.8em;
+  background: #fff;
+}
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3em;
+  z-index: 9998;
+  background: #cd0018;
+  text-align: center;
+  color: #fff;
+}
+.topbar .back-icon,
+.topbar .sure-select,
+.topbar .submit-icon {
+  color: #fff;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  display: block;
+  height: 3em;
+  line-height: 3em;
+}
+.topbar .submit-icon {
+  right: 0;
+  background: #cd0018;
+  font-size: inherit;
+  padding: 0 1em;
+  border: none;
+}
+.topbar .back-icon {
+  left: 1em;
+  float: left;
+}
+.topbar .bartitle {
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5em;
+}
+.topbar .sure-select {
+  right: 1em;
+  float: right;
+}
+.list-group-item {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+  border-bottom: 1px solid #cfcdcd;
+}
+.list-group-item a {
+  color: #000;
+  display: block;
+}
+.list-group-item .list-group-item-heading {
+  color: #c1c1c1;
+}
+.list-group-item .type-txt {
+  display: block;
+  float: right;
+  color: #cfcdcd;
+}
+.content .pdf-box {
+  width: 100%;
+}
+.content .pdf-box img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.content .control-menu {
+  margin-right: 1em;
+  float: right;
+}
+.content .control-menu:before,
+.content .control-menu:after {
+  content: " ";
+  display: table;
+}
+.content .control-menu:after {
+  clear: both;
+}
+.content .control-menu .btn {
+  width: 5em;
+}
+.content .control-menu .btn-default:hover {
+  background: #fff;
+}
+.content .control-menu .btn-default.active,
+.content .control-menu .btn-default.active:hover {
+  background: #c1c1c1;
+}

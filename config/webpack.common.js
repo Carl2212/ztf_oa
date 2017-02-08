@@ -36,6 +36,8 @@ const METADATA = {
  */
 module.exports = function (options) {
   isProd = options.env === 'production';
+  METADATA.isProd = isProd;
+  isProd && (METADATA.baseUrl = '/dist/');
   return {
 
     /*
@@ -54,11 +56,10 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-
+      'config': './src/config.ts',
       'polyfills': './src/polyfills.ts',
       'vendor': './src/vendor.ts',
       'main': './src/main.ts'
-
     },
 
     /*
@@ -124,6 +125,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           loaders: ['to-string-loader', 'css-loader']
+          //loader: ExtractTextPlugin.extract("style-loader", "css-loader")//!postcss-loader
         },
 
         /* Raw loader support for *.html
@@ -140,9 +142,10 @@ module.exports = function (options) {
         /* File loader for supporting images, for example, in CSS files.
          */
         {
-          test: /\.(jpg|png|gif)$/,
-          loader: 'url-loader?limit=8192'// 'file' url-loader 会打包出图片到相对位置的地方
-        },
+          test: /\.(png|jpg|gif)$/,
+          loader: 'file-loader?name=static/[hash:8].[name].[ext]'
+        }// 'file' url-loader 会打包出图片到相对位置的地方'url-loader?limit=8192'url-loader?limit=8192
+        ,
         /* load less
          */
         {
@@ -182,9 +185,8 @@ module.exports = function (options) {
        * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
        */
       new CommonsChunkPlugin({
-        name: ['polyfills', 'vendor'].reverse()
+        name: ['polyfills', 'vendor','config'].reverse()
       }),
-
       /**
        * Plugin: ContextReplacementPlugin
        * Description: Provides context to Angular's use of System.import
@@ -207,8 +209,14 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([{
-        from : 'src/resources/static',
-        to : 'resources/static'
+        from : 'src/resources/static/',
+        to : 'resources/static/'
+      },{
+        from : 'src/resources/fonts',
+        to : 'resources/fonts'
+      },{
+        from : 'src/resources/offline.appcache',
+        to : ''
       }]),
 
 
@@ -225,7 +233,7 @@ module.exports = function (options) {
         title: METADATA.title,
         chunksSortMode: 'dependency',
         metadata: METADATA,
-        inject: 'head',
+        inject: 'head'
       }),
 
       /*
@@ -272,11 +280,11 @@ module.exports = function (options) {
        */
       new LoaderOptionsPlugin({}),
 
-      new webpack.ProvidePlugin({
-        jQuery: 'jquery',
-        $: 'jquery',
-        jquery: 'jquery'
-      })
+      //new webpack.ProvidePlugin({
+      //  jQuery: 'jquery',
+      //  $: 'jquery',
+      //  jquery: 'jquery'
+      //})
 
     ],
 

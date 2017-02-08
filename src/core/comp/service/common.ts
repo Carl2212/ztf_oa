@@ -5,9 +5,9 @@
 import {Component,Injectable} from '@angular/core';
 import {Request} from "./request";
 import {Config} from "./config";
-import { LocalStorageService } from 'angular-2-local-storage';
 import {isArray} from "rxjs/util/isArray";
 import {isObject} from "rxjs/util/isObject";
+import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 
 @Injectable()
 export class CommonService {
@@ -23,7 +23,8 @@ export class CommonService {
     getGroupOrUserList(type,parentid,callback) {
         //type = 1 为grouplist  2为userlist
         var _me = this;
-        let userinfo = this.localstorage.get('userinfo');
+        let userinfo :any;
+        userinfo = this.localstorage.get('userinfo');
         let action = '';
         if(userinfo) {
             //数据
@@ -61,6 +62,43 @@ export class CommonService {
             });
         };
     }
+    /**
+     * 判断登录
+     * @param callback
+     */
+    islogin(username? , callback?) {
+        let _me = this;
+        let userinfo = {};
+        let params = {username : username};
+        let action = 'wx_login';
+        let userlist = [];
+        this.request.getJsonp(params , action  , function(data){
+            //处理数据
+            if(data.userlist) {
+                for(var items of data.userlist) {
+                    var item = {};
+                    for(var user of items) {
+                        item[user.name] = user.text;
+                    }
+                    if(userlist && userlist.length <= 0) {//第一条数据作为登录账户
+                        userinfo = item;
+                    }
+                    userlist.push(item);
+                }
+                _me.localstorage.add('userlist' ,userlist);
+                _me.localstorage.add('userinfo' ,userinfo);
+            }else if(data.userinfo) {//只有一个账户数据的时候
+                for(var user of data.userinfo) {
+                    userinfo[user.name] = user.text;
+                }
+                userlist.push(userinfo);
+                _me.localstorage.add('userlist' ,userlist);
+                _me.localstorage.add('userinfo' ,userinfo);
+            }
+            console.log(userinfo ,userlist);
+            callback && callback(userinfo ,userlist);
+        });
+    }
     //通用方法之列项数量的获取
     gotCount(doctype, callback,userinfo?) {
         let _me = this;
@@ -71,7 +109,7 @@ export class CommonService {
             _me.request.getJsonp(params , action,function(data){
                 var modulelist = data.modulelist;
                 var total_count = 0;
-                if (modulelist) {
+                if (modulelist && isArray(modulelist)) {
                     for (var items of modulelist) {
                         total_count += parseInt(items.count);
                     }

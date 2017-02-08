@@ -19,17 +19,16 @@
   color: #fff;
   position: fixed;
   z-index: 9999;
-  top: .5em;
+  top: 0;
   display: block;
-  height: 2em;
-  line-height: 2em;
+  height: 3em;
+  line-height: 3em;
 }
 .topbar .submit-icon {
-  right: 1em;
-  float: right;
+  right: 0;
   background: #cd0018;
   font-size: inherit;
-  padding: 0.1em .5em;
+  padding: 0 1em;
   border: none;
 }
 .topbar .back-icon {
@@ -67,9 +66,13 @@
   background: #cfcdcd;
 }
 .detail .content .bar-menu {
-  padding: 1em 1em 0 1em;
+  padding: 0 1em;
   border-bottom: 1px solid #cfcdcd;
   position: relative;
+}
+.detail .content .bar-menu .btn {
+  border-bottom: none;
+  margin-bottom: -1px;
 }
 .detail .content .bar-menu .fl-r {
   display: block;

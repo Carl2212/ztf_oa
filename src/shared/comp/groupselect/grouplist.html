@@ -7,14 +7,14 @@
         <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
         <div class="all">
             <div class="checkbox checkbox-danger" *ngIf="multiuser != 0">
-                <input type="checkbox" id="checkboxselct1" class="styled" (click)="selectall(items)" [(ngModel)]="status[items.groupid]">
-                <label for="checkboxselct1"></label>
+                <input type="checkbox" [attr.id]="items.groupid" class="styled" (click)="selectall(items)" [(ngModel)]="status[items.groupid]">
+                <label [attr.for]="items.groupid"></label>
             </div>
         </div>
         <!------------------------------------   单选隐藏 多选显示    -------------------------------------------------->
-        <div class="childgroup">
-            <grouplist *ngIf="nextgroup && nextgroup[items.groupid] && nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']" [selectitems] = "nextgroup[items.groupid]"  [multiuser] ="multiuser" [historyusers]="historyusers" [departmentparam]="" #userselect></grouplist>
+        <div class="childgroup" [ngClass]="{hidden : !nextselect || !nextselect[items.groupid] || !nextselect[items.groupid]['isopen']}">
+            <grouplist *ngIf="nextgroup && nextgroup[items.groupid]" [selectitems] = "nextgroup[items.groupid]"  [multiuser] ="multiuser" [historyusers]="historyusers" [departmentparam]="" #userselect></grouplist>
+            <userselect *ngIf="nextselect && nextselect[items.groupid]" [historyusers]="historyusers" [chooseornot]="status[items.groupid]" [userlist] ="nextselect[items.groupid]" [multiuser]="multiuser" [group]="items" (outusers)="selectusersfn($evnet)"></userselect>
         </div>
-        <userselect *ngIf="nextselect && nextselect[items.groupid] && nextselect[items.groupid]['isopen']" [historyusers]="historyusers" [chooseornot]="status[items.groupid]" [userlist] ="nextselect[items.groupid]" [multiuser]="multiuser" [group]="items" (outusers)="selectusersfn($evnet)"></userselect>
-    </li>
+        </li>
 </ul>

@@ -86,7 +86,7 @@ export class Base64Service {
     _utf8_decode(utftext) {
         var string = "";
         var i = 0;
-        var c = c1 = c2 = 0;
+        var c = 0 ,c1 = 0 ,c2 = 0 , c3;
         while ( i < utftext.length ) {
             c = utftext.charCodeAt(i);
             if (c < 128) {

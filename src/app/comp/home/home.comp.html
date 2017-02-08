@@ -1,33 +1,48 @@
 <div class="home">
     <div class="topbar">
         <span class="bartitle">中通服国际公司办公系统</span>
+        <div class="sure-select" *ngIf="userlist?.length > 1">
+            <div dropdown>
+                <div dropdownToggle>
+                    <div class="txt-box">
+                        <span class="txt"><span class="glyphicon glyphicon-user"></span></span>
+                    </div>
+                </div>
+                <!-- dropdown-menu holds content which will be shown -->
+                <div dropdownMenu>
+                    <div *ngFor="let user of userlist">
+                        <a (click)="changeuser(user.username)">{{user?.groupname}}-{{user?.cnname}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content">
         <menu>
             <ul class="menu-ul">
                 <li class="menu-li">
                     <a routerLink="/notice">
-                        <img class="item-img" src="../../../resources/static/index-icon-red.png">
-                        <h4 class="item-name">通知公告</h4>
+                        <img class="item-img" src="../../../resources/image/index-icon-red.png">
+                        <h5 class="item-name">通知公告</h5>
                     </a>
                 </li>
                 <li class="menu-li">
                     <a routerLink="/addressbk">
-                        <img class="item-img" src="../../../resources/static/index-icon-blue.png">
-                        <h4 class="item-name">通讯录</h4>
+                        <img class="item-img" src="../../../resources/image/index-icon-blue.png">
+                        <h5 class="item-name">通讯录</h5>
                     </a>
                 </li>
                 <li class="menu-li">
                     <a routerLink="/search">
-                        <img class="item-img" src="../../../resources/static/index-icon-purple.png">
-                        <h4 class="item-name">搜索公文</h4>
+                        <img class="item-img" src="../../../resources/image/index-icon-purple.png">
+                        <h5 class="item-name">搜索公文</h5>
                     </a>
                 </li>
                 <li class="menu-li">
                     <a (click)="openpage('toread')">
-                        <img class="item-img" src="../../../resources/static/index-icon-pink.png">
+                        <img class="item-img" src="../../../resources/image/index-icon-pink.png">
                         <span class="badge">{{toreadnum}}</span>
-                        <h4 class="item-name">待阅文件</h4>
+                        <h5 class="item-name">待阅文件</h5>
                     </a>
                 </li>
             </ul>
@@ -45,7 +60,7 @@
             <div *ngIf="doclist">
                 <div class="list-group-item" *ngFor="let doc of doclist">
                     <a routerLink="/detail/todo/{{doc?.detailparam?.moduleid}}/{{doc?.detailparam?.nodeid}}/{{doc?.detailparam?.docid}}/{{doc?.detailparam?.appid}}">
-                        <em>{{doc?.view?.topic}}</em>
+                        <em class="left-txt">{{doc?.view?.topic}}</em>
                         <span class="type-txt">{{doc?.view?.modulename}}</span>
                     </a>
                 </div>

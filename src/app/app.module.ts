@@ -19,22 +19,21 @@ import {HomeComponent} from './comp/home/home.comp';
 import {NoticeComponent} from './comp/notice/notice.comp';
 import {NoticeDetailComponent} from './comp/noticedetail/noticedetail.comp';
 import {DotosubmitComponent} from './comp/dotosubmit/dotosubmit.comp';
-import { AlertModule , DropdownModule , AccordionModule  } from 'ng2-bootstrap/ng2-bootstrap';
+import {ReadpdfComponent} from "./comp/readpdf/readpdf";
 
 import {CoreModule} from '../core/core.module';
 import {SharedModule} from '../shared/shared.module';
 
-
-import {KeysPipe} from '../shared/pipe/pipe';
+import {DropdownModule} from "ng2-bootstrap/components/dropdown";
 
 let localStorageServiceConfig = {
-    prefix: 'wx_ztfoa',
+    prefix: 'wx_ztfoa2',
     storageType: 'sessionStorage'
 };
 
 @NgModule({
-    imports : [ BrowserModule , AlertModule , DropdownModule ,  AccordionModule ,AppRoutingModule , CoreModule ,SharedModule ],
-    declarations : [ AppComponent,HomeComponent ,NoticeComponent,KeysPipe,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent ,NoticeDetailComponent],//
+    imports : [ BrowserModule , AppRoutingModule , CoreModule ,SharedModule ,DropdownModule ],
+    declarations : [ AppComponent,HomeComponent ,NoticeComponent,ModuleListComponent,DocListComponent,DetailComponent,AddressbkComponent,SearchComponent,DotosubmitComponent ,NoticeDetailComponent , ReadpdfComponent],//
     bootstrap : [ AppComponent],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,LocalStorageService,{provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig}

@@ -6,7 +6,6 @@ import {Component} from '@angular/core';
 @Component({
     selector : 'my-app',
     templateUrl : './app.comp.html',
-    styleUrls : ['../../../resources/test.css'],
 })
 export class AppComponent {
     public toptips : Array<string>;

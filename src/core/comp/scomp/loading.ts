@@ -6,10 +6,7 @@ import {Component} from '@angular/core';
 import { GlobalEventManager } from '../service/globaleventmanager';
 @Component({
     selector : 'loading',
-    template : `<div class="ml" *ngIf="isshow">
-                    <div class="ld-icon"><img src="../../../resources/static/loading.gif">
-                    </div>
-                 </div>`,
+    templateUrl : './loading.html',
     styleUrls : ['./scomp.less']
 })
 export class LoadingComponent {

@@ -6,6 +6,7 @@ import {Component ,Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
 import {isEmpty} from "rxjs/operator/isEmpty";
+import {isArray} from "rxjs/util/isArray";
 
 @Component({
     selector : 'router-box',
@@ -21,7 +22,6 @@ export class RouterBoxComponent {
     private nextcheckbox : any = [];
 
     @Input() node : any;
-
     @Input() multiroute : string;//单选路由还是多选路由
     @Input() nodelist : any;
     @Input() ischeck : boolean;
@@ -139,7 +139,7 @@ export class RouterBoxComponent {
                         this.selectusers[g].userselect.splice(u,1);
                     }
                 }
-                if(this.commonfn.isEmptyObject(this.selectusers[g].userselect)) {
+                if(isArray(this.selectusers[g].userselect) && this.selectusers[g].userselect.length <= 0 ) {
                     this.selectusers.splice(g,1);
                 }
             }
@@ -150,7 +150,7 @@ export class RouterBoxComponent {
      * input : none
      *********************************************/
     selusers() {
-        if(!this.selectusers || this.isEmptyObject(this.selectusers)) {
+        if(!this.selectusers || isArray(this.selectusers)) {
             this.isnull = true;
             this.toreadcheckbox = false;
         }else{
@@ -163,16 +163,6 @@ export class RouterBoxComponent {
             this.isnull = true;
             this.toreadcheckbox = false;
         }
-    }
-    /*********************************************
-     * 判断对象是否为空
-     * input : obj 对象
-     *********************************************/
-    isEmptyObject(obj) {
-        for(var i in obj) {
-            return false;
-        }
-        return true;
     }
     ischeckornot(event) {
         if(event == true) {

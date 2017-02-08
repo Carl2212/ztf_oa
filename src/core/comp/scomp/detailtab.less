@@ -1,30 +1,27 @@
 @import "../../../resources/common";
 .detailtab {
-  padding : 1em;
+  margin : 1em auto;
+  width : 90%;
   .tb-grid{
-    border : 1px solid @gray-deep;
-    margin-bottom : 0;
-    height : 4em;
-    dd{
-      width: 30%;
-      border-right : 1px solid @gray-deep;
+    .left{
+      width: 8em;
       text-align: center;
     }
-    dt{
-      padding-left: 1em;
-      width: 69%;
+    .right{
+      width: auto;
+      text-align: left;
     }
-    dd,dt{
-      height: 100%;
-      float : left;
-      line-height: 4em;
-      display: block;
+    td{
+      border : 1px solid @gray-shallow;
+      vertical-align: middle;
+      text-align: center;
+      height : auto;
       span{
         display: block;
         line-height: normal;
         position: relative;
         top : 50%;
-        margin-top : -.5em;
+        padding : 1.5em 1em;
       }
     }
   }

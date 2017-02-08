@@ -2,9 +2,9 @@
  * Created by Administrator on 2016/10/27.
  * 意见框 组件
  */
-import {Component ,Input Output ,EventEmitter} from '@angular/core';
+import {Component ,Input , Output ,EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
 
 @Component({
     selector : 'department',

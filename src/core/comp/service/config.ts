@@ -9,8 +9,7 @@ export const Config : any = {
     author_check : false,
     global_qybm: 'GJGS',
     global_xmbm: 'GJGSOA',
-    author_check: false,
-    global_url: 'http://192.168.200.67:61002/ms',
+    global_url: 'http://oa.chinaccsi.com:8001/ms',//'http://192.168.200.67:61002/ms',//
     //current_user_action: '/wx/user',
     wx_login: '/wap/execute?cmd=login_user&command=login_user',
     login: '/wap/execute?cmd=login&command=login',
@@ -26,7 +25,7 @@ export const Config : any = {
     submittodo:'/wap/execute?cmd=submit&command=submit',
 
 
-    //待办列表页获取，详情获取
+    //待办待阅列表页获取，详情获取
     doclist: '/wap/execute?cmd=doclist&command=doclist',
     docdetail: '/wap/execute?cmd=docdetail&command=docdetail',
 
@@ -44,4 +43,7 @@ export const Config : any = {
     //通知-列表数据以及详情数据
     noticelist:'/wap/execute?cmd=noticelist&command=noticelist',
     noticedetail:'/wap/execute?cmd=noticedetail&command=noticedetail',
+
+    pdfpagecount_action:'/wap/readonline/pdfpagecount',
+    pdfpageimg_action:'/wap/readonline/pdfpageimg',
 }

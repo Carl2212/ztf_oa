@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
     "build:docker": "npm run build:prod && docker build -t angular2-webpack-start:latest .",
-    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --bail && npm run compress-css",
     "build": "npm run build:dev",
     "ci": "npm run lint && npm test && npm run e2e",
     "clean:dist": "npm run rimraf -- dist",
@@ -50,7 +50,8 @@
     "webdriver:start": "npm run webdriver-manager start",
     "webdriver:update": "npm run webdriver-manager update",
     "webpack-dev-server": "webpack-dev-server",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "compress-css": "gulp css"
   },
   "dependencies": {
     "@angular/common": "2.1.0",
@@ -73,9 +74,9 @@
     "core-js": "^2.4.1",
     "http-server": "^0.9.0",
     "ie-shim": "^0.1.0",
-    "jquery": "3.1.1",
-    "ng2-bootstrap": "^1.1.14",
+    "ng2-radio-group": "0.0.6",
     "rxjs": "^5.0.0-beta.12",
+    "url-loader": "^0.5.7",
     "zone.js": "~0.6.17"
   },
   "devDependencies": {
@@ -96,7 +97,11 @@
     "expose-loader": "^0.7.1",
     "file-loader": "^0.9.0",
     "gh-pages": "^0.11.0",
+    "gulp": "^3.9.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^2.0.0",
     "html-webpack-plugin": "^2.21.0",
+    "html-withimg-loader": "^0.1.16",
     "imports-loader": "^0.6.5",
     "istanbul-instrumenter-loader": "^1.0.0",
     "json-loader": "^0.5.4",
@@ -112,6 +117,7 @@
     "less-loader": "^2.2.3",
     "parse5": "^2.2.2",
     "protractor": "^4.0.9",
+    "pump": "^1.0.1",
     "raw-loader": "0.5.1",
     "rimraf": "^2.5.2",
     "script-ext-html-webpack-plugin": "^1.3.2",

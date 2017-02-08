@@ -32,5 +32,8 @@ export class OptionsBoxComponent {
     selectvalue(value) {
         this.select = value;
     }
+    close() {
+        this.isopenumopinion = false;
+    }
 
 }

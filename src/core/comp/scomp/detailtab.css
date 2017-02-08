@@ -19,17 +19,16 @@
   color: #fff;
   position: fixed;
   z-index: 9999;
-  top: .5em;
+  top: 0;
   display: block;
-  height: 2em;
-  line-height: 2em;
+  height: 3em;
+  line-height: 3em;
 }
 .topbar .submit-icon {
-  right: 1em;
-  float: right;
+  right: 0;
   background: #cd0018;
   font-size: inherit;
-  padding: 0.1em .5em;
+  padding: 0 1em;
   border: none;
 }
 .topbar .back-icon {
@@ -64,34 +63,27 @@
   color: #cfcdcd;
 }
 .detailtab {
-  padding: 1em;
+  margin: 1em auto;
+  width: 90%;
 }
-.detailtab .tb-grid {
-  border: 1px solid #c1c1c1;
-  margin-bottom: 0;
-  height: 4em;
-}
-.detailtab .tb-grid dd {
-  width: 30%;
-  border-right: 1px solid #c1c1c1;
+.detailtab .tb-grid .left {
+  width: 8em;
   text-align: center;
 }
-.detailtab .tb-grid dt {
-  padding-left: 1em;
-  width: 69%;
+.detailtab .tb-grid .right {
+  width: auto;
+  text-align: left;
 }
-.detailtab .tb-grid dd,
-.detailtab .tb-grid dt {
-  height: 100%;
-  float: left;
-  line-height: 4em;
-  display: block;
+.detailtab .tb-grid td {
+  border: 1px solid #cfcdcd;
+  vertical-align: middle;
+  text-align: center;
+  height: auto;
 }
-.detailtab .tb-grid dd span,
-.detailtab .tb-grid dt span {
+.detailtab .tb-grid td span {
   display: block;
   line-height: normal;
   position: relative;
   top: 50%;
-  margin-top: -0.5em;
+  padding: 1.5em 1em;
 }

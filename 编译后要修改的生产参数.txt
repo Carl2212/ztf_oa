@@ -1,0 +1,29 @@
+1)编译前，请确认node_modules/querystring-es3/index.js 新增newescape和newunescape等方法（修复typescript不识得js的escape和unescape的方法）。对应的方法文件newescape.js 和 newunescape.js要添加进去。
+2)全局global_url 更改 core/comp/service/config.ts
+
+
+
+
+
+//维护更新日志：
+//2016.12.21
+//修改了搜索公文 样式显示问题  app/comp/search/search.comp.html,app/comp/search/search.comp.less
+//修改了选择人 群组全选 以及 展开+收缩图标 resources/bootstrap/glyphicons.less shared/comp/groupselect/grouplist.html
+//修改了单个选择人删除 shared/comp/routerbox/routerbox.ts
+//修改了弹出框样式，弹出模态框背景灰透明 core/scomp/scomp.less shared/comp/userinfo/userinfo.less
+//2016.12.26
+//新增多重身份账户切换功能 app/home/home.comp.less app/home/home.comp.ts app/home/home.comp.html
+//2017.2.8
+//修复nodejs里面escape以及unescape方法的缺失
+//修复读取文件，文件url不存在时时报错 src/core/comp/scomp/detailtab.ts
+
+
+
+
+
+//在你的机器上运行该项目
+1)安装nodejs 安装npm
+2）cd 项目
+3）npm install 安装依赖包（假设安装之后仍然无法使用，请直接解压node_module）
+4）npm run start(运行在本机上)
+5) npm run build:prod （编译打包正式环境代码dist）

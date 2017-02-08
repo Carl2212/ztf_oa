@@ -30,7 +30,9 @@ export class DetailComponent {
         let _me = this;
         let pagearray = {
             todo: {pagename: '待办' },
-            toread: {pagename: '待阅'  }
+            toread: {pagename: '待阅'  },
+            todone: {pagename: '已办' },
+            readdone: {pagename: '已阅'  }
         };
         this.route.params.forEach(param=>{
             _me.doctype = param['pagename'];
@@ -40,16 +42,16 @@ export class DetailComponent {
             _me.appid = param['appid'];
             _me.pageinfo = pagearray[this.doctype];
         });
-        this.userinfo = this.localstorage.get('userinfo');
-        if(!this.userinfo) {
-            //外部跳转进来必须携带的用户信息
-            let userid = this.route.snapshot.queryParams['userid'];
-            let username = this.route.snapshot.queryParams['username'];
-            if(userid && username) {
-                this.userinfo = {userid : userid,username : username};
-                this.localstorage.add('userinfo',this.userinfo);
-            }
+        //外部跳转进来必须携带的用户信息
+        let userid = this.route.snapshot.queryParams['userid'];
+        let username = this.route.snapshot.queryParams['username'];
+        if(userid && username) {
+            this.userinfo = {userid : userid,username : username};
+            this.localstorage.add('userinfo',this.userinfo);
+        }else {
+            this.userinfo = this.localstorage.get('userinfo');
         }
+
     }
     ngOnInit() {
         this.getDocDetail();

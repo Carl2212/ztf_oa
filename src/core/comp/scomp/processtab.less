@@ -4,22 +4,31 @@
   li{
     width: 95%;
     margin : 1em auto;
-    .tb-grid{
-      height : 3em;
-      border : 1px solid @gray-deep;
-      margin-bottom : 0;
-      dd{
-        width: 30%;
-        border-right : 1px solid @gray-deep;
-        text-align: center;
-      }
-      dt{
-        padding-left: 1em;
-        width: 69%;
-      }
-      dd,dt{
-        line-height : 3em;
-        float : left;
+    .tb-box {
+      margin : 1em auto;
+      width : 90%;
+      .tb-grid{
+        .left{
+          width: 8em;
+          text-align: center;
+        }
+        .right{
+          width: auto;
+          text-align: left;
+        }
+        td{
+          border : 1px solid @gray-shallow;
+          vertical-align: middle;
+          text-align: center;
+          height : auto;
+          span.txt{
+            display: block;
+            line-height: normal;
+            position: relative;
+            top : 50%;
+            padding : 1em;
+          }
+        }
       }
     }
   }

@@ -6,7 +6,7 @@ import {Router , ActivatedRoute} from '@angular/router';
 import {GlobalEventManager} from "../../../core/comp/service/globaleventmanager";
 import {Config} from "../../../core/comp/service/config";
 import {Request} from "../../../core/comp/service/request";
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
 import {LocalStorageService} from "angular-2-local-storage/dist/angular-2-local-storage";
 import {isObject} from "rxjs/util/isObject";
 import {CommonService} from "../../../core/comp/service/common";
@@ -43,7 +43,7 @@ export class DocListComponent {
         if(this.userinfo) {
             this.gotdoclist();
         }else{
-            //弹出提示信息并且显示no-content页面
+            this.doclist = false;
         }
     }
 

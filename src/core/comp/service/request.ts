@@ -9,7 +9,7 @@ import {Config} from './config';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
 
 
 @Injectable()
@@ -27,13 +27,17 @@ export class Request {
             params['xmbm'] = Config['global_xmbm'];
         }
         let searchparams = this.ParamsToString(params);
-        let url = Config.global_url + Config[action]+searchparams+'&callback=JSONP_CALLBACK';
+
+        let actionurl = Config[action].indexOf("?") > -1 ? Config[action] : Config[action]+'?1=1';
+        let url = Config.global_url + actionurl+searchparams+'&callback=JSONP_CALLBACK';
         return this.jsonp.request(url)
             .map(data => data.json())
             .subscribe(
                 data =>{
-                    if(needloadingmodule) _me.global.showloading.emit(false);
-                    if(data.header.code == 1 && data.result.success == 1) {
+                    if(needloadingmodule) {
+                        _me.global.showloading.emit(false);
+                    }
+                    if(data.header.code == 1) {
                         successfn && successfn(data.result)
                     }else{
                         _me.handleError(data.header.describe);

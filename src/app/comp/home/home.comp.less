@@ -34,6 +34,42 @@
 }
 .home {
   background :#fff;
+  .topbar {
+    .sure-select{
+      float:left;
+      right : .5em;
+      .dropdown-toggle{
+        height:3em;
+        position: relative;
+        .txt-box{
+          width: 2em;
+          overflow: hidden;
+          display: block;
+          height : 3em;
+          .txt{
+            display: block;
+            white-space: nowrap;
+            text-shadow: black 5px 3px 3px;
+            .glyphicon {
+              font-size: large;
+            }
+          }
+        }
+        .caret{
+          position: absolute;
+          top : 50%;
+          right:-.7em;
+          margin-top : -.1em;
+        }
+      }
+      .dropdown-menu{
+        right:-1em;
+        float:right;
+        text-align: center;
+        left:auto;
+      }
+    }
+  }
   .content {
     menu {
       margin : 0 ;
@@ -66,6 +102,7 @@
               margin : .5em auto;
               font-weight: bold;
               text-align: center;
+              padding: .5em;
             }
           }
         }
@@ -86,7 +123,7 @@
     .main{
       .header{
         position: relative;
-        padding : 1.5em 1em !important;
+        padding : 1em 1em !important;
         h4{
           margin : 0;
         }
@@ -96,10 +133,17 @@
         border : none;
         margin-top:1px;
         border-bottom : 1px solid @gray-shallow;
-        font-size: @font-size-small;
+        position: relative;
+        em.left-txt{
+          display: block;
+          margin-right: 5em;
+        }
         .type-txt{
           display: block;
-          float:right;
+          position: absolute;
+          right : 1em;
+          top : 50%;
+          margin-top : -.5em;
           color: @gray-shallow;
         }
       }

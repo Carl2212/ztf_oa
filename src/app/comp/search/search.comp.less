@@ -3,6 +3,9 @@
 .searchcomp {
   .content{
     background : #fff;
+    .result-bar{
+      margin : 2em 1em !important;
+    }
     .search{
       background : #eee;
       padding : 10px 20px;
@@ -12,7 +15,7 @@
       }
     }
     .history{
-      padding: 2em 1em;
+      margin: 2em 1em;
       .history-title-bar{
         color : #555;
         .del {
@@ -35,6 +38,27 @@
           padding : 0 .5em;
           margin : .3em;
           background : #eee;
+        }
+      }
+    }
+    .searchresult {
+      .list-group-item{
+        padding : 1em 15px;
+        border : none;
+        margin-top:1px;
+        border-bottom : 1px solid @gray-shallow;
+        position: relative;
+        em.left-txt{
+          display: block;
+          margin-right: 5em;
+        }
+        .type-txt{
+          display: block;
+          position: absolute;
+          right : 1em;
+          top : 50%;
+          margin-top : -.5em;
+          color: @gray-shallow;
         }
       }
     }

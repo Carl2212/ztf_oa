@@ -5,7 +5,7 @@
 import {Component ,Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
 
 @Component({
     selector : 'userselect',

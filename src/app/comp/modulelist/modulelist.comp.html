@@ -4,10 +4,11 @@
         <span class="bartitle">{{pageinfo.pagename}}</span>
     </div>
     <div class="content">
-        <ul class="main">
-            <li class="main-li" *ngFor="let module of modulelist">
+        <ul class="main" *ngIf="modulelist" >
+            <li class="main-li"  *ngFor="let module of modulelist">
                 <a routerLink="/doclist/{{doctype}}/{{module.module_id}}"><h4>{{module.module_name}}</h4><span class="badge">{{module.count}}</span> </a>
             </li>
         </ul>
     </div>
+    <no-content *ngIf="!modulelist" ></no-content>
 </div>

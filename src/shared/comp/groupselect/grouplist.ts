@@ -2,12 +2,12 @@
  * Created by Administrator on 2016/10/27.
  * 选择 用户 组件
  */
-import {Component ,Input, Output, EventEmitter} from '@angular/core';
+import {Component ,Input, Output, EventEmitter ,QueryList} from '@angular/core';
 import { AfterViewInit, ViewChildren } from '@angular/core';
 import {CommonService} from "../../../core/comp/service/common";
 import {Config} from "../../../core/comp/service/config";
 import {UserselectComponent} from "../userselect/userselect";
-import {isArray} from "util";
+import {isArray} from "rxjs/util/isArray";
 import {isObject} from "rxjs/util/isObject";
 
 @Component({
@@ -69,8 +69,17 @@ export class GrouplistComponent {
         }
         var type : number ;
         var parent : any;
-
-        if(this.departmentparam && this.commonfn.isEmptyObject(selectitem.parentid)) {
+        //已有数据做隐藏显示切换
+        if(this.nextselect && this.nextselect[aa]) {
+            if(istoggle){
+                this.nextselect[aa]['isopen'] = !this.nextselect[aa]['isopen'];//隐藏
+            }else{
+                this.nextselect[aa]['isopen'] = true;
+            }
+            return;
+        }
+        //未有数据请求数据再显示
+        if(this.departmentparam) {
             this.departmentparam.groupid = selectitem.groupid;
             type = 4;
             parent = this.departmentparam;
@@ -83,11 +92,7 @@ export class GrouplistComponent {
                 } else if (!_me.nextselect[aa]) {
                     _me.nextselect[aa] = tmpdata;
                 }
-                if(istoggle) {
-                    _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
-                }else{
-                    _me.nextselect[aa]['isopen'] =  true;
-                }
+                _me.nextselect[aa]['isopen'] =  true;
                 callback && callback();
             });
         }else{
@@ -100,12 +105,7 @@ export class GrouplistComponent {
                 _me.commonfn.getGroupOrUserList(2, aa, function (tmpdata) {
                     if(!isObject(_me.nextselect)) _me.nextselect = {};//没有数据则初始化
                     _me.nextselect[aa] = tmpdata;
-
-                    if(istoggle) {
-                        _me.nextselect[aa]['isopen'] = !_me.nextselect[aa]['isopen'];
-                    }else{
-                        _me.nextselect[aa]['isopen'] =  true;
-                    }
+                    _me.nextselect[aa]['isopen'] =  true;
                     callback && callback();
                 });
 

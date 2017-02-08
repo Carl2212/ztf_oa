@@ -9,14 +9,6 @@ h1,h2,h3,h4,h5,h6,details {
   margin: 0;
   padding: 0;
 }
-
-body {
-  position: relative;
-  font-family: "微软雅黑", sans-serif;
-  color: #000;
-  font-size: 1.4rem
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -50,10 +42,41 @@ b,i,em {
   font-weight: normal;
   font-style: normal;
 }
+.index-loading{
+  position: absolute;
+  z-index : 10001;
+  width: 100%;
+  height : 100%;
+  min-height : 400px;
+  background: transparent;
+  top : 0;
+  left : 0;
+  .ld-icon {
+    position: relative;
+    top : 50%;
+    left : 50%;
+    margin : -3em auto auto -3em;
+    padding : .5em 1em;
+    width: 6em;
+    height : 6em;
+    background : rgba(100,100,100 ,.6);
+    .border-top-radius(5px);
+    .border-bottom-radius(5px);
+    img {
+      display: block;
+      margin : 0 auto;
+      width: 3em;
+      height : 3em;
+    }
+    .tip{
+      margin : .5em auto;
+      color : #fff;
+    }
+  }
+}
 @import "../bootstrap/less/bootstrap.less"; //这个引用到原有的bootstrap文件2
 @import "../custom_bootstrap/custom_variables.less"; //3
 @import "../custom_bootstrap/custom_other.less";   //4
-@import "Font-Awesome/css/font-awesome.min.css";
 @import "../bootstrap/less/utilities.less"; //我们同样要引用原生的utilities.less，因为我们要保证该文件始终最后一个被导入
 @import "awesome-bootstrap-checkbox.css";
 @import "ladda.min.css";
